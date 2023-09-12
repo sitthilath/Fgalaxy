@@ -1,4 +1,4 @@
-# lottery
+# Lottery application for Galaxy 18 Company Ltd
 
 SuperApp Lottery Application
 
