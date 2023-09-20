@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:galaxy_18_lottery_app/shared/exceptions/http_exception.dart';
-import 'package:galaxy_18_lottery_app/shared/models/response.dart';
+import 'package:galaxy_18_lottery_app/shared/domain/models/response.dart';
 
 abstract class NetworkService {
   String get baseUrl;

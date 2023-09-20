@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:galaxy_18_lottery_app/configs/app_configs.dart';
+import 'package:galaxy_18_lottery_app/shared/data/remote/network_service.dart';
 import 'package:galaxy_18_lottery_app/shared/exceptions/http_exception.dart';
 import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/mixins/exception_handler_mixin.dart';
-import 'package:galaxy_18_lottery_app/shared/models/response.dart' as response;
-import 'package:galaxy_18_lottery_app/shared/remote/network_service.dart';
+import 'package:galaxy_18_lottery_app/shared/domain/models/response.dart' as response;
 
 class DioNetworkService extends NetworkService with ExceptionHandlerMixin {
   final Dio dio;

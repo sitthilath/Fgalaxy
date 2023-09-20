@@ -1,3 +1,4 @@
 class UrlConstants {
-  static const String loginPath = "/auth/login";
+  static const String LOGIN_PATH = "/auth/login";
+  static const String REGISTER_PATH = "auth/register";
 }

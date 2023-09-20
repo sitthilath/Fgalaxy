@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:galaxy_18_lottery_app/shared/local/storage_service.dart';
+import 'package:galaxy_18_lottery_app/shared/data/local/storage_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsService implements StorageService{
