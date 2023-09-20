@@ -27,15 +27,13 @@ class FirebaseNotification extends NotificationService {
   BuildContext? _buildContext;
 
   @override
-  set context(BuildContext context)  {
+  set context(BuildContext context) {
     _buildContext = context;
   }
 
   @override
   Future<void> initialise() async {
-    if (Platform.isIOS) {
-
-    }
+    if (Platform.isIOS) {}
     FirebaseMessaging.instance.requestPermission();
     String topic = 'NotificationTopicTest';
     if (topic != null) {
@@ -47,7 +45,6 @@ class FirebaseNotification extends NotificationService {
         '${Messaging.APP_NAME} - High Importance Notifications',
         importance: Importance.high,
         description: 'This channel is used for important notifications.',
-
       );
       flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
       await flutterLocalNotificationsPlugin!
@@ -91,14 +88,14 @@ class FirebaseNotification extends NotificationService {
   }
 
   void _handleNotificationNavigators(RemoteMessage message) {
-    try{
-      if(_buildContext == null){
+    try {
+      if (_buildContext == null) {
         print("handleNotificationNavigators#error: context is null");
         return;
       }
       print("Cliccckkk");
       AutoRouter.of(_buildContext!).push(RegisterRoute());
-    }catch (ex) {
+    } catch (ex) {
       print("handleNotificationNavigators#error: $ex");
     }
   }

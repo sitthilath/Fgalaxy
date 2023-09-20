@@ -16,7 +16,9 @@ class MyAppState extends ConsumerState<MyApp> {
     super.initState();
     ref.read(firebaseNotificationProvider).initialise();
   }
+
   final appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(

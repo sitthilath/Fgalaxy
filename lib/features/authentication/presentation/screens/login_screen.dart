@@ -20,7 +20,6 @@ class LoginScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(authStateNotifierProvider);
     ref.read(firebaseNotificationProvider).context = context;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Galaxy18 Lottery'),
