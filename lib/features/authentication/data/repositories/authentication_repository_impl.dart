@@ -10,12 +10,27 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository{
   AuthenticationRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<AppException, User>> loginUser({required User user}) {
-    return dataSource.loginUser(user: user);
+  Future<Either<AppException, User>> loginUser({required UserForm userForm}) {
+    return dataSource.loginUser(userForm: userForm);
   }
 
   @override
-  Future<Either<AppException, User>> registerUser({required UserForm userForm}) {
+  Future<Either<AppException, String>> registerUser({required UserForm userForm}) {
     return dataSource.registerUser(userForm: userForm);
+  }
+
+  @override
+  Future<Either<AppException, String>> sendOTP({required UserForm phone}) {
+    return dataSource.sendOTP(phone: phone);
+  }
+
+  @override
+  Future<Either<AppException, User>> verifyOTP({required UserForm code}) {
+    return dataSource.verifyOTP(code: code);
+  }
+
+  @override
+  Future<Either<AppException, bool>> checkUser() {
+    return dataSource.checkUser();
   }
 }

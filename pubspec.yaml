@@ -23,6 +23,9 @@ dependencies:
   firebase_messaging: ^14.6.7
   flutter_local_notifications: ^15.1.1
   permission_handler: ^11.0.0
+  pubnub: ^4.2.4
+  flutter_svg: ^2.0.7
+  fluttertoast: ^8.2.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -34,13 +37,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - images/
+    - icons/
   fonts:
     - family: NotoSansLao
       fonts:
-        - asset: lib/assets/fonts/NotoSansLao-Medium.ttf
-        - asset: lib/assets/fonts/NotoSansLao-Light.ttf
+        - asset: fonts/NotoSansLao-Medium.ttf
+        - asset: fonts/NotoSansLao-Light.ttf
     - family: roboto
       fonts:
-        - asset: lib/assets/fonts/roboto.bold.ttf
-        - asset: lib/assets/fonts/roboto.medium.ttf
-        - asset: lib/assets/fonts/roboto.medium-italic.ttf
+        - asset: fonts/roboto.bold.ttf
+        - asset: fonts/roboto.medium.ttf
+        - asset: fonts/roboto.medium-italic.ttf

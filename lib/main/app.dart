@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:galaxy_18_lottery_app/infrastructure/notification/providers/firebase_notification_provider.dart';
+import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
 import '../routes/app_route.dart';
 
 class MyApp extends ConsumerStatefulWidget {
@@ -14,7 +14,6 @@ class MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
-    ref.read(firebaseNotificationProvider).initialise();
   }
 
   final appRouter = AppRouter();
@@ -26,6 +25,11 @@ class MyAppState extends ConsumerState<MyApp> {
       debugShowCheckedModeBanner: false,
       routeInformationParser: appRouter.defaultRouteParser(),
       routerDelegate: appRouter.delegate(),
+      theme: ThemeData(
+        primaryColor: AppColor.primaryColor,
+        fontFamily: "NotoSansLao",
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
     );
   }
 }

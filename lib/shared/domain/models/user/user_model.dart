@@ -1,77 +1,137 @@
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
-  final int id;
-  final String email;
-  final String username;
-  final String password;
-  final String firstName;
-  final String lastName;
-  final String gender;
-  final String image;
-  final String token;
+  final String accessToken;
+  final UserData userData;
 
-  const User(
-      { this.id = 0,
-       this.email = '',
-       this.username = '',
-       this.password = '',
-       this.firstName = '',
-       this.lastName = '',
-       this.gender = '',
-       this.image = '',
-       this.token = ''});
+  const User({
+    required this.accessToken,
+    required this.userData
+  });
 
   @override
-  List<Object?> get props =>
-      [id, username, password, email, firstName, lastName, gender, email, token];
+  List<Object?> get props => [accessToken, userData];
 
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'id': id,
-      'username': username,
-      'password': password,
-      'email': email,
-      'firstName': firstName,
-      'lastName': lastName,
-      'gender': gender,
-      'image': image,
-      'token': token,
-    };
-  }
-
-  factory User.fromJson(Map<String, dynamic> map) => User(
-        id: map['id'] ?? 0,
-        email: map['email'] ?? '',
-        username: map['username'] ?? '',
-        password: map['password'] ?? '',
-        firstName: map['firstName'] ?? '',
-        lastName: map['lastName'] ?? '',
-        gender: map['gender'] ?? '',
-        image: map['image'] ?? '',
-        token: map['token'] ?? '',
+  factory User.fromJson(Map<String, dynamic> map) =>
+      User(
+        accessToken: map['access_token'],
+        userData: UserData.fromJson(map['data']),
       );
 
-  User copyWith(
-      {int? id,
-      String? username,
-      String? password,
-      String? email,
-      String? firstName,
-      String? lastName,
-      String? gender,
-      String? image,
-      String? token}) {
+  User copyWith({
+    String? accessToken,
+    UserData? userData,
+  }) {
     return User(
+        accessToken: accessToken ?? this.accessToken,
+        userData: userData ?? this.userData);
+  }
+
+  Map<String, dynamic> toJson() =>
+      {
+        "access_token": accessToken,
+        "data": userData.toJson(),
+      };
+}
+
+class UserData extends Equatable {
+  final int id;
+  final String? username;
+  final String? email;
+  final String phone;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final DateTime verifyAt;
+  final List<Role> roles;
+
+  const UserData({
+    required this.id,
+    this.username = '',
+    this.email = '',
+    required this.phone,
+    required this.roles,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.verifyAt,
+  });
+
+  @override
+  List<Object?> get props {
+    return [id, username, email, phone, roles, verifyAt];
+  }
+
+  factory UserData.fromJson(Map<String, dynamic> map) =>
+      UserData(
+        id: map['id'],
+        username: map['username'] ?? '',
+        email: map['email']?? '',
+        phone: map['phone'],
+        roles: List<Role>.from(
+            map['roles'].map((json) => Role.fromJson(json))),
+        createdAt: DateTime.parse(map["created_at"]),
+        updatedAt: DateTime.parse(map["updated_at"]),
+        verifyAt: DateTime.parse(map["verify_at"]),
+      );
+
+  UserData copyWith({
+    int? id,
+    String? username,
+    String? email,
+    String? phone,
+    String? firstName,
+    String? lastName,
+    List<Role>? roles,
+  }) {
+    return UserData(
       id: id ?? this.id,
-      email: email ?? this.email,
       username: username ?? this.username,
-      password: password ?? this.password,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      gender: gender ?? this.gender,
-      image: image ?? this.image,
-      token: token ?? this.token,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      roles: roles ?? this.roles,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      verifyAt: verifyAt,
     );
   }
+
+  Map<String, dynamic> toJson() =>
+      {
+        "id": id,
+        "username": username,
+        "email": email,
+        "phone": phone,
+        "roles": List<dynamic>.from(roles.map((x) => x.toJson())),
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "verify_at": verifyAt.toIso8601String(),
+      };
+}
+class Role {
+  int id;
+  String name;
+  String description;
+  List<dynamic> permissions;
+
+  Role({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.permissions,
+  });
+
+  factory Role.fromJson(Map<String, dynamic> json) =>
+      Role(
+        id: json["id"],
+        name: json["name"],
+        description: json["description"],
+        permissions: List<dynamic>.from(json["permissions"].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() =>
+      {
+        "id": id,
+        "name": name,
+        "description": description,
+        "permissions": List<dynamic>.from(permissions.map((x) => x)),
+      };
 }

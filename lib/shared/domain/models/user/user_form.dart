@@ -3,19 +3,30 @@ import 'package:equatable/equatable.dart';
 class UserForm extends Equatable {
   final String phoneNumber;
   final String password;
-  final String tokenID;
+  final String otpCode;
 
   const UserForm(
-      {required this.phoneNumber, required this.password, this.tokenID = ''});
+      {this.otpCode = '', this.phoneNumber = '', this.password = ''});
 
   @override
   List<Object?> get props => [phoneNumber, password];
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'phone_number': phoneNumber,
+      'phone': phoneNumber,
       'password': password,
-      'token_id': tokenID,
+    };
+  }
+  Map<String, dynamic> phoneToJson(){
+    return <String, dynamic> {
+      'phone': phoneNumber,
+    };
+  }
+
+  Map<String, dynamic> verifyToJson(){
+    return <String, dynamic>{
+      'phone': phoneNumber,
+      'code': otpCode,
     };
   }
 }

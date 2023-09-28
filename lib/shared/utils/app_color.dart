@@ -2,13 +2,21 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:galaxy_18_lottery_app/shared/hex_color.dart';
+
 class AppColor {
-  static Color primaryColor = HexColor('#131E80');
+  static Color primaryColor = HexColor('#191BAF');
   static Color primaryPurple = HexColor('#3F51F8');
   static Color primaryBlue = HexColor('#041ADF');
   static Color blackColor = HexColor('#252525');
   static Color grayColor = HexColor('#E3E3E3');
   static Color yellowColor = HexColor('#FFC215');
+  static Color borderColor = HexColor('#EAECFF');
+  static Color hintColor = HexColor('#C9CADB');
+  static Color bcelOneColor = HexColor('#B41212');
+  static Color whiteColor = HexColor('#FFFFFF');
+  static Color fillColor = HexColor('#F4F6FF');
+  static Color errorColor = HexColor('#eb4d4b');
+  static Color successColor = HexColor('#2ecc71');
 
   MaterialColor generateMaterialColor(Color color) {
     return MaterialColor(color.value, {

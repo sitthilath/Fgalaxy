@@ -19,14 +19,14 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
     required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
     required TResult Function() verified,
-    required TResult Function() exceeded,
     required TResult Function(AppException exception) failure,
     required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
     required TResult Function() idExists,
     required TResult Function() idNotExists,
     required TResult Function() invalidToken,
@@ -35,14 +35,14 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
     TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
     TResult? Function()? verified,
-    TResult? Function()? exceeded,
     TResult? Function(AppException exception)? failure,
     TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
     TResult? Function()? idExists,
     TResult? Function()? idNotExists,
     TResult? Function()? invalidToken,
@@ -51,14 +51,14 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
     TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
     TResult Function()? verified,
-    TResult Function()? exceeded,
     TResult Function(AppException exception)? failure,
     TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
     TResult Function()? idExists,
     TResult Function()? idNotExists,
     TResult Function()? invalidToken,
@@ -68,14 +68,14 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
     required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
     required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
     required TResult Function(Failure value) failure,
     required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
     required TResult Function(IdExists value) idExists,
     required TResult Function(IdNotExists value) idNotExists,
     required TResult Function(InvalidToken value) invalidToken,
@@ -84,14 +84,14 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
     TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
     TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
     TResult? Function(Failure value)? failure,
     TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult? Function(IdExists value)? idExists,
     TResult? Function(IdNotExists value)? idNotExists,
     TResult? Function(InvalidToken value)? invalidToken,
@@ -100,14 +100,14 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
     TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
     TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
     TResult Function(Failure value)? failure,
     TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult Function(IdExists value)? idExists,
     TResult Function(IdNotExists value)? idNotExists,
     TResult Function(InvalidToken value)? invalidToken,
@@ -170,14 +170,14 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
     required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
     required TResult Function() verified,
-    required TResult Function() exceeded,
     required TResult Function(AppException exception) failure,
     required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
     required TResult Function() idExists,
     required TResult Function() idNotExists,
     required TResult Function() invalidToken,
@@ -189,14 +189,14 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
     TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
     TResult? Function()? verified,
-    TResult? Function()? exceeded,
     TResult? Function(AppException exception)? failure,
     TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
     TResult? Function()? idExists,
     TResult? Function()? idNotExists,
     TResult? Function()? invalidToken,
@@ -208,14 +208,14 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
     TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
     TResult Function()? verified,
-    TResult Function()? exceeded,
     TResult Function(AppException exception)? failure,
     TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
     TResult Function()? idExists,
     TResult Function()? idNotExists,
     TResult Function()? invalidToken,
@@ -231,14 +231,14 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
     required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
     required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
     required TResult Function(Failure value) failure,
     required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
     required TResult Function(IdExists value) idExists,
     required TResult Function(IdNotExists value) idNotExists,
     required TResult Function(InvalidToken value) invalidToken,
@@ -250,14 +250,14 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
     TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
     TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
     TResult? Function(Failure value)? failure,
     TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult? Function(IdExists value)? idExists,
     TResult? Function(IdNotExists value)? idNotExists,
     TResult? Function(InvalidToken value)? invalidToken,
@@ -269,14 +269,14 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
     TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
     TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
     TResult Function(Failure value)? failure,
     TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult Function(IdExists value)? idExists,
     TResult Function(IdNotExists value)? idNotExists,
     TResult Function(InvalidToken value)? invalidToken,
@@ -294,34 +294,33 @@ abstract class Initial implements AuthState {
 }
 
 /// @nodoc
-abstract class _$$CodeSentCopyWith<$Res> {
-  factory _$$CodeSentCopyWith(
-          _$CodeSent value, $Res Function(_$CodeSent) then) =
-      __$$CodeSentCopyWithImpl<$Res>;
+abstract class _$$SigningCopyWith<$Res> {
+  factory _$$SigningCopyWith(_$Signing value, $Res Function(_$Signing) then) =
+      __$$SigningCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CodeSentCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$CodeSent>
-    implements _$$CodeSentCopyWith<$Res> {
-  __$$CodeSentCopyWithImpl(_$CodeSent _value, $Res Function(_$CodeSent) _then)
+class __$$SigningCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$Signing>
+    implements _$$SigningCopyWith<$Res> {
+  __$$SigningCopyWithImpl(_$Signing _value, $Res Function(_$Signing) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$CodeSent implements CodeSent {
-  const _$CodeSent();
+class _$Signing implements Signing {
+  const _$Signing();
 
   @override
   String toString() {
-    return 'AuthState.codeSent()';
+    return 'AuthState.signing()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CodeSent);
+        (other.runtimeType == runtimeType && other is _$Signing);
   }
 
   @override
@@ -331,59 +330,59 @@ class _$CodeSent implements CodeSent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
     required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
     required TResult Function() verified,
-    required TResult Function() exceeded,
     required TResult Function(AppException exception) failure,
     required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
     required TResult Function() idExists,
     required TResult Function() idNotExists,
     required TResult Function() invalidToken,
   }) {
-    return codeSent();
+    return signing();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
     TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
     TResult? Function()? verified,
-    TResult? Function()? exceeded,
     TResult? Function(AppException exception)? failure,
     TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
     TResult? Function()? idExists,
     TResult? Function()? idNotExists,
     TResult? Function()? invalidToken,
   }) {
-    return codeSent?.call();
+    return signing?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
     TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
     TResult Function()? verified,
-    TResult Function()? exceeded,
     TResult Function(AppException exception)? failure,
     TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
     TResult Function()? idExists,
     TResult Function()? idNotExists,
     TResult Function()? invalidToken,
     required TResult orElse(),
   }) {
-    if (codeSent != null) {
-      return codeSent();
+    if (signing != null) {
+      return signing();
     }
     return orElse();
   }
@@ -392,66 +391,550 @@ class _$CodeSent implements CodeSent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
     required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
     required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
     required TResult Function(Failure value) failure,
     required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
     required TResult Function(IdExists value) idExists,
     required TResult Function(IdNotExists value) idNotExists,
     required TResult Function(InvalidToken value) invalidToken,
   }) {
-    return codeSent(this);
+    return signing(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
     TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
     TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
     TResult? Function(Failure value)? failure,
     TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult? Function(IdExists value)? idExists,
     TResult? Function(IdNotExists value)? idNotExists,
     TResult? Function(InvalidToken value)? invalidToken,
   }) {
-    return codeSent?.call(this);
+    return signing?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
     TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
     TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
     TResult Function(Failure value)? failure,
     TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult Function(IdExists value)? idExists,
     TResult Function(IdNotExists value)? idNotExists,
     TResult Function(InvalidToken value)? invalidToken,
     required TResult orElse(),
   }) {
-    if (codeSent != null) {
-      return codeSent(this);
+    if (signing != null) {
+      return signing(this);
     }
     return orElse();
   }
 }
 
-abstract class CodeSent implements AuthState {
-  const factory CodeSent() = _$CodeSent;
+abstract class Signing implements AuthState {
+  const factory Signing() = _$Signing;
+}
+
+/// @nodoc
+abstract class _$$SignedCopyWith<$Res> {
+  factory _$$SignedCopyWith(_$Signed value, $Res Function(_$Signed) then) =
+      __$$SignedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SignedCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$Signed>
+    implements _$$SignedCopyWith<$Res> {
+  __$$SignedCopyWithImpl(_$Signed _value, $Res Function(_$Signed) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$Signed implements Signed {
+  const _$Signed();
+
+  @override
+  String toString() {
+    return 'AuthState.signed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Signed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
+    required TResult Function() verified,
+    required TResult Function(AppException exception) failure,
+    required TResult Function() verifyByCode,
+    required TResult Function() idExists,
+    required TResult Function() idNotExists,
+    required TResult Function() invalidToken,
+  }) {
+    return signed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
+    TResult? Function()? verified,
+    TResult? Function(AppException exception)? failure,
+    TResult? Function()? verifyByCode,
+    TResult? Function()? idExists,
+    TResult? Function()? idNotExists,
+    TResult? Function()? invalidToken,
+  }) {
+    return signed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
+    TResult Function()? verified,
+    TResult Function(AppException exception)? failure,
+    TResult Function()? verifyByCode,
+    TResult Function()? idExists,
+    TResult Function()? idNotExists,
+    TResult Function()? invalidToken,
+    required TResult orElse(),
+  }) {
+    if (signed != null) {
+      return signed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
+    required TResult Function(Verified value) verified,
+    required TResult Function(Failure value) failure,
+    required TResult Function(VerifyByCode value) verifyByCode,
+    required TResult Function(IdExists value) idExists,
+    required TResult Function(IdNotExists value) idNotExists,
+    required TResult Function(InvalidToken value) invalidToken,
+  }) {
+    return signed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
+    TResult? Function(Verified value)? verified,
+    TResult? Function(Failure value)? failure,
+    TResult? Function(VerifyByCode value)? verifyByCode,
+    TResult? Function(IdExists value)? idExists,
+    TResult? Function(IdNotExists value)? idNotExists,
+    TResult? Function(InvalidToken value)? invalidToken,
+  }) {
+    return signed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
+    TResult Function(Verified value)? verified,
+    TResult Function(Failure value)? failure,
+    TResult Function(VerifyByCode value)? verifyByCode,
+    TResult Function(IdExists value)? idExists,
+    TResult Function(IdNotExists value)? idNotExists,
+    TResult Function(InvalidToken value)? invalidToken,
+    required TResult orElse(),
+  }) {
+    if (signed != null) {
+      return signed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Signed implements AuthState {
+  const factory Signed() = _$Signed;
+}
+
+/// @nodoc
+abstract class _$$SigningCodeCopyWith<$Res> {
+  factory _$$SigningCodeCopyWith(
+          _$SigningCode value, $Res Function(_$SigningCode) then) =
+      __$$SigningCodeCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SigningCodeCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$SigningCode>
+    implements _$$SigningCodeCopyWith<$Res> {
+  __$$SigningCodeCopyWithImpl(
+      _$SigningCode _value, $Res Function(_$SigningCode) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SigningCode implements SigningCode {
+  const _$SigningCode();
+
+  @override
+  String toString() {
+    return 'AuthState.signingCode()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SigningCode);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
+    required TResult Function() verified,
+    required TResult Function(AppException exception) failure,
+    required TResult Function() verifyByCode,
+    required TResult Function() idExists,
+    required TResult Function() idNotExists,
+    required TResult Function() invalidToken,
+  }) {
+    return signingCode();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
+    TResult? Function()? verified,
+    TResult? Function(AppException exception)? failure,
+    TResult? Function()? verifyByCode,
+    TResult? Function()? idExists,
+    TResult? Function()? idNotExists,
+    TResult? Function()? invalidToken,
+  }) {
+    return signingCode?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
+    TResult Function()? verified,
+    TResult Function(AppException exception)? failure,
+    TResult Function()? verifyByCode,
+    TResult Function()? idExists,
+    TResult Function()? idNotExists,
+    TResult Function()? invalidToken,
+    required TResult orElse(),
+  }) {
+    if (signingCode != null) {
+      return signingCode();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
+    required TResult Function(Verified value) verified,
+    required TResult Function(Failure value) failure,
+    required TResult Function(VerifyByCode value) verifyByCode,
+    required TResult Function(IdExists value) idExists,
+    required TResult Function(IdNotExists value) idNotExists,
+    required TResult Function(InvalidToken value) invalidToken,
+  }) {
+    return signingCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
+    TResult? Function(Verified value)? verified,
+    TResult? Function(Failure value)? failure,
+    TResult? Function(VerifyByCode value)? verifyByCode,
+    TResult? Function(IdExists value)? idExists,
+    TResult? Function(IdNotExists value)? idNotExists,
+    TResult? Function(InvalidToken value)? invalidToken,
+  }) {
+    return signingCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
+    TResult Function(Verified value)? verified,
+    TResult Function(Failure value)? failure,
+    TResult Function(VerifyByCode value)? verifyByCode,
+    TResult Function(IdExists value)? idExists,
+    TResult Function(IdNotExists value)? idNotExists,
+    TResult Function(InvalidToken value)? invalidToken,
+    required TResult orElse(),
+  }) {
+    if (signingCode != null) {
+      return signingCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SigningCode implements AuthState {
+  const factory SigningCode() = _$SigningCode;
+}
+
+/// @nodoc
+abstract class _$$SignedCodeCopyWith<$Res> {
+  factory _$$SignedCodeCopyWith(
+          _$SignedCode value, $Res Function(_$SignedCode) then) =
+      __$$SignedCodeCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SignedCodeCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$SignedCode>
+    implements _$$SignedCodeCopyWith<$Res> {
+  __$$SignedCodeCopyWithImpl(
+      _$SignedCode _value, $Res Function(_$SignedCode) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SignedCode implements SignedCode {
+  const _$SignedCode();
+
+  @override
+  String toString() {
+    return 'AuthState.signedCode()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SignedCode);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
+    required TResult Function() verified,
+    required TResult Function(AppException exception) failure,
+    required TResult Function() verifyByCode,
+    required TResult Function() idExists,
+    required TResult Function() idNotExists,
+    required TResult Function() invalidToken,
+  }) {
+    return signedCode();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
+    TResult? Function()? verified,
+    TResult? Function(AppException exception)? failure,
+    TResult? Function()? verifyByCode,
+    TResult? Function()? idExists,
+    TResult? Function()? idNotExists,
+    TResult? Function()? invalidToken,
+  }) {
+    return signedCode?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
+    TResult Function()? verified,
+    TResult Function(AppException exception)? failure,
+    TResult Function()? verifyByCode,
+    TResult Function()? idExists,
+    TResult Function()? idNotExists,
+    TResult Function()? invalidToken,
+    required TResult orElse(),
+  }) {
+    if (signedCode != null) {
+      return signedCode();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
+    required TResult Function(Verified value) verified,
+    required TResult Function(Failure value) failure,
+    required TResult Function(VerifyByCode value) verifyByCode,
+    required TResult Function(IdExists value) idExists,
+    required TResult Function(IdNotExists value) idNotExists,
+    required TResult Function(InvalidToken value) invalidToken,
+  }) {
+    return signedCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
+    TResult? Function(Verified value)? verified,
+    TResult? Function(Failure value)? failure,
+    TResult? Function(VerifyByCode value)? verifyByCode,
+    TResult? Function(IdExists value)? idExists,
+    TResult? Function(IdNotExists value)? idNotExists,
+    TResult? Function(InvalidToken value)? invalidToken,
+  }) {
+    return signedCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
+    TResult Function(Verified value)? verified,
+    TResult Function(Failure value)? failure,
+    TResult Function(VerifyByCode value)? verifyByCode,
+    TResult Function(IdExists value)? idExists,
+    TResult Function(IdNotExists value)? idNotExists,
+    TResult Function(InvalidToken value)? invalidToken,
+    required TResult orElse(),
+  }) {
+    if (signedCode != null) {
+      return signedCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignedCode implements AuthState {
+  const factory SignedCode() = _$SignedCode;
 }
 
 /// @nodoc
@@ -493,14 +976,14 @@ class _$Verifying implements Verifying {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
     required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
     required TResult Function() verified,
-    required TResult Function() exceeded,
     required TResult Function(AppException exception) failure,
     required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
     required TResult Function() idExists,
     required TResult Function() idNotExists,
     required TResult Function() invalidToken,
@@ -512,14 +995,14 @@ class _$Verifying implements Verifying {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
     TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
     TResult? Function()? verified,
-    TResult? Function()? exceeded,
     TResult? Function(AppException exception)? failure,
     TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
     TResult? Function()? idExists,
     TResult? Function()? idNotExists,
     TResult? Function()? invalidToken,
@@ -531,14 +1014,14 @@ class _$Verifying implements Verifying {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
     TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
     TResult Function()? verified,
-    TResult Function()? exceeded,
     TResult Function(AppException exception)? failure,
     TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
     TResult Function()? idExists,
     TResult Function()? idNotExists,
     TResult Function()? invalidToken,
@@ -554,14 +1037,14 @@ class _$Verifying implements Verifying {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
     required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
     required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
     required TResult Function(Failure value) failure,
     required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
     required TResult Function(IdExists value) idExists,
     required TResult Function(IdNotExists value) idNotExists,
     required TResult Function(InvalidToken value) invalidToken,
@@ -573,14 +1056,14 @@ class _$Verifying implements Verifying {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
     TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
     TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
     TResult? Function(Failure value)? failure,
     TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult? Function(IdExists value)? idExists,
     TResult? Function(IdNotExists value)? idNotExists,
     TResult? Function(InvalidToken value)? invalidToken,
@@ -592,14 +1075,14 @@ class _$Verifying implements Verifying {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
     TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
     TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
     TResult Function(Failure value)? failure,
     TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult Function(IdExists value)? idExists,
     TResult Function(IdNotExists value)? idNotExists,
     TResult Function(InvalidToken value)? invalidToken,
@@ -614,166 +1097,6 @@ class _$Verifying implements Verifying {
 
 abstract class Verifying implements AuthState {
   const factory Verifying() = _$Verifying;
-}
-
-/// @nodoc
-abstract class _$$SigningCopyWith<$Res> {
-  factory _$$SigningCopyWith(_$Signing value, $Res Function(_$Signing) then) =
-      __$$SigningCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$SigningCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$Signing>
-    implements _$$SigningCopyWith<$Res> {
-  __$$SigningCopyWithImpl(_$Signing _value, $Res Function(_$Signing) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$Signing implements Signing {
-  const _$Signing();
-
-  @override
-  String toString() {
-    return 'AuthState.signing()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Signing);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
-    required TResult Function() signing,
-    required TResult Function() verified,
-    required TResult Function() exceeded,
-    required TResult Function(AppException exception) failure,
-    required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
-    required TResult Function() idExists,
-    required TResult Function() idNotExists,
-    required TResult Function() invalidToken,
-  }) {
-    return signing();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
-    TResult? Function()? signing,
-    TResult? Function()? verified,
-    TResult? Function()? exceeded,
-    TResult? Function(AppException exception)? failure,
-    TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
-    TResult? Function()? idExists,
-    TResult? Function()? idNotExists,
-    TResult? Function()? invalidToken,
-  }) {
-    return signing?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
-    TResult Function()? signing,
-    TResult Function()? verified,
-    TResult Function()? exceeded,
-    TResult Function(AppException exception)? failure,
-    TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
-    TResult Function()? idExists,
-    TResult Function()? idNotExists,
-    TResult Function()? invalidToken,
-    required TResult orElse(),
-  }) {
-    if (signing != null) {
-      return signing();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
-    required TResult Function(Signing value) signing,
-    required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
-    required TResult Function(Failure value) failure,
-    required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
-    required TResult Function(IdExists value) idExists,
-    required TResult Function(IdNotExists value) idNotExists,
-    required TResult Function(InvalidToken value) invalidToken,
-  }) {
-    return signing(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
-    TResult? Function(Signing value)? signing,
-    TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
-    TResult? Function(Failure value)? failure,
-    TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
-    TResult? Function(IdExists value)? idExists,
-    TResult? Function(IdNotExists value)? idNotExists,
-    TResult? Function(InvalidToken value)? invalidToken,
-  }) {
-    return signing?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
-    TResult Function(Signing value)? signing,
-    TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
-    TResult Function(Failure value)? failure,
-    TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
-    TResult Function(IdExists value)? idExists,
-    TResult Function(IdNotExists value)? idNotExists,
-    TResult Function(InvalidToken value)? invalidToken,
-    required TResult orElse(),
-  }) {
-    if (signing != null) {
-      return signing(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Signing implements AuthState {
-  const factory Signing() = _$Signing;
 }
 
 /// @nodoc
@@ -814,14 +1137,14 @@ class _$Verified implements Verified {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
     required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
     required TResult Function() verified,
-    required TResult Function() exceeded,
     required TResult Function(AppException exception) failure,
     required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
     required TResult Function() idExists,
     required TResult Function() idNotExists,
     required TResult Function() invalidToken,
@@ -833,14 +1156,14 @@ class _$Verified implements Verified {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
     TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
     TResult? Function()? verified,
-    TResult? Function()? exceeded,
     TResult? Function(AppException exception)? failure,
     TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
     TResult? Function()? idExists,
     TResult? Function()? idNotExists,
     TResult? Function()? invalidToken,
@@ -852,14 +1175,14 @@ class _$Verified implements Verified {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
     TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
     TResult Function()? verified,
-    TResult Function()? exceeded,
     TResult Function(AppException exception)? failure,
     TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
     TResult Function()? idExists,
     TResult Function()? idNotExists,
     TResult Function()? invalidToken,
@@ -875,14 +1198,14 @@ class _$Verified implements Verified {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
     required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
     required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
     required TResult Function(Failure value) failure,
     required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
     required TResult Function(IdExists value) idExists,
     required TResult Function(IdNotExists value) idNotExists,
     required TResult Function(InvalidToken value) invalidToken,
@@ -894,14 +1217,14 @@ class _$Verified implements Verified {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
     TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
     TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
     TResult? Function(Failure value)? failure,
     TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult? Function(IdExists value)? idExists,
     TResult? Function(IdNotExists value)? idNotExists,
     TResult? Function(InvalidToken value)? invalidToken,
@@ -913,14 +1236,14 @@ class _$Verified implements Verified {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
     TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
     TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
     TResult Function(Failure value)? failure,
     TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult Function(IdExists value)? idExists,
     TResult Function(IdNotExists value)? idNotExists,
     TResult Function(InvalidToken value)? invalidToken,
@@ -935,167 +1258,6 @@ class _$Verified implements Verified {
 
 abstract class Verified implements AuthState {
   const factory Verified() = _$Verified;
-}
-
-/// @nodoc
-abstract class _$$ExceededCopyWith<$Res> {
-  factory _$$ExceededCopyWith(
-          _$Exceeded value, $Res Function(_$Exceeded) then) =
-      __$$ExceededCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ExceededCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$Exceeded>
-    implements _$$ExceededCopyWith<$Res> {
-  __$$ExceededCopyWithImpl(_$Exceeded _value, $Res Function(_$Exceeded) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$Exceeded implements Exceeded {
-  const _$Exceeded();
-
-  @override
-  String toString() {
-    return 'AuthState.exceeded()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Exceeded);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
-    required TResult Function() signing,
-    required TResult Function() verified,
-    required TResult Function() exceeded,
-    required TResult Function(AppException exception) failure,
-    required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
-    required TResult Function() idExists,
-    required TResult Function() idNotExists,
-    required TResult Function() invalidToken,
-  }) {
-    return exceeded();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
-    TResult? Function()? signing,
-    TResult? Function()? verified,
-    TResult? Function()? exceeded,
-    TResult? Function(AppException exception)? failure,
-    TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
-    TResult? Function()? idExists,
-    TResult? Function()? idNotExists,
-    TResult? Function()? invalidToken,
-  }) {
-    return exceeded?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
-    TResult Function()? signing,
-    TResult Function()? verified,
-    TResult Function()? exceeded,
-    TResult Function(AppException exception)? failure,
-    TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
-    TResult Function()? idExists,
-    TResult Function()? idNotExists,
-    TResult Function()? invalidToken,
-    required TResult orElse(),
-  }) {
-    if (exceeded != null) {
-      return exceeded();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
-    required TResult Function(Signing value) signing,
-    required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
-    required TResult Function(Failure value) failure,
-    required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
-    required TResult Function(IdExists value) idExists,
-    required TResult Function(IdNotExists value) idNotExists,
-    required TResult Function(InvalidToken value) invalidToken,
-  }) {
-    return exceeded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
-    TResult? Function(Signing value)? signing,
-    TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
-    TResult? Function(Failure value)? failure,
-    TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
-    TResult? Function(IdExists value)? idExists,
-    TResult? Function(IdNotExists value)? idNotExists,
-    TResult? Function(InvalidToken value)? invalidToken,
-  }) {
-    return exceeded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
-    TResult Function(Signing value)? signing,
-    TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
-    TResult Function(Failure value)? failure,
-    TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
-    TResult Function(IdExists value)? idExists,
-    TResult Function(IdNotExists value)? idNotExists,
-    TResult Function(InvalidToken value)? invalidToken,
-    required TResult orElse(),
-  }) {
-    if (exceeded != null) {
-      return exceeded(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Exceeded implements AuthState {
-  const factory Exceeded() = _$Exceeded;
 }
 
 /// @nodoc
@@ -1162,14 +1324,14 @@ class _$Failure implements Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
     required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
     required TResult Function() verified,
-    required TResult Function() exceeded,
     required TResult Function(AppException exception) failure,
     required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
     required TResult Function() idExists,
     required TResult Function() idNotExists,
     required TResult Function() invalidToken,
@@ -1181,14 +1343,14 @@ class _$Failure implements Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
     TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
     TResult? Function()? verified,
-    TResult? Function()? exceeded,
     TResult? Function(AppException exception)? failure,
     TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
     TResult? Function()? idExists,
     TResult? Function()? idNotExists,
     TResult? Function()? invalidToken,
@@ -1200,14 +1362,14 @@ class _$Failure implements Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
     TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
     TResult Function()? verified,
-    TResult Function()? exceeded,
     TResult Function(AppException exception)? failure,
     TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
     TResult Function()? idExists,
     TResult Function()? idNotExists,
     TResult Function()? invalidToken,
@@ -1223,14 +1385,14 @@ class _$Failure implements Failure {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
     required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
     required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
     required TResult Function(Failure value) failure,
     required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
     required TResult Function(IdExists value) idExists,
     required TResult Function(IdNotExists value) idNotExists,
     required TResult Function(InvalidToken value) invalidToken,
@@ -1242,14 +1404,14 @@ class _$Failure implements Failure {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
     TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
     TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
     TResult? Function(Failure value)? failure,
     TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult? Function(IdExists value)? idExists,
     TResult? Function(IdNotExists value)? idNotExists,
     TResult? Function(InvalidToken value)? invalidToken,
@@ -1261,14 +1423,14 @@ class _$Failure implements Failure {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
     TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
     TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
     TResult Function(Failure value)? failure,
     TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult Function(IdExists value)? idExists,
     TResult Function(IdNotExists value)? idNotExists,
     TResult Function(InvalidToken value)? invalidToken,
@@ -1329,14 +1491,14 @@ class _$VerifyByCode implements VerifyByCode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
     required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
     required TResult Function() verified,
-    required TResult Function() exceeded,
     required TResult Function(AppException exception) failure,
     required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
     required TResult Function() idExists,
     required TResult Function() idNotExists,
     required TResult Function() invalidToken,
@@ -1348,14 +1510,14 @@ class _$VerifyByCode implements VerifyByCode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
     TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
     TResult? Function()? verified,
-    TResult? Function()? exceeded,
     TResult? Function(AppException exception)? failure,
     TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
     TResult? Function()? idExists,
     TResult? Function()? idNotExists,
     TResult? Function()? invalidToken,
@@ -1367,14 +1529,14 @@ class _$VerifyByCode implements VerifyByCode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
     TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
     TResult Function()? verified,
-    TResult Function()? exceeded,
     TResult Function(AppException exception)? failure,
     TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
     TResult Function()? idExists,
     TResult Function()? idNotExists,
     TResult Function()? invalidToken,
@@ -1390,14 +1552,14 @@ class _$VerifyByCode implements VerifyByCode {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
     required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
     required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
     required TResult Function(Failure value) failure,
     required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
     required TResult Function(IdExists value) idExists,
     required TResult Function(IdNotExists value) idNotExists,
     required TResult Function(InvalidToken value) invalidToken,
@@ -1409,14 +1571,14 @@ class _$VerifyByCode implements VerifyByCode {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
     TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
     TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
     TResult? Function(Failure value)? failure,
     TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult? Function(IdExists value)? idExists,
     TResult? Function(IdNotExists value)? idNotExists,
     TResult? Function(InvalidToken value)? invalidToken,
@@ -1428,14 +1590,14 @@ class _$VerifyByCode implements VerifyByCode {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
     TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
     TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
     TResult Function(Failure value)? failure,
     TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult Function(IdExists value)? idExists,
     TResult Function(IdNotExists value)? idNotExists,
     TResult Function(InvalidToken value)? invalidToken,
@@ -1450,168 +1612,6 @@ class _$VerifyByCode implements VerifyByCode {
 
 abstract class VerifyByCode implements AuthState {
   const factory VerifyByCode() = _$VerifyByCode;
-}
-
-/// @nodoc
-abstract class _$$AutoRetrievalTimeOutCopyWith<$Res> {
-  factory _$$AutoRetrievalTimeOutCopyWith(_$AutoRetrievalTimeOut value,
-          $Res Function(_$AutoRetrievalTimeOut) then) =
-      __$$AutoRetrievalTimeOutCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$AutoRetrievalTimeOutCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$AutoRetrievalTimeOut>
-    implements _$$AutoRetrievalTimeOutCopyWith<$Res> {
-  __$$AutoRetrievalTimeOutCopyWithImpl(_$AutoRetrievalTimeOut _value,
-      $Res Function(_$AutoRetrievalTimeOut) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$AutoRetrievalTimeOut implements AutoRetrievalTimeOut {
-  const _$AutoRetrievalTimeOut();
-
-  @override
-  String toString() {
-    return 'AuthState.autoRetrievalTimeOut()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AutoRetrievalTimeOut);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
-    required TResult Function() signing,
-    required TResult Function() verified,
-    required TResult Function() exceeded,
-    required TResult Function(AppException exception) failure,
-    required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
-    required TResult Function() idExists,
-    required TResult Function() idNotExists,
-    required TResult Function() invalidToken,
-  }) {
-    return autoRetrievalTimeOut();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
-    TResult? Function()? signing,
-    TResult? Function()? verified,
-    TResult? Function()? exceeded,
-    TResult? Function(AppException exception)? failure,
-    TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
-    TResult? Function()? idExists,
-    TResult? Function()? idNotExists,
-    TResult? Function()? invalidToken,
-  }) {
-    return autoRetrievalTimeOut?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
-    TResult Function()? signing,
-    TResult Function()? verified,
-    TResult Function()? exceeded,
-    TResult Function(AppException exception)? failure,
-    TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
-    TResult Function()? idExists,
-    TResult Function()? idNotExists,
-    TResult Function()? invalidToken,
-    required TResult orElse(),
-  }) {
-    if (autoRetrievalTimeOut != null) {
-      return autoRetrievalTimeOut();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
-    required TResult Function(Signing value) signing,
-    required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
-    required TResult Function(Failure value) failure,
-    required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
-    required TResult Function(IdExists value) idExists,
-    required TResult Function(IdNotExists value) idNotExists,
-    required TResult Function(InvalidToken value) invalidToken,
-  }) {
-    return autoRetrievalTimeOut(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
-    TResult? Function(Signing value)? signing,
-    TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
-    TResult? Function(Failure value)? failure,
-    TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
-    TResult? Function(IdExists value)? idExists,
-    TResult? Function(IdNotExists value)? idNotExists,
-    TResult? Function(InvalidToken value)? invalidToken,
-  }) {
-    return autoRetrievalTimeOut?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
-    TResult Function(Signing value)? signing,
-    TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
-    TResult Function(Failure value)? failure,
-    TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
-    TResult Function(IdExists value)? idExists,
-    TResult Function(IdNotExists value)? idNotExists,
-    TResult Function(InvalidToken value)? invalidToken,
-    required TResult orElse(),
-  }) {
-    if (autoRetrievalTimeOut != null) {
-      return autoRetrievalTimeOut(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class AutoRetrievalTimeOut implements AuthState {
-  const factory AutoRetrievalTimeOut() = _$AutoRetrievalTimeOut;
 }
 
 /// @nodoc
@@ -1652,14 +1652,14 @@ class _$IdExists implements IdExists {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
     required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
     required TResult Function() verified,
-    required TResult Function() exceeded,
     required TResult Function(AppException exception) failure,
     required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
     required TResult Function() idExists,
     required TResult Function() idNotExists,
     required TResult Function() invalidToken,
@@ -1671,14 +1671,14 @@ class _$IdExists implements IdExists {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
     TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
     TResult? Function()? verified,
-    TResult? Function()? exceeded,
     TResult? Function(AppException exception)? failure,
     TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
     TResult? Function()? idExists,
     TResult? Function()? idNotExists,
     TResult? Function()? invalidToken,
@@ -1690,14 +1690,14 @@ class _$IdExists implements IdExists {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
     TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
     TResult Function()? verified,
-    TResult Function()? exceeded,
     TResult Function(AppException exception)? failure,
     TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
     TResult Function()? idExists,
     TResult Function()? idNotExists,
     TResult Function()? invalidToken,
@@ -1713,14 +1713,14 @@ class _$IdExists implements IdExists {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
     required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
     required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
     required TResult Function(Failure value) failure,
     required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
     required TResult Function(IdExists value) idExists,
     required TResult Function(IdNotExists value) idNotExists,
     required TResult Function(InvalidToken value) invalidToken,
@@ -1732,14 +1732,14 @@ class _$IdExists implements IdExists {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
     TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
     TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
     TResult? Function(Failure value)? failure,
     TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult? Function(IdExists value)? idExists,
     TResult? Function(IdNotExists value)? idNotExists,
     TResult? Function(InvalidToken value)? invalidToken,
@@ -1751,14 +1751,14 @@ class _$IdExists implements IdExists {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
     TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
     TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
     TResult Function(Failure value)? failure,
     TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult Function(IdExists value)? idExists,
     TResult Function(IdNotExists value)? idNotExists,
     TResult Function(InvalidToken value)? invalidToken,
@@ -1814,14 +1814,14 @@ class _$IdNotExists implements IdNotExists {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
     required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
     required TResult Function() verified,
-    required TResult Function() exceeded,
     required TResult Function(AppException exception) failure,
     required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
     required TResult Function() idExists,
     required TResult Function() idNotExists,
     required TResult Function() invalidToken,
@@ -1833,14 +1833,14 @@ class _$IdNotExists implements IdNotExists {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
     TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
     TResult? Function()? verified,
-    TResult? Function()? exceeded,
     TResult? Function(AppException exception)? failure,
     TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
     TResult? Function()? idExists,
     TResult? Function()? idNotExists,
     TResult? Function()? invalidToken,
@@ -1852,14 +1852,14 @@ class _$IdNotExists implements IdNotExists {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
     TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
     TResult Function()? verified,
-    TResult Function()? exceeded,
     TResult Function(AppException exception)? failure,
     TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
     TResult Function()? idExists,
     TResult Function()? idNotExists,
     TResult Function()? invalidToken,
@@ -1875,14 +1875,14 @@ class _$IdNotExists implements IdNotExists {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
     required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
     required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
     required TResult Function(Failure value) failure,
     required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
     required TResult Function(IdExists value) idExists,
     required TResult Function(IdNotExists value) idNotExists,
     required TResult Function(InvalidToken value) invalidToken,
@@ -1894,14 +1894,14 @@ class _$IdNotExists implements IdNotExists {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
     TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
     TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
     TResult? Function(Failure value)? failure,
     TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult? Function(IdExists value)? idExists,
     TResult? Function(IdNotExists value)? idNotExists,
     TResult? Function(InvalidToken value)? invalidToken,
@@ -1913,14 +1913,14 @@ class _$IdNotExists implements IdNotExists {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
     TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
     TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
     TResult Function(Failure value)? failure,
     TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult Function(IdExists value)? idExists,
     TResult Function(IdNotExists value)? idNotExists,
     TResult Function(InvalidToken value)? invalidToken,
@@ -1976,14 +1976,14 @@ class _$InvalidToken implements InvalidToken {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() codeSent,
-    required TResult Function() verifying,
     required TResult Function() signing,
+    required TResult Function() signed,
+    required TResult Function() signingCode,
+    required TResult Function() signedCode,
+    required TResult Function() verifying,
     required TResult Function() verified,
-    required TResult Function() exceeded,
     required TResult Function(AppException exception) failure,
     required TResult Function() verifyByCode,
-    required TResult Function() autoRetrievalTimeOut,
     required TResult Function() idExists,
     required TResult Function() idNotExists,
     required TResult Function() invalidToken,
@@ -1995,14 +1995,14 @@ class _$InvalidToken implements InvalidToken {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? codeSent,
-    TResult? Function()? verifying,
     TResult? Function()? signing,
+    TResult? Function()? signed,
+    TResult? Function()? signingCode,
+    TResult? Function()? signedCode,
+    TResult? Function()? verifying,
     TResult? Function()? verified,
-    TResult? Function()? exceeded,
     TResult? Function(AppException exception)? failure,
     TResult? Function()? verifyByCode,
-    TResult? Function()? autoRetrievalTimeOut,
     TResult? Function()? idExists,
     TResult? Function()? idNotExists,
     TResult? Function()? invalidToken,
@@ -2014,14 +2014,14 @@ class _$InvalidToken implements InvalidToken {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? codeSent,
-    TResult Function()? verifying,
     TResult Function()? signing,
+    TResult Function()? signed,
+    TResult Function()? signingCode,
+    TResult Function()? signedCode,
+    TResult Function()? verifying,
     TResult Function()? verified,
-    TResult Function()? exceeded,
     TResult Function(AppException exception)? failure,
     TResult Function()? verifyByCode,
-    TResult Function()? autoRetrievalTimeOut,
     TResult Function()? idExists,
     TResult Function()? idNotExists,
     TResult Function()? invalidToken,
@@ -2037,14 +2037,14 @@ class _$InvalidToken implements InvalidToken {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(CodeSent value) codeSent,
-    required TResult Function(Verifying value) verifying,
     required TResult Function(Signing value) signing,
+    required TResult Function(Signed value) signed,
+    required TResult Function(SigningCode value) signingCode,
+    required TResult Function(SignedCode value) signedCode,
+    required TResult Function(Verifying value) verifying,
     required TResult Function(Verified value) verified,
-    required TResult Function(Exceeded value) exceeded,
     required TResult Function(Failure value) failure,
     required TResult Function(VerifyByCode value) verifyByCode,
-    required TResult Function(AutoRetrievalTimeOut value) autoRetrievalTimeOut,
     required TResult Function(IdExists value) idExists,
     required TResult Function(IdNotExists value) idNotExists,
     required TResult Function(InvalidToken value) invalidToken,
@@ -2056,14 +2056,14 @@ class _$InvalidToken implements InvalidToken {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(CodeSent value)? codeSent,
-    TResult? Function(Verifying value)? verifying,
     TResult? Function(Signing value)? signing,
+    TResult? Function(Signed value)? signed,
+    TResult? Function(SigningCode value)? signingCode,
+    TResult? Function(SignedCode value)? signedCode,
+    TResult? Function(Verifying value)? verifying,
     TResult? Function(Verified value)? verified,
-    TResult? Function(Exceeded value)? exceeded,
     TResult? Function(Failure value)? failure,
     TResult? Function(VerifyByCode value)? verifyByCode,
-    TResult? Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult? Function(IdExists value)? idExists,
     TResult? Function(IdNotExists value)? idNotExists,
     TResult? Function(InvalidToken value)? invalidToken,
@@ -2075,14 +2075,14 @@ class _$InvalidToken implements InvalidToken {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(CodeSent value)? codeSent,
-    TResult Function(Verifying value)? verifying,
     TResult Function(Signing value)? signing,
+    TResult Function(Signed value)? signed,
+    TResult Function(SigningCode value)? signingCode,
+    TResult Function(SignedCode value)? signedCode,
+    TResult Function(Verifying value)? verifying,
     TResult Function(Verified value)? verified,
-    TResult Function(Exceeded value)? exceeded,
     TResult Function(Failure value)? failure,
     TResult Function(VerifyByCode value)? verifyByCode,
-    TResult Function(AutoRetrievalTimeOut value)? autoRetrievalTimeOut,
     TResult Function(IdExists value)? idExists,
     TResult Function(IdNotExists value)? idNotExists,
     TResult Function(InvalidToken value)? invalidToken,

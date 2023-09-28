@@ -22,7 +22,7 @@ late AndroidNotificationChannel channel;
 
 FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
 
-class FirebaseNotification extends NotificationService {
+class FirebaseNotification implements NotificationService {
   String? currentOpenedMessageId;
   BuildContext? _buildContext;
 
@@ -33,8 +33,9 @@ class FirebaseNotification extends NotificationService {
 
   @override
   Future<void> initialise() async {
-    if (Platform.isIOS) {}
-    FirebaseMessaging.instance.requestPermission();
+    if (Platform.isIOS) {
+      FirebaseMessaging.instance.requestPermission();
+    }
     String topic = 'NotificationTopicTest';
     if (topic != null) {
       FirebaseMessaging.instance.subscribeToTopic(topic);

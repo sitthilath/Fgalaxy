@@ -1,75 +1,267 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:galaxy_18_lottery_app/configs/app_configs.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/auth_providers.dart';
-import 'package:galaxy_18_lottery_app/shared/domain/models/user/user_form.dart';
+import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/state/auth_state.dart';
+import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/login_button.dart';
+import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/password_field.dart';
+import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/phone_field.dart';
+import 'package:galaxy_18_lottery_app/infrastructure/messages/providers/flutter_toast_message_provider.dart';
+import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
+import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
+import 'package:galaxy_18_lottery_app/shared/constants/regex.dart';
+import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
+import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
+import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
+import 'package:galaxy_18_lottery_app/shared/widgets/label_widget.dart';
+import 'package:galaxy_18_lottery_app/shared/widgets/loadings/loading.dart';
+import 'package:galaxy_18_lottery_app/shared/widgets/theme_widget.dart';
 
 @RoutePage()
-class RegisterScreen extends ConsumerWidget{
-  RegisterScreen({super.key});
+class RegisterScreen extends ConsumerStatefulWidget {
+  const RegisterScreen({super.key});
 
-  final TextEditingController txtPhoneNumber = TextEditingController(text: '2076782728');
-  final TextEditingController txtPassword = TextEditingController();
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(authStateNotifierProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() => RegisterState();
+}
+
+class RegisterState extends ConsumerState<RegisterScreen> {
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  String? phoneIsEmpty;
+  String? passwordIsEmpty;
+
+  @override
+  Widget build(BuildContext context) {
+    ref.watch(authStateNotifierProvider);
+    ref.read(toastMessageProvider).initialMessage(context);
+    ref.listen(authStateNotifierProvider.select((value) => value),
+        (previous, next) async {
+      if (next is Signing) {
+        _showLoader(context, "ກະລຸນາລໍຖ້າ");
+      } else if (next is Signed) {
+        _closeLoader(context);
+        AutoRouter.of(context).push(
+          OTPRoute(phoneNumber: phoneController.text),
+        );
+      } else if (next is Failure) {
+        if (next.exception.statusCode == 409) {
+          ref.read(toastMessageProvider).messageInfo(
+              message:
+                  "ເບີ ${AppConfigs.LA_PREFIX}${phoneController.text} ມີຢູ່ໃນລະບົບແລ້ວ ກະລຸນາເຂົ້າສູ່ລະບົບ");
+        } else if (next.exception.statusCode == 422) {
+          ref
+              .read(authStateNotifierProvider.notifier)
+              .sendOTP(phoneController.text);
+          AutoRouter.of(context).push(
+            OTPRoute(phoneNumber: phoneController.text),
+          );
+        } else {
+          ref.read(toastMessageProvider).messageError(
+                message: next.exception.message.toString(),
+              );
+        }
+        _closeLoader(context);
+      }
+    });
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Galaxy18 Lottery'),
-      ),
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
+      body: ThemeApp(
+        child: Stack(
           children: [
-            Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-              child: TextField(
-                controller: txtPhoneNumber,
-                obscureText: false,
-                decoration: const InputDecoration(
-                  hintText: 'phone',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8.0),
-                    ),
+            Container(
+              width: double.infinity,
+              height: 280,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppConstants.authBGImagePath),
+                    fit: BoxFit.cover),
+              ),
+              child: Image.asset(
+                AppConstants.appLogo,
+                fit: BoxFit.contain,
+              ),
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 180,
+              child: SizedBox(
+                width: double.infinity,
+                height: 150,
+                child: SvgPicture.asset(
+                  AppConstants.boxGroupPath,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              top: 280,
+              child: Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 35),
+                decoration: BoxDecoration(
+                    color: AppColor.whiteColor,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                    )),
+                child: IntrinsicHeight(
+                  child: ListView(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(bottom: 15),
+                        decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                            color: AppColor.borderColor,
+                          )),
+                        ),
+                        child: Text(
+                          "ລົງທະບຽນ",
+                          style: stylePrimary(
+                            size: 18,
+                            weight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      heightBox(15),
+                      labelText(
+                          color: AppColor.blackColor,
+                          text: 'ເບີໂທລະສັບ',
+                          size: 14,
+                          fontWeight: FontWeight.w500),
+                      heightBox(10),
+                      phoneField(
+                        controller: phoneController,
+                        onValidate: _checkPhoneNumber,
+                        errorMsg: phoneIsEmpty,
+                      ),
+                      heightBox(15),
+                      labelText(
+                          color: AppColor.blackColor,
+                          text: 'ລະຫັດຜ່ານ',
+                          size: 14,
+                          fontWeight: FontWeight.w500),
+                      heightBox(10),
+                      passwordField(
+                        controller: passwordController,
+                        onValidate: _checkPassword,
+                        errorMsg: passwordIsEmpty,
+                      ),
+                      heightBox(15),
+                      registerButton(
+                        onTab: () => _validateField(ref),
+                      ),
+                      Center(
+                        child: labelText(
+                            color: AppColor.blackColor,
+                            text: 'ຫຼື',
+                            size: 16,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      heightBox(15),
+                      registerWithBCELOne(),
+                      heightBox(20),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Flex(
+                          direction: Axis.horizontal,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "ມີບັນຊີຢູ່ແລ້ວ",
+                              style:
+                                  styleBlack(size: 14, weight: FontWeight.w600),
+                            ),
+                            widthBox(8),
+                            InkWell(
+                              onTap: () {
+                                context.router.back();
+                              },
+                              child: Text("ເຂົ້າສູ່ລະບົບ",
+                                  style: stylePrimary(
+                                      size: 14, weight: FontWeight.w700)),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-            Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-              child: TextField(
-                controller: txtPassword,
-                obscureText: false,
-                decoration: const InputDecoration(
-                  hintText: 'password',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8.0),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            state.maybeMap(
-              signing: (_) => const Center(child: CircularProgressIndicator()),
-              orElse: () => loginButton(ref),
-            )
           ],
         ),
       ),
     );
   }
-  Widget loginButton(WidgetRef ref) {
-    return ElevatedButton(
-      onPressed: () {
-        // validate email and password
-        ref.watch(authStateNotifierProvider.notifier).verifyPhoneNumber(UserForm(phoneNumber: txtPhoneNumber.text, password: txtPassword.text));
-      },
-      child: const Text('Verify'),
-    );
+
+  Future<void> _showLoader(BuildContext context, String title) {
+    return LoadingDialog.showAuthLoadingDialog(context, title: title);
+  }
+
+  Future<void> _closeLoader(BuildContext context) async {
+    final navigator = Navigator.of(context);
+    if (navigator.canPop()) {
+      return navigator.pop();
+    }
+    return Future.value(null);
+  }
+
+  _validateField(WidgetRef ref) async {
+    focusDisable(context);
+    _checkPhoneNumber(phoneController.text);
+    _checkPassword(passwordController.text);
+    if (phoneController.text.isNotEmpty &&
+        phoneController.text.length == 8 &&
+        passwordController.text.isNotEmpty &&
+        passwordRegex.hasMatch(passwordController.text)) {
+      ref
+          .read(authStateNotifierProvider.notifier)
+          .registerUser(phoneController.text, passwordController.text);
+    }
+  }
+
+  void _checkPhoneNumber(String phone) {
+    if (phone.isEmpty) {
+      setState(() {
+        phoneIsEmpty = "ເບີໂທລະສັບບໍ່ສາມາດວ່າງເປົ່າໄດ້";
+      });
+    } else if (phone.length < 8) {
+      setState(() {
+        phoneIsEmpty = "ເບີໂທລະສັບຈະຕ້ອງເທົ່າກັບ 8 ຕົວເລກ";
+      });
+    } else {
+      setState(() {
+        phoneIsEmpty = null;
+      });
+    }
+  }
+
+  void _checkPassword(String password) {
+    if (password.isEmpty) {
+      setState(() {
+        passwordIsEmpty = "ລະຫັດຜ່ານບໍ່ສາມາດວ່າງເປົ່າໄດ້";
+      });
+    } else if (!passwordRegex.hasMatch(password)) {
+      setState(() {
+        passwordIsEmpty =
+            "ລະຫັດຜ່ານຈະຕ້ອງມີຕົວພິມໃຫຍ່ A-Z ແລະ ຕົວພິມນ້ອຍ a-z, ຕົວເລກ 0-9, ຕົວອັກສອນພິເສດ [&,@] ແລະ ຕ້ອງມີຈຳນວນ 6 ຕົວຂື້ນໄປ";
+      });
+    } else {
+      setState(() {
+        passwordIsEmpty = null;
+      });
+    }
   }
 }

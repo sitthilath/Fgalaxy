@@ -36,9 +36,7 @@ class DioNetworkService extends NetworkService with ExceptionHandlerMixin {
   @override
   Map<String, dynamic> updateHeader(Map<String, dynamic> data) {
     final header = {...data, ...headers};
-    if (!kTestModel) {
       dio.options.headers = header;
-    }
     return header;
   }
 
