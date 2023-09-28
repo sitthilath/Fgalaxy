@@ -37,17 +37,19 @@ class LoginState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     ref.watch(authStateNotifierProvider);
     ref.read(toastMessageProvider).initialMessage(context);
-    ref.listen(authStateNotifierProvider.select((value) => value), (previous, next) async {
-      if(next is Signing){
+    ref.listen(authStateNotifierProvider.select((value) => value), (previous,
+        next) async {
+      if (next is Signing) {
         await _showLoader(context, "ກະລຸນາລໍຖ້າ");
-      }else if(next is Signed){
+      } else if (next is Signed) {
         _closeLoader(context);
-        ref.read(toastMessageProvider).messageSuccess(message: "ເຂົ້າສູ່ລະບົບສຳເລັດ");
+        AutoRouter.of(context).pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
         _clearTextController();
-      }else if(next is Failure){
+      } else if (next is Failure) {
         _closeLoader(context);
-        if(next.exception.statusCode != 409){
-          ref.read(toastMessageProvider).messageError(message: next.exception.message.toString());
+        if (next.exception.statusCode != 409) {
+          ref.read(toastMessageProvider).messageError(
+              message: next.exception.message.toString());
         }
       }
     });
@@ -90,7 +92,7 @@ class LoginState extends ConsumerState<LoginScreen> {
               child: Container(
                 width: double.infinity,
                 padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 35),
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 35),
                 decoration: BoxDecoration(
                     color: AppColor.whiteColor,
                     borderRadius: const BorderRadius.only(
@@ -107,8 +109,8 @@ class LoginState extends ConsumerState<LoginScreen> {
                         decoration: BoxDecoration(
                           border: Border(
                               bottom: BorderSide(
-                            color: AppColor.borderColor,
-                          )),
+                                color: AppColor.borderColor,
+                              )),
                         ),
                         child: Text(
                           "ເຂົ້າສູ່ລະບົບ",
@@ -164,7 +166,7 @@ class LoginState extends ConsumerState<LoginScreen> {
                             Text(
                               "ຍັງບໍ່ມີບັນຊີເທື່ອ",
                               style:
-                                  styleBlack(size: 14, weight: FontWeight.w600),
+                              styleBlack(size: 14, weight: FontWeight.w600),
                             ),
                             widthBox(8),
                             InkWell(
@@ -232,10 +234,10 @@ class LoginState extends ConsumerState<LoginScreen> {
     }
   }
 
-  void _clearTextController(){
+  void _clearTextController() {
     setState(() {
       phoneController.text = '';
-      passwordController.text ='';
+      passwordController.text = '';
     });
   }
 

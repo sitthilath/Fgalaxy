@@ -5,7 +5,7 @@ import 'main/app.dart';
 import 'main/app_env.dart';
 import 'main/observers.dart';
 
-void main() async => mainCommon(AppEnvironment.PROD);
+void main() async => mainCommon(AppEnvironment.DEV);
 
 Future<void> mainCommon(AppEnvironment environment) async {
   WidgetsFlutterBinding.ensureInitialized();

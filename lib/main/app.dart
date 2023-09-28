@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:galaxy_18_lottery_app/main/app_env.dart';
+import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
+import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
 import '../routes/app_route.dart';
 
@@ -21,13 +24,13 @@ class MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Galaxy18 Lottery',
+      title: EnvInfo.appName,
       debugShowCheckedModeBanner: false,
       routeInformationParser: appRouter.defaultRouteParser(),
       routerDelegate: appRouter.delegate(),
       theme: ThemeData(
         primaryColor: AppColor.primaryColor,
-        fontFamily: "NotoSansLao",
+        fontFamily: LAO_FONT_FAMILY,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
     );

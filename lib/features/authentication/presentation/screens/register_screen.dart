@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:galaxy_18_lottery_app/configs/app_configs.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/auth_providers.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/state/auth_state.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/login_button.dart';
@@ -12,6 +11,7 @@ import 'package:galaxy_18_lottery_app/infrastructure/messages/providers/flutter_
 import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/regex.dart';
+import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
@@ -51,7 +51,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
         if (next.exception.statusCode == 409) {
           ref.read(toastMessageProvider).messageInfo(
               message:
-                  "ເບີ ${AppConfigs.LA_PREFIX}${phoneController.text} ມີຢູ່ໃນລະບົບແລ້ວ ກະລຸນາເຂົ້າສູ່ລະບົບ");
+                  "ເບີ $LA_PREFIX${phoneController.text} ມີຢູ່ໃນລະບົບແລ້ວ ກະລຸນາເຂົ້າສູ່ລະບົບ");
         } else if (next.exception.statusCode == 422) {
           ref
               .read(authStateNotifierProvider.notifier)

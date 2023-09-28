@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:galaxy_18_lottery_app/configs/app_configs.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/auth_providers.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/state/auth_state.dart';
 import 'package:galaxy_18_lottery_app/infrastructure/messages/providers/flutter_toast_message_provider.dart';
+import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/appbars/shared_appbar.dart';
@@ -90,7 +90,7 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
                   children: [
                     Text("ລະຫັດ OTP ຂອງທ່ານຖືກສົ່ງໄປຫາເບີ",
                         style: styleWhite(size: 14, weight: FontWeight.w400)),
-                    Text(AppConfigs.LA_PREFIX + widget.phoneNumber,
+                    Text(LA_PREFIX + widget.phoneNumber,
                         style: styleWhite(size: 14, weight: FontWeight.w400)),
                     heightBox(36),
                     Flex(

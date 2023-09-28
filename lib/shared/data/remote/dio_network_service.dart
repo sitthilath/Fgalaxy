@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:galaxy_18_lottery_app/configs/app_configs.dart';
+import 'package:galaxy_18_lottery_app/main/app_env.dart';
 import 'package:galaxy_18_lottery_app/shared/data/remote/network_service.dart';
 import 'package:galaxy_18_lottery_app/shared/exceptions/http_exception.dart';
 import 'package:galaxy_18_lottery_app/shared/globals.dart';
@@ -25,7 +25,7 @@ class DioNetworkService extends NetworkService with ExceptionHandlerMixin {
       BaseOptions(baseUrl: baseUrl, headers: headers);
 
   @override
-  String get baseUrl => AppConfigs.baseUrl;
+  String get baseUrl => EnvInfo.connectionString;
 
   @override
   Map<String, Object> get headers => {
