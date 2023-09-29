@@ -9,6 +9,7 @@ import 'package:galaxy_18_lottery_app/infrastructure/messages/providers/flutter_
 import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
+import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/appbars/shared_appbar.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/loadings/loading.dart';
@@ -53,17 +54,17 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(authStateNotifierProvider);
+    ref.watch(authStateNotifierProvider);
     ref.read(toastMessageProvider).initialMessage(context);
     ref.listen(authStateNotifierProvider.select((value) => value),
         (previous, next) async {
       if (next is Verifying) {
-        _showLoader(context, "Verifying");
+        _showLoader(context, Txt.t(context, "verify_msg"));
       } else if (next is Verified) {
-        await _closeLoader(context);
+         _closeLoader(context);
         ref
             .read(toastMessageProvider)
-            .messageSuccess(message: 'ລົງທະບຽນສຳເລັດ ກຳລັງເຂົ້າສູ່ລະບົບ');
+            .messageSuccess(message: Txt.t(context, "register_success"));
         otpCodes.clear();
       } else if (next is Failure) {
         await _closeLoader(context);
@@ -76,7 +77,7 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
     return ThemeApp(
       child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: const SharedAppbar(title: 'ຢືນຢັນລະຫັດ OTP'),
+          appBar: SharedAppbar(title: Txt.t(context, "confirm_otp")),
           body: Column(
             children: [
               Expanded(
@@ -88,7 +89,7 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   direction: Axis.vertical,
                   children: [
-                    Text("ລະຫັດ OTP ຂອງທ່ານຖືກສົ່ງໄປຫາເບີ",
+                    Text(Txt.t(context, "your_phone_send_to"),
                         style: styleWhite(size: 14, weight: FontWeight.w400)),
                     Text(LA_PREFIX + widget.phoneNumber,
                         style: styleWhite(size: 14, weight: FontWeight.w400)),
@@ -210,7 +211,7 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: _secondsRemaining == 0
           ? [
-              Text("ຍັງບໍ່ໄດ້ຮັບລະຫັດ",
+              Text(Txt.t(context, "still_haven_received_the_code"),
                   style: styleWhite(size: 14, weight: FontWeight.w300)),
               widthBox(10),
               InkWell(
@@ -225,12 +226,12 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
                     _startCountdown();
                   }
                 },
-                child: Text("ຂໍລະຫັດອີກຄັ້ງ",
+                child: Text(Txt.t(context, "send_again"),
                     style: styleWhite(size: 14, weight: FontWeight.w600)),
               ),
             ]
           : [
-              Text("ລະຫັດ OTP ສາມາດຂໍໄດ້ອີກໃນ $_secondsRemaining ວິນາທີ",
+              Text("${Txt.t(context, "otp_can_send_again_at")} $_secondsRemaining ${Txt.t(context, "second")}",
                   style: styleWhite(size: 14, weight: FontWeight.w400)),
             ],
     );

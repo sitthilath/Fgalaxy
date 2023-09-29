@@ -9,8 +9,8 @@ import 'package:galaxy_18_lottery_app/features/navigator/presentation/widgets/bu
 import 'package:galaxy_18_lottery_app/features/navigator/presentation/widgets/menu_items.dart';
 import 'package:galaxy_18_lottery_app/features/profile/presentation/screen/profile_screen.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
-import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
+import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/theme_widget.dart';
 
@@ -68,7 +68,7 @@ class NavigatorState extends ConsumerState<NavigatorScreen> {
               children: [
                 menuBottomItem(
                   icon: MenuIcons.home,
-                  title: 'ໜ້າຫຼັກ',
+                  title: Txt.t(context, "home"), // ໜ້າຫຼັກ
                   index: 0,
                   onTap: () {
                     setState(() {
@@ -80,7 +80,7 @@ class NavigatorState extends ConsumerState<NavigatorScreen> {
                 ),
                 menuBottomItem(
                   icon: MenuIcons.lotteryResult,
-                  title: 'ຜົນຫວຍ',
+                  title: Txt.t(context, 'lottery_result'), //ຜົນຫວຍ
                   index: 1,
                   onTap: () {
                     setState(() {
@@ -101,7 +101,7 @@ class NavigatorState extends ConsumerState<NavigatorScreen> {
               children: [
                 menuBottomItem(
                   icon: MenuIcons.information,
-                  title: 'ຂ່າວສານ',
+                  title: Txt.t(context, 'information'), //ຂ່າວສານ
                   index: 2,
                   onTap: () {
                     setState(() {
@@ -113,7 +113,7 @@ class NavigatorState extends ConsumerState<NavigatorScreen> {
                 ),
                 menuBottomItem(
                   icon: MenuIcons.profile,
-                  title: 'ໂປຣຟາຍ',
+                  title: Txt.t(context, "profile"), //ໂປຣຟາຍ
                   index: 3,
                   onTap: () {
                     setState(() {

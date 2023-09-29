@@ -1,17 +1,20 @@
+ const String iconPath ="assets/icons";
+const String imagePath = "assets/images";
+
 class AppConstants {
-  static String authBGImagePath = "images/auth-bg-frame.png";
-  static String boxGroupPath = "images/box-group.svg";
-  static String appLogo = "images/app_logo.png";
-  static String phoneIcon = "images/phone.svg";
+  static String authBGImagePath = "$imagePath/auth-bg-frame.png";
+  static String boxGroupPath = "$imagePath/box-group.svg";
+  static String appLogo = "$imagePath/app_logo.png";
+  static String phoneIcon = "$imagePath/phone.svg";
 
 
   ////======== for icons =========
-  static String leadingIcon = 'icons/leading_icon.svg';
+  static String leadingIcon = '$iconPath/leading_icon.svg';
 }
 
 class MenuIcons {
-  static String home = "icons/home.svg";
-  static String lotteryResult = 'icons/lottery-result.svg';
-  static String information = 'icons/information.svg';
-  static String profile = 'icons/person.svg';
+  static String home = "$iconPath/home.svg";
+  static String lotteryResult = '$iconPath/lottery-result.svg';
+  static String information = '$iconPath/information.svg';
+  static String profile = '$iconPath/person.svg';
 }

@@ -14,6 +14,7 @@ import 'package:galaxy_18_lottery_app/shared/constants/regex.dart';
 import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
+import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/label_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/loadings/loading.dart';
@@ -41,7 +42,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
     ref.listen(authStateNotifierProvider.select((value) => value),
         (previous, next) async {
       if (next is Signing) {
-        _showLoader(context, "ກະລຸນາລໍຖ້າ");
+        _showLoader(context, Txt.t(context, "waiting_msg"));
       } else if (next is Signed) {
         _closeLoader(context);
         AutoRouter.of(context).push(
@@ -51,7 +52,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
         if (next.exception.statusCode == 409) {
           ref.read(toastMessageProvider).messageInfo(
               message:
-                  "ເບີ $LA_PREFIX${phoneController.text} ມີຢູ່ໃນລະບົບແລ້ວ ກະລຸນາເຂົ້າສູ່ລະບົບ");
+                  "${Txt.t(context, "phone_number")} $LA_PREFIX${phoneController.text} ${Txt.t(context, "has_in_system_plz_login")}");
         } else if (next.exception.statusCode == 422) {
           ref
               .read(authStateNotifierProvider.notifier)
@@ -127,7 +128,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
                           )),
                         ),
                         child: Text(
-                          "ລົງທະບຽນ",
+                          Txt.t(context, "register"),
                           style: stylePrimary(
                             size: 18,
                             weight: FontWeight.w600,
@@ -137,7 +138,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
                       heightBox(15),
                       labelText(
                           color: AppColor.blackColor,
-                          text: 'ເບີໂທລະສັບ',
+                          text: Txt.t(context, "phone_number"),
                           size: 14,
                           fontWeight: FontWeight.w500),
                       heightBox(10),
@@ -149,7 +150,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
                       heightBox(15),
                       labelText(
                           color: AppColor.blackColor,
-                          text: 'ລະຫັດຜ່ານ',
+                          text: Txt.t(context, "password_text"),
                           size: 14,
                           fontWeight: FontWeight.w500),
                       heightBox(10),
@@ -165,7 +166,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
                       Center(
                         child: labelText(
                             color: AppColor.blackColor,
-                            text: 'ຫຼື',
+                            text: Txt.t(context, "or"),
                             size: 16,
                             fontWeight: FontWeight.w500),
                       ),
@@ -179,7 +180,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "ມີບັນຊີຢູ່ແລ້ວ",
+                              Txt.t(context, "is_have_account"),
                               style:
                                   styleBlack(size: 14, weight: FontWeight.w600),
                             ),
@@ -188,7 +189,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
                               onTap: () {
                                 context.router.back();
                               },
-                              child: Text("ເຂົ້າສູ່ລະບົບ",
+                              child: Text(Txt.t(context, "login_button_text"),
                                   style: stylePrimary(
                                       size: 14, weight: FontWeight.w700)),
                             ),
@@ -235,11 +236,11 @@ class RegisterState extends ConsumerState<RegisterScreen> {
   void _checkPhoneNumber(String phone) {
     if (phone.isEmpty) {
       setState(() {
-        phoneIsEmpty = "ເບີໂທລະສັບບໍ່ສາມາດວ່າງເປົ່າໄດ້";
+        phoneIsEmpty = Txt.t(context, "phone_can_not_empty");
       });
     } else if (phone.length < 8) {
       setState(() {
-        phoneIsEmpty = "ເບີໂທລະສັບຈະຕ້ອງເທົ່າກັບ 8 ຕົວເລກ";
+        phoneIsEmpty = Txt.t(context, "phone_should_be_must_equal_8");
       });
     } else {
       setState(() {
@@ -251,12 +252,11 @@ class RegisterState extends ConsumerState<RegisterScreen> {
   void _checkPassword(String password) {
     if (password.isEmpty) {
       setState(() {
-        passwordIsEmpty = "ລະຫັດຜ່ານບໍ່ສາມາດວ່າງເປົ່າໄດ້";
+        passwordIsEmpty = Txt.t(context, "password_can_not_be_empty");
       });
     } else if (!passwordRegex.hasMatch(password)) {
       setState(() {
-        passwordIsEmpty =
-            "ລະຫັດຜ່ານຈະຕ້ອງມີຕົວພິມໃຫຍ່ A-Z ແລະ ຕົວພິມນ້ອຍ a-z, ຕົວເລກ 0-9, ຕົວອັກສອນພິເສດ [&,@] ແລະ ຕ້ອງມີຈຳນວນ 6 ຕົວຂື້ນໄປ";
+        passwordIsEmpty = Txt.t(context, "password_must_be_pass_regex");
       });
     } else {
       setState(() {
