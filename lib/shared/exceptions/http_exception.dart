@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:galaxy_18_lottery_app/shared/models/response.dart';
+import 'package:galaxy_18_lottery_app/shared/domain/models/response.dart';
 
 class AppException implements Exception {
   final String? message;

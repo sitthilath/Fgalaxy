@@ -20,13 +20,13 @@ abstract class EnvInfo {
 
 extension _EnvProperties on AppEnvironment {
   static const _appTitles = {
-    AppEnvironment.DEV: 'Q Flutter TDD Dev',
-    AppEnvironment.STAGING: 'Q Flutter TDD Staging',
-    AppEnvironment.PROD: 'Q Flutter TDD',
+    AppEnvironment.DEV: 'Galaxy18 Lottery Dev',
+    AppEnvironment.STAGING: 'Galaxy18 Lottery Staging',
+    AppEnvironment.PROD: 'Galaxy18 Lottery',
   };
 
   static const _connectionStrings = {
-    AppEnvironment.DEV: 'https://api.spoonacular.com',
+    AppEnvironment.DEV: 'https://galaxy-lottery-backend-dev.up.railway.app/api/auth/customers',
     AppEnvironment.STAGING: 'https://api.spoonacular.com',
     AppEnvironment.PROD: 'https://api.spoonacular.com',
   };

@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:galaxy_18_lottery_app/shared/data/remote/network_service.dart';
 import 'package:galaxy_18_lottery_app/shared/exceptions/http_exception.dart';
-import 'package:galaxy_18_lottery_app/shared/models/response.dart' as response;
-import 'package:galaxy_18_lottery_app/shared/remote/network_service.dart';
+import 'package:galaxy_18_lottery_app/shared/domain/models/response.dart' as response;
 
 mixin ExceptionHandlerMixin on NetworkService {
   Future<Either<AppException, response.Response>> handleException<T extends Object>(Future<Response<dynamic>> Function() handle, {String endpoint = ''}) async {
@@ -26,7 +26,7 @@ mixin ExceptionHandlerMixin on NetworkService {
        case DioException:
          e as DioException;
          message = e.response?.data?['message'] ?? 'Internal Error occured';
-         statusCode = 1;
+         statusCode = e.response?.statusCode ?? 0;
          identifier = 'DioException ${e.message} \nat  $endpoint';
          break;
 
