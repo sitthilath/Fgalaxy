@@ -4,7 +4,6 @@ import 'package:galaxy_18_lottery_app/services/user_cache_service/domain/reposit
 import 'package:galaxy_18_lottery_app/shared/domain/models/user/user_form.dart';
 import 'package:galaxy_18_lottery_app/shared/exceptions/http_exception.dart';
 import 'package:galaxy_18_lottery_app/shared/globals.dart';
-
 import 'auth_state.dart';
 
 class AuthNotifier extends StateNotifier<AuthState> {

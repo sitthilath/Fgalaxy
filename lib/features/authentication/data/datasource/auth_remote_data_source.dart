@@ -9,11 +9,13 @@ import 'package:galaxy_18_lottery_app/shared/utils/url_constants.dart';
 abstract class LoginUserDataSource {
   Future<Either<AppException, User>> loginUser({required UserForm userForm});
 
-  Future<Either<AppException, String>> registerUser({required UserForm userForm});
+  Future<Either<AppException, String>> registerUser(
+      {required UserForm userForm});
 
   Future<Either<AppException, String>> sendOTP({required UserForm phone});
 
   Future<Either<AppException, User>> verifyOTP({required UserForm code});
+
   Future<Either<AppException, bool>> checkUser();
 }
 
@@ -30,7 +32,8 @@ class LoginUserRemoteDataSource implements LoginUserDataSource {
           data: userForm.toJson());
       return eitherType.fold((exception) => Left(exception), (response) {
         final user = User.fromJson(response.data);
-        networkService.updateHeader({'Authorization': TOKEN_TYPE+user.accessToken});
+        networkService
+            .updateHeader({'Authorization': TOKEN_TYPE + user.accessToken});
         return right(user);
       });
     } catch (e) {
@@ -47,7 +50,7 @@ class LoginUserRemoteDataSource implements LoginUserDataSource {
     try {
       final response = await networkService.post(UrlConstants.REGISTER_PATH,
           data: userForm.toJson());
-      return response.fold((l){
+      return response.fold((l) {
         return Left(l);
       }, (r) {
         final message = r.data;
@@ -82,30 +85,41 @@ class LoginUserRemoteDataSource implements LoginUserDataSource {
 
   @override
   Future<Either<AppException, User>> verifyOTP({required UserForm code}) async {
-    try{
-      final response = await networkService.post(UrlConstants.OVERIFY_OTP, data: code.verifyToJson());
-      return response.fold((l) => Left(l), (r){
+    try {
+      final response = await networkService.post(UrlConstants.OVERIFY_OTP,
+          data: code.verifyToJson());
+      return response.fold((l) => Left(l), (r) {
         final user = User.fromJson(r.data);
-        networkService.updateHeader({'Authorization': TOKEN_TYPE+user.accessToken});
+        networkService
+            .updateHeader({'Authorization': TOKEN_TYPE + user.accessToken});
         return Right(user);
       });
-    }catch (e){
-      return Left(AppException(message: 'ເກີດຄວາມຜິດພາດທີ່ບໍ່ຮູ້ຈັກຈາກການຢືນຢັນລະຫັດ OTP', statusCode: 1, identifier: 'LoginUserRemoteDataSource.verifyOTP: $e'));
+    } catch (e) {
+      return Left(AppException(
+          message: 'ເກີດຄວາມຜິດພາດທີ່ບໍ່ຮູ້ຈັກຈາກການຢືນຢັນລະຫັດ OTP',
+          statusCode: 1,
+          identifier: 'LoginUserRemoteDataSource.verifyOTP: $e'));
     }
   }
 
   @override
   Future<Either<AppException, bool>> checkUser() async {
-    try{
+    try {
       final response = await networkService.get(UrlConstants.USER_PROFILE);
-      return response.fold((l) => Left(l), (r){
-        if(r.statusCode == 200){
+      return response.fold((l) => Left(l), (r) {
+        if (r.statusCode == 200) {
           return const Right(true);
         }
-        return Left(AppException(message: 'ບໍ່ມີຂໍ້ມູນ', statusCode: 1, identifier: "no response!!"));
+        return Left(AppException(
+            message: 'ບໍ່ມີຂໍ້ມູນ',
+            statusCode: 1,
+            identifier: "no response!!"));
       });
-    }catch(e){
-      return Left(AppException(message: 'Invalid Token', statusCode: 1, identifier: "CheckUser: $e"));
+    } catch (e) {
+      return Left(AppException(
+          message: 'Invalid Token',
+          statusCode: 1,
+          identifier: "CheckUser: $e"));
     }
   }
 }

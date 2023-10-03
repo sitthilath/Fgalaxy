@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
+import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
 
 class BuyLotteryButton extends ConsumerWidget{
   const BuyLotteryButton({super.key});
@@ -37,7 +38,7 @@ class BuyLotteryButton extends ConsumerWidget{
               child: Image.asset(AppConstants.appLogo),
             ),
             Text(
-              "ຊື້ຫວຍ",
+              Txt.t(context, "buy_lottery"),
               style: styleWhite(size: 15.64, weight: FontWeight.w400),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

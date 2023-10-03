@@ -27,7 +27,7 @@ class OTPScreen extends ConsumerStatefulWidget {
 
 class OTPScreenState extends ConsumerState<OTPScreen> {
   List<int> otpCodes = [];
-  int _secondsRemaining = 30;
+  int _secondsRemaining = TIMER_OF_OTP;
   late Timer _timer;
 
   @override

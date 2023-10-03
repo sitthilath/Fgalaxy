@@ -38,19 +38,21 @@ class LoginState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     ref.watch(authStateNotifierProvider);
     ref.read(toastMessageProvider).initialMessage(context);
-    ref.listen(authStateNotifierProvider.select((value) => value), (previous,
-        next) async {
+    ref.listen(authStateNotifierProvider.select((value) => value),
+        (previous, next) async {
       if (next is Signing) {
         await _showLoader(context, Txt.t(context, "waiting_msg"));
       } else if (next is Signed) {
         _closeLoader(context);
-        AutoRouter.of(context).pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
+        AutoRouter.of(context)
+            .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
         _clearTextController();
       } else if (next is Failure) {
         _closeLoader(context);
         if (next.exception.statusCode != 409) {
-          ref.read(toastMessageProvider).messageError(
-              message: next.exception.message.toString());
+          ref
+              .read(toastMessageProvider)
+              .messageError(message: next.exception.message.toString());
         }
       }
     });
@@ -93,7 +95,7 @@ class LoginState extends ConsumerState<LoginScreen> {
               child: Container(
                 width: double.infinity,
                 padding:
-                const EdgeInsets.symmetric(vertical: 10, horizontal: 35),
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 35),
                 decoration: BoxDecoration(
                     color: AppColor.whiteColor,
                     borderRadius: const BorderRadius.only(
@@ -145,6 +147,18 @@ class LoginState extends ConsumerState<LoginScreen> {
                         onValidate: _checkPassword,
                         errorMsg: passwordIsEmpty,
                       ),
+                      heightBox(8.0),
+                      InkWell(
+                        onTap: () => AutoRouter.of(context).push(const ForgotPasswordRoute()),
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            Txt.t(context, "forgot_password_text"),
+                            style: stylePrimary(size: 14, weight: FontWeight.w400),
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                      ),
                       heightBox(15),
                       loginButton(onTab: _onLoginUser),
                       Center(
@@ -167,7 +181,7 @@ class LoginState extends ConsumerState<LoginScreen> {
                             Text(
                               Txt.t(context, 'not_have_account'),
                               style:
-                              styleBlack(size: 14, weight: FontWeight.w600),
+                                  styleBlack(size: 14, weight: FontWeight.w600),
                             ),
                             widthBox(8),
                             InkWell(
@@ -175,7 +189,7 @@ class LoginState extends ConsumerState<LoginScreen> {
                                 context.router.push(const RegisterRoute());
                               },
                               child: Text(
-                                "register",
+                                Txt.t(context, "register"),
                                 style: stylePrimary(
                                     size: 14, weight: FontWeight.w700),
                               ),

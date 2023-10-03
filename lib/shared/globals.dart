@@ -7,3 +7,4 @@ const String LA_PREFIX = "+85620";
 const String LANG_CODE = "app_lang_code";
 const String EN_LANG ="English";
 const String LA_LANG ="Lao";
+const int TIMER_OF_OTP = 30;

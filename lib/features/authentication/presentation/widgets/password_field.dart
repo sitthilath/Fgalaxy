@@ -7,7 +7,7 @@ Widget passwordField({required TextEditingController controller, required Functi
     controller: controller,
     obscureText: true,
     style: styleBlack(size: 14, weight: FontWeight.w500),
-    decoration: simpleDecoration(hint: 'ລະຫັດຜ່ານ', errorText: errorMsg),
+    decoration: simpleDecoration(hint: "", errorText: errorMsg),
     onChanged: onValidate,
   );
 }

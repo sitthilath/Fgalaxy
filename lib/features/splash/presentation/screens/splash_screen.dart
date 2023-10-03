@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:galaxy_18_lottery_app/features/splash/presentation/providers/splash_provider.dart';
 import 'package:galaxy_18_lottery_app/features/splash/presentation/providers/state/splash_state.dart';
 import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
+import 'package:galaxy_18_lottery_app/services/loader_service/providers/loader_provider.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
 import 'package:galaxy_18_lottery_app/shared/hex_color.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
