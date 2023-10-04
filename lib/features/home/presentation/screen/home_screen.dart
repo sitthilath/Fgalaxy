@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
+import 'package:galaxy_18_lottery_app/features/banners/presentation/widget/banners_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/theme_widget.dart';
 
 @RoutePage()
@@ -18,12 +18,14 @@ class HomeState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ThemeApp(
-        child: Center(
-          child: Text(
-            "Home",
-            style: styleWhite(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+          child: ListView(
+            children: const [
+              BannersWidget(),
+            ],
           ),
-        ),
+        )
       ),
     );
   }

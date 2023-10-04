@@ -26,7 +26,7 @@ extension _EnvProperties on AppEnvironment {
   };
 
   static const _connectionStrings = {
-    AppEnvironment.DEV: 'https://galaxy-lottery-backend-dev.up.railway.app/api/auth/customers',
+    AppEnvironment.DEV: 'https://galaxy-lottery-backend-dev.up.railway.app/api',
     AppEnvironment.STAGING: 'https://api.spoonacular.com',
     AppEnvironment.PROD: 'https://api.spoonacular.com',
   };
