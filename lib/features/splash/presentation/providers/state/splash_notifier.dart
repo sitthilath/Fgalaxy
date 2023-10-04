@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:galaxy_18_lottery_app/features/banners/domain/repository/banners_repository.dart';
@@ -9,6 +8,7 @@ import 'package:galaxy_18_lottery_app/infrastructure/notification/firebase_notif
 import 'package:galaxy_18_lottery_app/services/banners_cache_service/domain/repository/banners_cache_repository.dart';
 import 'package:galaxy_18_lottery_app/services/user_cache_service/domain/repositories/user_cache_repository.dart';
 import 'package:galaxy_18_lottery_app/shared/data/remote/network_service.dart';
+import 'package:galaxy_18_lottery_app/shared/domain/models/banners/banner_model.dart' as banner_model;
 import 'package:galaxy_18_lottery_app/shared/globals.dart';
 
 class SplashNotifier extends StateNotifier<SplashAppState> {
@@ -75,7 +75,8 @@ class SplashNotifier extends StateNotifier<SplashAppState> {
   Future<void> fetchAllBanners() async {
     final response  = await bannersRepository.fetchAllBanners();
    await response.fold((l) => null, (banners) async {
-     await bannersCacheRepository.saveBanners(banners: banners.data);
+     final bannerList = banners.data.map((e) => banner_model.Banner.fromJson(e)).toList();
+     await bannersCacheRepository.saveBanners(banners: bannerList);
    });
   }
 
