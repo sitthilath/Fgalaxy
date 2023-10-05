@@ -22,7 +22,6 @@ class SharedAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: color,
       leading: Padding(
         padding: const EdgeInsets.all(6.0),
         child: InkWell(

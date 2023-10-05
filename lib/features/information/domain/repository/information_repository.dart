@@ -4,5 +4,5 @@ import 'package:galaxy_18_lottery_app/shared/domain/models/paginated_response.da
 import 'package:galaxy_18_lottery_app/shared/exceptions/http_exception.dart';
 
 abstract class InformationRepository {
-  Future<Either<AppException, PaginatedResponse<Information>>> fetchInformation();
+  Future<Either<AppException, PaginatedResponse>> fetchInformation({required int cursor});
 }
