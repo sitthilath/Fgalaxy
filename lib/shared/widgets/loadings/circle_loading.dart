@@ -6,7 +6,8 @@ Widget circleLoading({required Color color}){
   return CircularProgressIndicator(
     strokeWidth: 6,
     valueColor: AlwaysStoppedAnimation<Color>(color),
-
+  );
+}
 Widget circlePrimaryLoading(){
   return CircularProgressIndicator(
     strokeWidth: 4,
