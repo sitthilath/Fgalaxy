@@ -17,6 +17,7 @@ class AppColor {
   static Color fillColor = HexColor('#F4F6FF');
   static Color errorColor = HexColor('#eb4d4b');
   static Color successColor = HexColor('#2ecc71');
+  static Color fontGrayColor = HexColor('#636e72');
 
   MaterialColor generateMaterialColor(Color color) {
     return MaterialColor(color.value, {

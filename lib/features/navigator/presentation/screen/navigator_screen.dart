@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:galaxy_18_lottery_app/features/home/presentation/screen/home_screen.dart';
+import 'package:galaxy_18_lottery_app/features/information/presentation/screens/information_screen.dart';
 import 'package:galaxy_18_lottery_app/features/lottery-results/presentation/screen/lottery_result_screen.dart';
 import 'package:galaxy_18_lottery_app/features/navigator/presentation/widgets/buy_lottery_button.dart';
 import 'package:galaxy_18_lottery_app/features/navigator/presentation/widgets/menu_items.dart';
@@ -28,7 +29,7 @@ class NavigatorState extends ConsumerState<NavigatorScreen> {
   List<Widget> screens = [
     const HomeScreen(),
     const LotteryResultScreen(),
-     Container(),
+    const InformationScreen(),
     const ProfileScreen(),
   ];
   late Widget currentScreen;

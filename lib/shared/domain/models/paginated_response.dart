@@ -7,7 +7,7 @@ class PaginatedResponse<T> {
 
   PaginatedResponse({this.cursor = 0, required this.data});
 
-  factory PaginatedResponse.fromJson(dynamic json, List<T> data) =>
+  factory PaginatedResponse.fromJson(dynamic json, List<T> data, {Function(dynamic json)? fixture}) =>
       PaginatedResponse(
         cursor: json['cursor'] ?? 0,
         data: data,
