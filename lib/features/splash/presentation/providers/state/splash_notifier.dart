@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:galaxy_18_lottery_app/features/splash/presentation/providers/state/splash_state.dart';
@@ -15,12 +14,12 @@ class SplashNotifier extends StateNotifier<SplashAppState> {
   final AuthenticationRepository authenticationRepository;
   final NetworkService networkService;
 
-  SplashNotifier(
-      {required this.firebaseService,
-      required this.userRepository,
-      required this.authenticationRepository,
-      required this.networkService})
-      : super(const SplashAppState.initial());
+  SplashNotifier({
+    required this.firebaseService,
+    required this.userRepository,
+    required this.authenticationRepository,
+    required this.networkService,
+  }) : super(const SplashAppState.initial());
 
   Future<void> initialApp() async {
     state = const SplashAppState.loading();
@@ -43,7 +42,8 @@ class SplashNotifier extends StateNotifier<SplashAppState> {
     if (hasUser) {
       final user = await userRepository.fetchUser();
       user.fold((l) => false, (r) async {
-        networkService.updateHeader({'Authorization':TOKEN_TYPE+r.accessToken});
+        networkService
+            .updateHeader({'Authorization': TOKEN_TYPE + r.accessToken});
       });
       final response = await authenticationRepository.checkUser();
       return response.fold((l) => false, (r) => true);
@@ -63,7 +63,6 @@ class SplashNotifier extends StateNotifier<SplashAppState> {
       return false;
     }
   }
-
   set context(BuildContext context) {
     firebaseService.context = context;
   }

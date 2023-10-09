@@ -6,6 +6,7 @@ class AppConstants {
   static String boxGroupPath = "$imagePath/box-group.svg";
   static String appLogo = "$imagePath/app_logo.png";
   static String phoneIcon = "$imagePath/phone.svg";
+  static String userIcon = "$imagePath/user.png";
 
 
   ////======== for icons =========

@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/domain/providers/login_provider.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:galaxy_18_lottery_app/features/banners/domain/providers/banners_provider.dart';
+import 'package:galaxy_18_lottery_app/features/banners/domain/repository/banners_repository.dart';
 import 'package:galaxy_18_lottery_app/features/splash/presentation/providers/state/splash_notifier.dart';
 import 'package:galaxy_18_lottery_app/features/splash/presentation/providers/state/splash_state.dart';
 import 'package:galaxy_18_lottery_app/infrastructure/notification/firebase_notification.dart';
@@ -18,6 +20,8 @@ final splashStateNotifierProvider =
   final FirebaseNotification firebaseNotification =
       ref.watch(firebaseNotificationProvider);
   final NetworkService networkService = ref.watch(networkServiceProvider);
+  final BannersRepository bannersRepository =
+      ref.watch(bannersRepositoryProvider);
   return SplashNotifier(
     firebaseService: firebaseNotification,
     userRepository: userRepository,

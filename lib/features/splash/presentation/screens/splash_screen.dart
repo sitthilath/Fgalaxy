@@ -27,7 +27,7 @@ class SplashState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () async {
+    Future.delayed(const Duration(seconds: 3), () async {
       await ref.read(splashStateNotifierProvider.notifier).initialApp();
     });
   }
