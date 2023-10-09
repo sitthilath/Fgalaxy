@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +5,7 @@ import 'package:galaxy_18_lottery_app/features/banners/presentation/providers/ba
 import 'package:galaxy_18_lottery_app/infrastructure/messages/providers/flutter_toast_message_provider.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
+import 'package:galaxy_18_lottery_app/shared/utils/read_url.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/loadings/circle_loading.dart';
 
@@ -25,7 +24,7 @@ class BannerState extends ConsumerState<BannersWidget> {
     super.initState();
     currentPageItem = 0;
     Future.delayed(const Duration(milliseconds: 200), () async {
-     await ref.read(bannersNotifierProvider.notifier).fetchAllBanners();
+      await ref.read(bannersNotifierProvider.notifier).fetchAllBanners();
     });
   }
 
@@ -43,7 +42,7 @@ class BannerState extends ConsumerState<BannersWidget> {
             height: 175,
             color: AppColor.whiteColor,
             child: state.isLoading
-                ? Center(child: circlePrimaryLoading())
+                ? Center(child: circleLoading(color: AppColor.primaryColor))
                 : state.hasData
                     ? CarouselSlider.builder(
                         itemCount: state.bannerList.length,
@@ -106,6 +105,6 @@ class BannerState extends ConsumerState<BannersWidget> {
   }
 
   _jumpTo(String link) async {
-
+    await readLink(link);
   }
 }
