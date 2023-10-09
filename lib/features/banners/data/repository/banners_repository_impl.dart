@@ -10,7 +10,7 @@ class BannersRepositoryImpl extends BannersRepository{
   BannersRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<AppException, PaginatedResponse<Banner>>> fetchAllBanners() {
+  Future<Either<AppException, PaginatedResponse>> fetchAllBanners() {
     return datasource.fetchAllBanners();
   }
 
