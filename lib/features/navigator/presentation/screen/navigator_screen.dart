@@ -57,7 +57,7 @@ class NavigatorState extends ConsumerState<NavigatorScreen> {
       height: 78,
       color: AppColor.primaryColor,
       alignment: Alignment.center,
-      padding: const EdgeInsets.fromLTRB(15.0, 13.0, 15.0, 8.0),
+      padding: const EdgeInsets.fromLTRB(18.0, 13.0, 18.0, 8.0),
       child: Row(
         children: [
           Expanded(
