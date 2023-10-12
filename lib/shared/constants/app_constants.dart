@@ -24,6 +24,7 @@ class AppConstants {
   static String check = '$iconPath/check.svg';
   static String search = '$iconPath/search_icon.svg';
   static String close = '$iconPath/close_icon.svg';
+  static String delete = '$iconPath/delete.svg';
 }
 
 class MenuIcons {

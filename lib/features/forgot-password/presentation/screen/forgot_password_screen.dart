@@ -14,6 +14,7 @@ import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/appbars/shared_appbar.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/label_widget.dart';
+import 'package:galaxy_18_lottery_app/shared/widgets/theme_widget.dart';
 
 @RoutePage()
 class ForgotPasswordScreen extends ConsumerStatefulWidget {

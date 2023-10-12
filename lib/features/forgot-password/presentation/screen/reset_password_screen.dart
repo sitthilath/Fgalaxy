@@ -14,6 +14,7 @@ import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/appbars/shared_appbar.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/label_widget.dart';
+import 'package:galaxy_18_lottery_app/shared/widgets/theme_widget.dart';
 
 @RoutePage()
 class ResetPasswordScreen extends ConsumerStatefulWidget {
@@ -29,7 +30,7 @@ class ResetPasswordScreen extends ConsumerStatefulWidget {
 
 class ResetPasswordState extends ConsumerState<ResetPasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordCtr = TextEditingController();
+  // final TextEditingController _confirmPasswordCtr = TextEditingController();
   final TextEditingController _otpCtr = TextEditingController();
   String? passwordIsEmpty;
   String? passwordMatch;
@@ -81,18 +82,18 @@ class ResetPasswordState extends ConsumerState<ResetPasswordScreen> {
               onChange: _checkPassword,
               errorMsg: passwordIsEmpty,
             ),
-            heightBox(15),
-            labelText(
-              color: AppColor.blackColor,
-              text: Txt.t(context, "confirm_password"),
-              fontWeight: FontWeight.w400,
-            ),
-            heightBox(10),
-            PasswordField(
-              controller: _confirmPasswordCtr,
-              onChange: _checkCfPassword,
-              errorMsg: passwordMatch,
-            ),
+            // heightBox(15),
+            // labelText(
+            //   color: AppColor.blackColor,
+            //   text: Txt.t(context, "confirm_password"),
+            //   fontWeight: FontWeight.w400,
+            // ),
+            // heightBox(10),
+            // PasswordField(
+            //   controller: _confirmPasswordCtr,
+            //   onChange: _checkCfPassword,
+            //   errorMsg: passwordMatch,
+            // ),
             heightBox(15),
             labelText(
               color: AppColor.blackColor,
@@ -162,10 +163,9 @@ class ResetPasswordState extends ConsumerState<ResetPasswordScreen> {
       onTap: () async {
         focusDisable(context);
         _checkPassword(_passwordController.text);
-        _checkCfPassword(_confirmPasswordCtr.text);
+        // _checkCfPassword(_confirmPasswordCtr.text);
         if (_passwordController.text.isNotEmpty &&
             passwordRegex.hasMatch(_passwordController.text) &&
-            _passwordController.text == _confirmPasswordCtr.text &&
             _otpCtr.text.isNotEmpty &&
             _otpCtr.text.length == 6) {
           _timer.cancel();

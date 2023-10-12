@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/auth_providers.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/state/auth_state.dart';
 import 'package:galaxy_18_lottery_app/infrastructure/messages/providers/flutter_toast_message_provider.dart';
+import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
+import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
 import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
@@ -61,10 +64,12 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
       if (next is Verifying) {
         _showLoader(context, Txt.t(context, "verify_msg"));
       } else if (next is Verified) {
-         _closeLoader(context);
+        _closeLoader(context);
         ref
             .read(toastMessageProvider)
             .messageSuccess(message: Txt.t(context, "register_success"));
+        AutoRouter.of(context)
+            .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
         otpCodes.clear();
       } else if (next is Failure) {
         await _closeLoader(context);
@@ -81,41 +86,43 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
           body: Column(
             children: [
               Expanded(
-                flex: 1,
+                  flex: 1,
                   child: SizedBox(
-                width: double.infinity,
-                child: Flex(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  direction: Axis.vertical,
-                  children: [
-                    Text(Txt.t(context, "your_phone_send_to"),
-                        style: styleWhite(size: 14, weight: FontWeight.w400)),
-                    Text(LA_PREFIX + widget.phoneNumber,
-                        style: styleWhite(size: 14, weight: FontWeight.w400)),
-                    heightBox(36),
-                    Flex(
-                      direction: Axis.horizontal,
+                    width: double.infinity,
+                    child: Flex(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      direction: Axis.vertical,
                       children: [
-                        _pinItems(_checkIndex(0)),
-                        widthBox(12),
-                        _pinItems(_checkIndex(1)),
-                        widthBox(12),
-                        _pinItems(_checkIndex(2)),
-                        widthBox(12),
-                        _pinItems(_checkIndex(3)),
-                        widthBox(12),
-                        _pinItems(_checkIndex(4)),
-                        widthBox(12),
-                        _pinItems(_checkIndex(5)),
+                        Text(Txt.t(context, "your_phone_send_to"),
+                            style:
+                                styleWhite(size: 14, weight: FontWeight.w400)),
+                        Text(LA_PREFIX + widget.phoneNumber,
+                            style:
+                                styleWhite(size: 14, weight: FontWeight.w400)),
+                        heightBox(36),
+                        Flex(
+                          direction: Axis.horizontal,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _pinItems(_checkIndex(0)),
+                            widthBox(12),
+                            _pinItems(_checkIndex(1)),
+                            widthBox(12),
+                            _pinItems(_checkIndex(2)),
+                            widthBox(12),
+                            _pinItems(_checkIndex(3)),
+                            widthBox(12),
+                            _pinItems(_checkIndex(4)),
+                            widthBox(12),
+                            _pinItems(_checkIndex(5)),
+                          ],
+                        ),
+                        heightBox(36),
+                        _sendOtpAgain(),
                       ],
                     ),
-                    heightBox(36),
-                    _sendOtpAgain(),
-                  ],
-                ),
-              )),
+                  )),
               Expanded(
                 child: Container(
                   width: double.infinity,
@@ -193,7 +200,18 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
                               number: 0,
                               subText: '+',
                               onTap: () => _addNumber(0)),
-                          _digit(number: '#', subText: '', onTap: () {}),
+                          InkWell(
+                            onTap: (){
+                              if(otpCodes.isNotEmpty){
+                                otpCodes.removeLast();
+                              }
+                            },
+                            child: SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: SvgPicture.asset(AppConstants.delete, color: AppColor.primaryColor),
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -223,7 +241,7 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
                     setState(() {
                       _secondsRemaining = 30;
                     });
-                    _startCountdown();
+                   // _startCountdown();
                   }
                 },
                 child: Text(Txt.t(context, "send_again"),
@@ -231,7 +249,8 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
               ),
             ]
           : [
-              Text("${Txt.t(context, "otp_can_send_again_at")} $_secondsRemaining ${Txt.t(context, "second")}",
+              Text(
+                  "${Txt.t(context, "otp_can_send_again_at")} $_secondsRemaining ${Txt.t(context, "second")}",
                   style: styleWhite(size: 14, weight: FontWeight.w400)),
             ],
     );
@@ -306,7 +325,7 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
       final code = otpCodes.join('');
       ref
           .read(authStateNotifierProvider.notifier)
-          .verifyUser(code,widget.phoneNumber);
+          .verifyUser(code, widget.phoneNumber);
     }
   }
 
