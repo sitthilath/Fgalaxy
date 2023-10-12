@@ -39,6 +39,7 @@ class SharedAppbar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: isCenter,
       elevation: 0.0,
       automaticallyImplyLeading: false,
+      backgroundColor: color,
     );
   }
 }
