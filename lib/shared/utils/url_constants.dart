@@ -8,4 +8,5 @@ class UrlConstants {
   static const String RESET_PASSWORD = '/auth/customers/reset-password';
   static const String BANNERS_ADVERTISEMENT = '/customers/advertisements/banners';
   static const String NEWS_ADVERTISEMENT = '/customers/advertisements/news';
+  static const String DREAM_TREATISE = '/customer/lotteries-dreams-treatise';
 }

@@ -33,6 +33,7 @@ dependencies:
   cached_network_image: ^3.3.0
   url_launcher: ^6.1.14
   flutter_html: ^3.0.0-beta.2
+  intl: ^0.18.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

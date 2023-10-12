@@ -9,8 +9,12 @@ void main() async => mainCommon(AppEnvironment.DEV);
 
 Future<void> mainCommon(AppEnvironment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
+  try{
+    await Firebase.initializeApp();
+  }catch(e){
+    print('==========>$e');
+  }
   EnvInfo.initialize(environment);
-  await Firebase.initializeApp();
   runApp(
     ProviderScope(
       observers: [
