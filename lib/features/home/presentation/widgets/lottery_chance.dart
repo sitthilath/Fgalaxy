@@ -54,7 +54,6 @@ class _LotteryChanceState extends ConsumerState<LotteryChance> {
       ),
     );
   }
-
   _timeBox(int time, String title) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
