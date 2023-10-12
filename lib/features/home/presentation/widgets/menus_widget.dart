@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
@@ -54,8 +56,11 @@ class _MenusWidgetState extends ConsumerState<MenusWidget> {
                     icon: HomeMenuIcons.lotteryResult, title: 'lottery_result'),
               ),
               InkWell(
+                onTap: (){
+                  AutoRouter.of(context).push(const DreamTreatiseRoute());
+                },
                 child: _menuItem(
-                    icon: HomeMenuIcons.dreamAugur, title: 'dream_augur'),
+                    icon: HomeMenuIcons.dreamTreatise, title: 'dream_treatise'),
               ),
             ],
           ),

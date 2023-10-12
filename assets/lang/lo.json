@@ -46,6 +46,10 @@
   "no_more_items": "ຂໍ້ມູນໝົດແລ້ວ",
   "not_found_data": "ບໍ່ພົບຂໍ້ມູນ",
   "points": "ຄະແນນ",
+  "search_hint": "ຄົ້ນຫາ",
+  "animal_lottery": "ເລກນາມສັດ",
+  "select_all": "ເລືອກທັງໝົດ",
+  "buy_lottery_risk": "ຊື້ເລກສ່ຽງ",
   "news": "========================== ຂ່າວສານ ===============",
   "news_page_title": "ຂ່າວສານ",
   "news_detail_page_title": "ລາຍລະອຽດ",
@@ -57,11 +61,14 @@
   "lottery_services": "ບໍລິການຫວຍ",
   "lottery_betting": "ແທງຫວຍ",
   "lottery_statistic": "ສະຖິຕິຫວຍ",
-  "dream_augur": "ຕຳລາຝັນ",
+  "dream_treatise": "ຕຳລາຝັນ",
   "chance_date": "ງວດວັນທີ",
   "close_lottery_chance": "ປິດການຂາຍໃນອີກ",
   "day": "ວັນ",
   "hour": "ຊົ່ວໂມງ",
   "minute": "ນາທີ",
-  "second": "ວິນາທີ"
+  "second": "ວິນາທີ",
+  "dream_treatise_page": "======================> ຕຳລາຝັນ ==============>",
+  "a_dream": "ຄວາມຝັນ",
+  "risk_number": "ເລກສ່ຽງ"
 }

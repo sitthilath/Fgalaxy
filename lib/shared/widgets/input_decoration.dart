@@ -89,6 +89,26 @@ simpleDecoration({required String hint, String? errorText}) {
   );
 }
 
+searchDecoration({required String hint}) {
+  return InputDecoration(
+    fillColor: AppColor.whiteColor,
+    filled: true,
+    hintText: hint,
+    hintStyle: styleOption(
+        color: AppColor.hintColor, fontWeight: FontWeight.w500, size: 14),
+    contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+    border: const OutlineInputBorder(),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColor.whiteColor, width: 1),
+      borderRadius: BorderRadius.circular(15),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColor.whiteColor, width: 1),
+      borderRadius: BorderRadius.circular(15),
+    ),
+  );
+}
+
 otpDecoration(BuildContext context,
     {required String hint,
     String? errorText,

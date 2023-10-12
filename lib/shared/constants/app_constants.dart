@@ -8,6 +8,8 @@ class AppConstants {
   static String phoneIcon = "$imagePath/phone.svg";
   static String userIcon = "$imagePath/user.png";
   static String avatar = "$imagePath/avatar.png";
+  static String emptyBox = "$imagePath/empty-box.png";
+  static String error = "$imagePath/error.png";
 
 
   ////======== for icons =========
@@ -20,6 +22,8 @@ class AppConstants {
   static String verified = '$iconPath/verified.svg';
   static String copy = '$iconPath/copy.svg';
   static String check = '$iconPath/check.svg';
+  static String search = '$iconPath/search_icon.svg';
+  static String close = '$iconPath/close_icon.svg';
 }
 
 class MenuIcons {
@@ -34,5 +38,5 @@ class HomeMenuIcons {
   static const String lotteryBetting = '$iconPath/Lottery_betting.svg';
   static const String lotteryResult = '$iconPath/lottery_result_solid.svg';
   static const String lotteryStatistic = '$iconPath/lottery_statistic.svg';
-  static const String dreamAugur = '$iconPath/dream_augur.svg';
+  static const String dreamTreatise = '$iconPath/dream_treatise.svg';
 }
