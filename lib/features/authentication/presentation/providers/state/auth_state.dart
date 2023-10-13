@@ -11,6 +11,10 @@ enum AuthConcreteState {
   sentOtp,
   verifying,
   verified,
+  signingWithOtp,
+  signedWithOtp,
+  verifyingWithOtp,
+  verifiedWithOtp,
 }
 
 class AuthState extends Equatable {

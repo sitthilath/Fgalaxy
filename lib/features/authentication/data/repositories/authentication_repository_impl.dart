@@ -33,4 +33,14 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository{
   Future<Either<AppException, bool>> checkUser() {
     return dataSource.checkUser();
   }
+
+  @override
+  Future<Either<AppException, String>> loginWithOTP({required UserForm phone}) {
+    return dataSource.loginWithOTP(phone: phone);
+  }
+
+  @override
+  Future<Either<AppException, User>> verifyLoginWithOTP({required UserForm form}) {
+    return dataSource.verifyLoginWithOTP(form: form);
+  }
 }

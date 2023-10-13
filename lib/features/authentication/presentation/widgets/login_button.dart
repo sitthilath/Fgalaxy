@@ -23,8 +23,9 @@ Widget loginButton({required Function()onTab}){
   );
 }
 
-Widget loginWithOTP() {
+Widget loginWithOTP(Function() onTap) {
   return InkWell(
+    onTap: onTap,
     child: Container(
       width: double.infinity,
       height: 50,

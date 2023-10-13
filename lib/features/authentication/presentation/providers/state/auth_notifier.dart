@@ -34,13 +34,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
           isLoading: false,
           statusCode: 200,
         );
+      }else {
+        state = state.copyWith(
+          state: AuthConcreteState.failure,
+          message: CacheFailureException().message,
+          isLoading: false,
+          statusCode: 0,
+        );
       }
-      state = state.copyWith(
-        state: AuthConcreteState.failure,
-        message: CacheFailureException().message,
-        isLoading: false,
-        statusCode: 0,
-      );
     });
   }
 
@@ -139,6 +140,63 @@ class AuthNotifier extends StateNotifier<AuthState> {
                 );
               }
             });
+      }
+
+      Future<void> loginWithOtp(String phone) async {
+       state = state.copyWith(
+         state: AuthConcreteState.signingWithOtp,
+         isLoading: true,
+       );
+
+       final response = await authRepository.loginWithOTP(phone: UserForm(phoneNumber: LA_PREFIX + phone));
+       response.fold((failure){
+         state = state.copyWith(
+           state: AuthConcreteState.failure,
+           statusCode: failure.statusCode,
+           message: failure.message,
+           isLoading: false,
+         );
+       }, (data){
+         if(data.isNotEmpty){
+           state = state.copyWith(
+             state: AuthConcreteState.signedWithOtp,
+             statusCode: 200,
+             isLoading: false,
+           );
+         }
+       });
+      }
+
+      Future<void> verifyUserWithOTP(String phone, String code) async {
+        state = state.copyWith(
+          state: AuthConcreteState.verifyingWithOtp,
+          isLoading: true,
+        );
+
+        final response = await authRepository.verifyLoginWithOTP(form: UserForm(otpCode: code, phoneNumber: LA_PREFIX+phone));
+        response.fold((failure){
+          state = state.copyWith(
+            state: AuthConcreteState.failure,
+            isLoading: false,
+            message: failure.message,
+            statusCode: failure.statusCode,
+          );
+        }, (data) async {
+          final hasSaveUser = await userRepository.saveUser(user: data);
+          if(hasSaveUser){
+            state = state.copyWith(
+              state: AuthConcreteState.verifiedWithOtp,
+              isLoading: false,
+              statusCode: 200,
+            );
+          }else{
+            state = state.copyWith(
+              state: AuthConcreteState.failure,
+              isLoading: false,
+              message: CacheFailureException().message,
+            );
+          }
+        });
       }
 
       void resetState(){

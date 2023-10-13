@@ -51,6 +51,11 @@ class LoginState extends ConsumerState<LoginScreen> {
         if (next.statusCode != 409) {
           ref.read(toastMessageProvider).messageError(message: next.message.toString());
         }
+      }else if(next.state == AuthConcreteState.signingWithOtp){
+        await _showLoader(context, Txt.t(context, "waiting_msg"));
+      }else if(next.state == AuthConcreteState.signedWithOtp){
+        _closeLoader(context);
+        AutoRouter.of(context).push(OTPRoute(phoneNumber: phoneController.text, isLogin: true));
       }
     });
     return Scaffold(
@@ -165,7 +170,7 @@ class LoginState extends ConsumerState<LoginScreen> {
                             size: 16,
                             fontWeight: FontWeight.w500),
                       ),
-                      loginWithOTP(),
+                      loginWithOTP(_loginWithOTP),
                       heightBox(15),
                       loginWithBCELOne(),
                       heightBox(20),
@@ -263,5 +268,13 @@ class LoginState extends ConsumerState<LoginScreen> {
       return navigator.pop();
     }
     return Future.value(null);
+  }
+
+  _loginWithOTP() {
+    focusDisable(context);
+    _checkPhoneNumber(phoneController.text);
+    if(phoneController.text.isNotEmpty && phoneController.text.length == 8){
+      ref.read(authStateNotifierProvider.notifier).loginWithOtp(phoneController.text);
+    }
   }
 }
