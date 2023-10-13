@@ -1,20 +1,57 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:galaxy_18_lottery_app/shared/exceptions/http_exception.dart';
+import 'package:equatable/equatable.dart';
 
-part 'auth_state.freezed.dart';
+enum AuthConcreteState {
+  initial,
+  signingIn,
+  signedIn,
+  failure,
+  singingUp,
+  signedUp,
+  sendingOtp,
+  sentOtp,
+  verifying,
+  verified,
+}
 
-@freezed
-abstract class AuthState with _$AuthState {
-  const factory AuthState.initial() = Initial; // initial state
-  const factory AuthState.signing() = Signing; // ກຳລັງລົງທະບຽນ ຫຼື ເຂົ້າສູ່ລະບົບ
-  const factory AuthState.signed() = Signed; // ລົງທະບຽນ ຫຼື ເຊົ້າສູ່ລະບົບ ສຳເລັດ
-  const factory AuthState.signingCode() = SigningCode; // ກຳລັງສົ່ງລະຫັດ otp
-  const factory AuthState.signedCode() = SignedCode; // send otp code success
-  const factory AuthState.verifying() = Verifying; // ກວດສອບລະຫັດ otp// signing in or signing up
-  const factory AuthState.verified() = Verified; // success login or register
-  const factory AuthState.failure(AppException exception) = Failure; // unknown error
-  const factory AuthState.verifyByCode() = VerifyByCode; // verify code error
-  const factory AuthState.idExists() = IdExists; // phone already exists
-  const factory AuthState.idNotExists() = IdNotExists; // user is not register
-  const factory AuthState.invalidToken() = InvalidToken; // Token ບໍ່ຖືກຕ້ອງ
+class AuthState extends Equatable {
+  final AuthConcreteState state;
+  final String message;
+  final bool isLoading;
+  final int statusCode;
+
+  const AuthState({
+    this.state = AuthConcreteState.initial,
+    this.message = '',
+    this.isLoading = false,
+    this.statusCode =0,
+  });
+
+  @override
+  List<Object?> get props => [state, message];
+
+  const AuthState.initial({
+    this.state = AuthConcreteState.initial,
+    this.message = '',
+    this.isLoading = false,
+    this.statusCode = 0,
+  });
+
+  AuthState copyWith({
+    AuthConcreteState? state,
+    String? message,
+    bool? isLoading,
+    int? statusCode,
+  }) {
+    return AuthState(
+      state: state ?? this.state,
+      message: message ?? this.message,
+      isLoading: isLoading ?? this.isLoading,
+      statusCode: statusCode ?? this.statusCode,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'AuthState(state: $state, message: $message, isLoading: $isLoading, statusCode: $statusCode)';
+  }
 }

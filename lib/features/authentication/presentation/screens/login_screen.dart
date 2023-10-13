@@ -40,19 +40,16 @@ class LoginState extends ConsumerState<LoginScreen> {
     ref.read(toastMessageProvider).initialMessage(context);
     ref.listen(authStateNotifierProvider.select((value) => value),
         (previous, next) async {
-      if (next is Signing) {
+      if (next.state == AuthConcreteState.signingIn) {
         await _showLoader(context, Txt.t(context, "waiting_msg"));
-      } else if (next is Signed) {
+      } else if (next.state == AuthConcreteState.signedIn) {
         _closeLoader(context);
-        AutoRouter.of(context)
-            .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
+        AutoRouter.of(context).pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
         _clearTextController();
-      } else if (next is Failure) {
+      } else if (next.state == AuthConcreteState.failure) {
         _closeLoader(context);
-        if (next.exception.statusCode != 409) {
-          ref
-              .read(toastMessageProvider)
-              .messageError(message: next.exception.message.toString());
+        if (next.statusCode != 409) {
+          ref.read(toastMessageProvider).messageError(message: next.message.toString());
         }
       }
     });

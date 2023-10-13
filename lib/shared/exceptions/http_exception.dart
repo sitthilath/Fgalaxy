@@ -30,6 +30,21 @@ class CacheFailureException extends Equatable implements AppException {
   List<Object?> get props => [message, statusCode, identifier];
 }
 
+class InitialException extends Equatable implements AppException{
+  @override
+  String? get identifier => '';
+
+  @override
+  String? get message => '';
+
+  @override
+  List<Object?> get props => [message, statusCode, identifier];
+
+  @override
+  int? get statusCode => 0;
+
+}
+
 //  extension
 extension HttpExceptionExtension on AppException {
   Left<AppException, Response> get toLeft => Left<AppException, Response>(this);

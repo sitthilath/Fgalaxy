@@ -61,9 +61,9 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
     ref.read(toastMessageProvider).initialMessage(context);
     ref.listen(authStateNotifierProvider.select((value) => value),
         (previous, next) async {
-      if (next is Verifying) {
+      if (next.state == AuthConcreteState.verifying) {
         _showLoader(context, Txt.t(context, "verify_msg"));
-      } else if (next is Verified) {
+      } else if (next.state == AuthConcreteState.verified) {
         _closeLoader(context);
         ref
             .read(toastMessageProvider)
@@ -71,11 +71,9 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
         AutoRouter.of(context)
             .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
         otpCodes.clear();
-      } else if (next is Failure) {
+      } else if (next.state == AuthConcreteState.failure) {
         await _closeLoader(context);
-        ref
-            .read(toastMessageProvider)
-            .messageError(message: next.exception.message.toString());
+        ref.read(toastMessageProvider).messageError(message: next.message.toString());
         otpCodes.clear();
       }
     });
