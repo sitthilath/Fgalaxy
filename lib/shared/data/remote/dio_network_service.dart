@@ -3,10 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:galaxy_18_lottery_app/main/app_env.dart';
 import 'package:galaxy_18_lottery_app/shared/data/remote/network_service.dart';
+import 'package:galaxy_18_lottery_app/shared/domain/models/response.dart'
+    as response;
 import 'package:galaxy_18_lottery_app/shared/exceptions/http_exception.dart';
 import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/mixins/exception_handler_mixin.dart';
-import 'package:galaxy_18_lottery_app/shared/domain/models/response.dart' as response;
 
 class DioNetworkService extends NetworkService with ExceptionHandlerMixin {
   final Dio dio;
@@ -31,12 +32,13 @@ class DioNetworkService extends NetworkService with ExceptionHandlerMixin {
   Map<String, Object> get headers => {
         'accept': 'application/json',
         'content-type': 'application/json',
+        'locale': 'lo',
       };
 
   @override
   Map<String, dynamic> updateHeader(Map<String, dynamic> data) {
     final header = {...data, ...headers};
-      dio.options.headers = header;
+    dio.options.headers = header;
     return header;
   }
 

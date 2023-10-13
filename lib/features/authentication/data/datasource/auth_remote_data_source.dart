@@ -17,6 +17,11 @@ abstract class LoginUserDataSource {
   Future<Either<AppException, User>> verifyOTP({required UserForm code});
 
   Future<Either<AppException, bool>> checkUser();
+
+  Future<Either<AppException, String>> loginWithOTP({required UserForm phone});
+
+  Future<Either<AppException, User>> verifyLoginWithOTP(
+      {required UserForm form});
 }
 
 class LoginUserRemoteDataSource implements LoginUserDataSource {
@@ -120,6 +125,41 @@ class LoginUserRemoteDataSource implements LoginUserDataSource {
           message: 'Invalid Token',
           statusCode: 1,
           identifier: "CheckUser: $e"));
+    }
+  }
+
+  @override
+  Future<Either<AppException, String>> loginWithOTP(
+      {required UserForm phone}) async {
+    try {
+      final response = await networkService.post(UrlConstants.LOGIN_WITH_OTP,
+          data: phone.phoneToJson());
+      return response.fold((l) => Left(l), (r) => Right(r.data.toString()));
+    } catch (e) {
+      return Left(AppException(
+          message: 'ເກີດຄວາມຜິດພາດທີ່ບໍ່ຮູ້ຈັກ',
+          statusCode: 0,
+          identifier:
+              '${e.toString()}\nLoginUserRemoteDataSource.loginWithOtp'));
+    }
+  }
+
+  @override
+  Future<Either<AppException, User>> verifyLoginWithOTP(
+      {required UserForm form}) async {
+    try{
+      final response = await networkService.post(UrlConstants.VERIFY_LOGIN_OTP, data: form.verifyToJson());
+      return response.fold((l) => Left(l), (r){
+        final user = User.fromJson(r.data);
+        networkService.updateHeader({'Authorization': TOKEN_TYPE + user.accessToken});
+        return Right(user);
+      });
+    }catch(e){
+      return Left(AppException(
+          message: 'ເກີດຄວາມຜິດພາດທີ່ບໍ່ຮູ້ຈັກ',
+          statusCode: 0,
+          identifier:
+          '${e.toString()}\nLoginUserRemoteDataSource.verifyLoginWithOTP'));
     }
   }
 }

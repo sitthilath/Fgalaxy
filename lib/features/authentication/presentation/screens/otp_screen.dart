@@ -20,9 +20,10 @@ import 'package:galaxy_18_lottery_app/shared/widgets/theme_widget.dart';
 
 @RoutePage()
 class OTPScreen extends ConsumerStatefulWidget {
-  const OTPScreen({super.key, required this.phoneNumber});
+  const OTPScreen({super.key, required this.phoneNumber, this.isLogin = false});
 
   final String phoneNumber;
+  final bool isLogin;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => OTPScreenState();
@@ -59,26 +60,7 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
   Widget build(BuildContext context) {
     ref.watch(authStateNotifierProvider);
     ref.read(toastMessageProvider).initialMessage(context);
-    ref.listen(authStateNotifierProvider.select((value) => value),
-        (previous, next) async {
-      if (next is Verifying) {
-        _showLoader(context, Txt.t(context, "verify_msg"));
-      } else if (next is Verified) {
-        _closeLoader(context);
-        ref
-            .read(toastMessageProvider)
-            .messageSuccess(message: Txt.t(context, "register_success"));
-        AutoRouter.of(context)
-            .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
-        otpCodes.clear();
-      } else if (next is Failure) {
-        await _closeLoader(context);
-        ref
-            .read(toastMessageProvider)
-            .messageError(message: next.exception.message.toString());
-        otpCodes.clear();
-      }
-    });
+    _listenState();
     return ThemeApp(
       child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -201,15 +183,16 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
                               subText: '+',
                               onTap: () => _addNumber(0)),
                           InkWell(
-                            onTap: (){
-                              if(otpCodes.isNotEmpty){
+                            onTap: () {
+                              if (otpCodes.isNotEmpty) {
                                 otpCodes.removeLast();
                               }
                             },
                             child: SizedBox(
                               width: 40,
                               height: 40,
-                              child: SvgPicture.asset(AppConstants.delete, color: AppColor.primaryColor),
+                              child: SvgPicture.asset(AppConstants.delete,
+                                  color: AppColor.primaryColor),
                             ),
                           ),
                         ],
@@ -241,7 +224,7 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
                     setState(() {
                       _secondsRemaining = 30;
                     });
-                   // _startCountdown();
+                    // _startCountdown();
                   }
                 },
                 child: Text(Txt.t(context, "send_again"),
@@ -323,9 +306,15 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
     }
     if (otpCodes.length == 6) {
       final code = otpCodes.join('');
-      ref
-          .read(authStateNotifierProvider.notifier)
-          .verifyUser(code, widget.phoneNumber);
+      if (widget.isLogin) {
+        ref
+            .read(authStateNotifierProvider.notifier)
+            .verifyUserWithOTP(widget.phoneNumber, code);
+      } else {
+        ref
+            .read(authStateNotifierProvider.notifier)
+            .verifyUser(code, widget.phoneNumber);
+      }
     }
   }
 
@@ -339,5 +328,37 @@ class OTPScreenState extends ConsumerState<OTPScreen> {
       return navigator.pop();
     }
     return Future.value(null);
+  }
+
+  void _listenState() {
+    ref.listen(authStateNotifierProvider.select((value) => value),
+            (previous, next) async {
+          if (next.state == AuthConcreteState.verifying) {
+            _showLoader(context, Txt.t(context, "verify_msg"));
+          } else if (next.state == AuthConcreteState.verified) {
+            _closeLoader(context);
+            ref
+                .read(toastMessageProvider)
+                .messageSuccess(message: Txt.t(context, "register_success"));
+            AutoRouter.of(context)
+                .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
+            otpCodes.clear();
+          } else if (next.state == AuthConcreteState.verifyingWithOtp) {
+            await _showLoader(context, Txt.t(context, "verify_msg"));
+          } else if (next.state == AuthConcreteState.verifiedWithOtp) {
+            _closeLoader(context);
+            ref
+                .read(toastMessageProvider)
+                .messageSuccess(message: Txt.t(context, "register_success"));
+            AutoRouter.of(context)
+                .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
+          } else if (next.state == AuthConcreteState.failure) {
+            await _closeLoader(context);
+            ref
+                .read(toastMessageProvider)
+                .messageError(message: next.message.toString());
+            otpCodes.clear();
+          }
+        });
   }
 }

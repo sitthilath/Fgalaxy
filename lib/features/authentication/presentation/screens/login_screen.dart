@@ -40,20 +40,22 @@ class LoginState extends ConsumerState<LoginScreen> {
     ref.read(toastMessageProvider).initialMessage(context);
     ref.listen(authStateNotifierProvider.select((value) => value),
         (previous, next) async {
-      if (next is Signing) {
+      if (next.state == AuthConcreteState.signingIn) {
         await _showLoader(context, Txt.t(context, "waiting_msg"));
-      } else if (next is Signed) {
+      } else if (next.state == AuthConcreteState.signedIn) {
         _closeLoader(context);
-        AutoRouter.of(context)
-            .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
+        AutoRouter.of(context).pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
         _clearTextController();
-      } else if (next is Failure) {
+      } else if (next.state == AuthConcreteState.failure) {
         _closeLoader(context);
-        if (next.exception.statusCode != 409) {
-          ref
-              .read(toastMessageProvider)
-              .messageError(message: next.exception.message.toString());
+        if (next.statusCode != 409) {
+          ref.read(toastMessageProvider).messageError(message: next.message.toString());
         }
+      }else if(next.state == AuthConcreteState.signingWithOtp){
+        await _showLoader(context, Txt.t(context, "waiting_msg"));
+      }else if(next.state == AuthConcreteState.signedWithOtp){
+        _closeLoader(context);
+        AutoRouter.of(context).push(OTPRoute(phoneNumber: phoneController.text, isLogin: true));
       }
     });
     return Scaffold(
@@ -168,7 +170,7 @@ class LoginState extends ConsumerState<LoginScreen> {
                             size: 16,
                             fontWeight: FontWeight.w500),
                       ),
-                      loginWithOTP(),
+                      loginWithOTP(_loginWithOTP),
                       heightBox(15),
                       loginWithBCELOne(),
                       heightBox(20),
@@ -266,5 +268,13 @@ class LoginState extends ConsumerState<LoginScreen> {
       return navigator.pop();
     }
     return Future.value(null);
+  }
+
+  _loginWithOTP() {
+    focusDisable(context);
+    _checkPhoneNumber(phoneController.text);
+    if(phoneController.text.isNotEmpty && phoneController.text.length == 8){
+      ref.read(authStateNotifierProvider.notifier).loginWithOtp(phoneController.text);
+    }
   }
 }

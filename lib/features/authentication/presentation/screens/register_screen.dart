@@ -41,19 +41,19 @@ class RegisterState extends ConsumerState<RegisterScreen> {
     ref.read(toastMessageProvider).initialMessage(context);
     ref.listen(authStateNotifierProvider.select((value) => value),
         (previous, next) async {
-      if (next is Signing) {
+      if (next.state == AuthConcreteState.singingUp) {
         _showLoader(context, Txt.t(context, "waiting_msg"));
-      } else if (next is Signed) {
+      } else if (next.state == AuthConcreteState.signedUp) {
         _closeLoader(context);
         AutoRouter.of(context).push(
           OTPRoute(phoneNumber: phoneController.text),
         );
-      } else if (next is Failure) {
-        if (next.exception.statusCode == 409) {
+      } else if (next.state == AuthConcreteState.failure) {
+        if (next.statusCode == 409) {
           ref.read(toastMessageProvider).messageInfo(
               message:
                   "${Txt.t(context, "phone_number")} $LA_PREFIX${phoneController.text} ${Txt.t(context, "has_in_system_plz_login")}");
-        } else if (next.exception.statusCode == 422) {
+        } else if (next.statusCode == 422) {
           ref
               .read(authStateNotifierProvider.notifier)
               .sendOTP(phoneController.text);
@@ -62,7 +62,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
           );
         } else {
           ref.read(toastMessageProvider).messageError(
-                message: next.exception.message.toString(),
+                message: next.message.toString(),
               );
         }
         _closeLoader(context);

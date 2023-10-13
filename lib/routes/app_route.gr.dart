@@ -120,6 +120,7 @@ abstract class $AppRouter extends _i15.RootStackRouter {
         child: _i10.OTPScreen(
           key: args.key,
           phoneNumber: args.phoneNumber,
+          isLogin: args.isLogin,
         ),
       );
     },
@@ -360,12 +361,14 @@ class OTPRoute extends _i15.PageRouteInfo<OTPRouteArgs> {
   OTPRoute({
     _i16.Key? key,
     required String phoneNumber,
+    bool isLogin = false,
     List<_i15.PageRouteInfo>? children,
   }) : super(
           OTPRoute.name,
           args: OTPRouteArgs(
             key: key,
             phoneNumber: phoneNumber,
+            isLogin: isLogin,
           ),
           initialChildren: children,
         );
@@ -380,15 +383,18 @@ class OTPRouteArgs {
   const OTPRouteArgs({
     this.key,
     required this.phoneNumber,
+    this.isLogin = false,
   });
 
   final _i16.Key? key;
 
   final String phoneNumber;
 
+  final bool isLogin;
+
   @override
   String toString() {
-    return 'OTPRouteArgs{key: $key, phoneNumber: $phoneNumber}';
+    return 'OTPRouteArgs{key: $key, phoneNumber: $phoneNumber, isLogin: $isLogin}';
   }
 }
 
