@@ -1,59 +1,42 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/auth_providers.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/state/auth_state.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/login_button.dart';
-import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/password_field.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/phone_field.dart';
 import 'package:galaxy_18_lottery_app/infrastructure/messages/providers/flutter_toast_message_provider.dart';
 import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
+import 'package:galaxy_18_lottery_app/services/loader_service/providers/loader_provider.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/label_widget.dart';
-import 'package:galaxy_18_lottery_app/shared/widgets/loadings/loading.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/theme_widget.dart';
 
 @RoutePage()
-class LoginScreen extends ConsumerStatefulWidget {
-  static const routeName = '/loginScreen';
-
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginWithOTP extends ConsumerStatefulWidget {
+  static const String routeName = '/loginWithOTP';
+  const LoginWithOTP({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => LoginState();
+  ConsumerState<LoginWithOTP> createState() => _LoginWithOTPState();
 }
 
-class LoginState extends ConsumerState<LoginScreen> {
+class _LoginWithOTPState extends ConsumerState<LoginWithOTP> {
   final TextEditingController phoneController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
   String? phoneIsEmpty;
-  String? passwordIsEmpty;
-
   @override
   Widget build(BuildContext context) {
     ref.watch(authStateNotifierProvider);
     ref.read(toastMessageProvider).initialMessage(context);
-    ref.listen(authStateNotifierProvider.select((value) => value),
-        (previous, next) async {
-      if (next.state == AuthConcreteState.signingIn) {
-        await _showLoader(context, Txt.t(context, "waiting_msg"));
-      } else if (next.state == AuthConcreteState.signedIn) {
-        _closeLoader(context);
-        AutoRouter.of(context).pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
-        _clearTextController();
-      } else if (next.state == AuthConcreteState.failure) {
-        _closeLoader(context);
-        if (next.statusCode != 409) {
-          ref.read(toastMessageProvider).messageError(message: next.message.toString());
-        }
-      }
-    });
+    ref.read(loaderProvider).context = context;
+    _listenState();
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: ThemeApp(
         child: Stack(
           children: [
@@ -92,7 +75,7 @@ class LoginState extends ConsumerState<LoginScreen> {
               child: Container(
                 width: double.infinity,
                 padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 35),
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 35),
                 decoration: BoxDecoration(
                     color: AppColor.whiteColor,
                     borderRadius: const BorderRadius.only(
@@ -113,7 +96,7 @@ class LoginState extends ConsumerState<LoginScreen> {
                               )),
                         ),
                         child: Text(
-                          Txt.t(context, "login_button_text"),
+                          Txt.t(context, "login_with_otp"),
                           style: stylePrimary(
                             size: 18,
                             weight: FontWeight.w600,
@@ -132,42 +115,9 @@ class LoginState extends ConsumerState<LoginScreen> {
                         onValidate: _checkPhoneNumber,
                         errorMsg: phoneIsEmpty,
                       ),
+                      heightBox(20),
+                      loginWithOTP(_loginWithOTP, bgColor: AppColor.primaryColor, fontColor: AppColor.whiteColor),
                       heightBox(15),
-                      labelText(
-                          color: AppColor.blackColor,
-                          text: Txt.t(context, "password_text"),
-                          size: 14,
-                          fontWeight: FontWeight.w500),
-                      heightBox(10),
-                      passwordField(
-                        controller: passwordController,
-                        onValidate: _checkPassword,
-                        errorMsg: passwordIsEmpty,
-                      ),
-                      heightBox(8.0),
-                      InkWell(
-                        onTap: () => AutoRouter.of(context).push(const ForgotPasswordRoute()),
-                        child: Container(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            Txt.t(context, "forgot_password_text"),
-                            style: stylePrimary(size: 14, weight: FontWeight.w400),
-                            textAlign: TextAlign.right,
-                          ),
-                        ),
-                      ),
-                      heightBox(15),
-                      loginButton(onTab: _onLoginUser),
-                      Center(
-                        child: labelText(
-                            color: AppColor.blackColor,
-                            text: Txt.t(context, "or"),
-                            size: 16,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      loginWithOTP(_loginWithOTP, fontColor: AppColor.primaryColor),
-                      heightBox(15),
-                      loginWithBCELOne(),
                       heightBox(20),
                       SizedBox(
                         width: double.infinity,
@@ -176,17 +126,17 @@ class LoginState extends ConsumerState<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              Txt.t(context, 'not_have_account'),
+                              Txt.t(context, 'is_have_account'),
                               style:
-                                  styleBlack(size: 14, weight: FontWeight.w600),
+                              styleBlack(size: 14, weight: FontWeight.w600),
                             ),
                             widthBox(8),
                             InkWell(
                               onTap: () {
-                                context.router.push(const RegisterRoute());
+                                context.router.push(const LoginRoute());
                               },
                               child: Text(
-                                Txt.t(context, "register"),
+                                Txt.t(context, "login_button_text"),
                                 style: stylePrimary(
                                     size: 14, weight: FontWeight.w700),
                               ),
@@ -221,52 +171,24 @@ class LoginState extends ConsumerState<LoginScreen> {
     }
   }
 
-  void _checkPassword(String password) {
-    if (password.isEmpty) {
-      setState(() {
-        passwordIsEmpty = Txt.t(context, "password_can_not_be_empty");
-      });
-    } else {
-      setState(() {
-        passwordIsEmpty = null;
-      });
-    }
-  }
-
-  _onLoginUser() async {
-    focusDisable(context);
-    _checkPhoneNumber(phoneController.text);
-    _checkPassword(passwordController.text);
-    if (phoneController.text.isNotEmpty &&
-        phoneController.text.length == 8 &&
-        passwordController.text.isNotEmpty) {
-      ref
-          .read(authStateNotifierProvider.notifier)
-          .loginUser(phoneController.text, passwordController.text);
-    }
-  }
-
-  void _clearTextController() {
-    setState(() {
-      phoneController.text = '';
-      passwordController.text = '';
-    });
-  }
-
-  Future<void> _showLoader(BuildContext context, String title) {
-    return LoadingDialog.showAuthLoadingDialog(context, title: title);
-  }
-
-  Future<void> _closeLoader(BuildContext context) async {
-    final navigator = Navigator.of(context);
-    if (navigator.canPop()) {
-      return navigator.pop();
-    }
-    return Future.value(null);
-  }
-
   _loginWithOTP() {
     focusDisable(context);
-    AutoRouter.of(context).push(const LoginWithOTP());
+    _checkPhoneNumber(phoneController.text);
+    if(phoneController.text.isNotEmpty && phoneController.text.length == 8){
+      ref.read(authStateNotifierProvider.notifier).loginWithOtp(phoneController.text);
+    }
+  }
+
+  void _listenState() {
+    ref.listen(authStateNotifierProvider.select((value) => value), (previous, next) async {
+      if(next.state == AuthConcreteState.signingWithOtp){
+      ref.read(loaderProvider).showLoader(Txt.t(context, "waiting_msg"));
+      }else if(next.state == AuthConcreteState.signedWithOtp){
+      ref.read(loaderProvider).closeLoader();
+      AutoRouter.of(context).push(OTPRoute(phoneNumber: phoneController.text, isLogin: true));
+      }else if( next.state == AuthConcreteState.failure){
+        ref.read(toastMessageProvider).messageError(message: next.message);
+      }
+    });
   }
 }

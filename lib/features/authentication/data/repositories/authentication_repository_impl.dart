@@ -43,4 +43,9 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository{
   Future<Either<AppException, User>> verifyLoginWithOTP({required UserForm form}) {
     return dataSource.verifyLoginWithOTP(form: form);
   }
+
+  @override
+  Future<Either<AppException, String>> logout() {
+    return dataSource.logout();
+  }
 }

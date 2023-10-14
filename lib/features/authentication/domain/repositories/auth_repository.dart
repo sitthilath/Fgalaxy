@@ -11,4 +11,5 @@ abstract class AuthenticationRepository {
   Future<Either<AppException, bool>> checkUser();
   Future<Either<AppException, String>> loginWithOTP({required UserForm phone});
   Future<Either<AppException, User>> verifyLoginWithOTP({required UserForm form});
+  Future<Either<AppException, String>> logout();
 }

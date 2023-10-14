@@ -6,4 +6,5 @@ abstract class UserRepository {
   Future<Either<AppException, User>> fetchUser();
   Future<bool> hasUser();
   Future<bool> saveUser({required User user});
+  Future<bool> removeUser();
 }
