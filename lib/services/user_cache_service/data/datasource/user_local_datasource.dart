@@ -13,6 +13,7 @@ abstract class UserDataSource {
   Future<bool> saveUser({required User user});
 
   Future<bool> hasUser();
+  Future<bool> removeUser();
 }
 
 class UserLocalDataSource extends UserDataSource {
@@ -44,5 +45,10 @@ class UserLocalDataSource extends UserDataSource {
   @override
   Future<bool> saveUser({required User user}) async{
     return await storageService.set(storageKey, jsonEncode(user.toJson()));
+  }
+
+  @override
+  Future<bool> removeUser() async {
+    return await storageService.remove(storageKey);
   }
 }

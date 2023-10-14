@@ -29,6 +29,7 @@
   "change_password_button": "ປ່ຽນລະຫັດຜ່ານ",
   "change_password_success_msg": "ປ່ຽນລະຫັດຜ່ານສຳເລັດ ກະລຸນາເຂົ້າສູ່ລະບົບ",
   "this_phone_not_have_in_system": "ບໍ່ມີໃນລະບົບ ກະລຸນາລົງທະບຽນກ່ອນ",
+  "login_with_otp": "ເຂົ້າລະບົບດ້ວຍລະຫັດ OTP",
   "menus_bottom": "=============================> menus bottom ========================",
   "home": "ໜ້າຫຼັກ",
   "lottery_result": "ຜົນຫວຍ",
@@ -70,5 +71,11 @@
   "second": "ວິນາທີ",
   "dream_treatise_page": "======================> ຕຳລາຝັນ ==============>",
   "a_dream": "ຄວາມຝັນ",
-  "risk_number": "ເລກສ່ຽງ"
+  "risk_number": "ເລກສ່ຽງ",
+  "Profile_page_title": "================> ໜ້າໂປຣຟາຍ ==============",
+  "logout": "ອອກຈາກລະບົບ",
+  "logout_content": "ທ່ານຕ້ອງການທີ່ຈະອອກຈາກລະບົບ ຫຼື ບໍ່?",
+  "cancel_text": "ຍົກເລີກ",
+  "logout_title": "ຢືນຢັນເພື່ອອອກຈາກລະບົບ",
+  "logout_success_msg":"ອອກຈາກລະບົບສຳເລັດ"
 }

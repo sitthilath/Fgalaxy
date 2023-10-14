@@ -23,7 +23,7 @@ Widget loginButton({required Function()onTab}){
   );
 }
 
-Widget loginWithOTP(Function() onTap) {
+Widget loginWithOTP(Function() onTap, {Color bgColor = Colors.transparent, Color fontColor = Colors.blue}) {
   return InkWell(
     onTap: onTap,
     child: Container(
@@ -31,13 +31,14 @@ Widget loginWithOTP(Function() onTap) {
       height: 50,
       alignment: Alignment.center,
       decoration: BoxDecoration(
+        color: bgColor,
         border: Border.all(
           color: AppColor.primaryColor,
           width: 1.5,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(15)),
       ),
-      child: Text('ເຂົ້າສູ່ລະບົບຜ່ານ OTP', style: stylePrimary(size: 14, weight: FontWeight.w800)),
+      child: Text('ເຂົ້າສູ່ລະບົບຜ່ານ OTP', style: styleOption(size: 14, fontWeight: FontWeight.w800, color: fontColor)),
     ),
   );
 }

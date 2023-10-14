@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:galaxy_18_lottery_app/services/user_cache_service/domain/repositories/user_cache_repository.dart';
@@ -196,6 +197,36 @@ class AuthNotifier extends StateNotifier<AuthState> {
               message: CacheFailureException().message,
             );
           }
+        });
+      }
+      Future<void> logoutUser() async {
+        state = state.copyWith(
+          state: AuthConcreteState.signingOut,
+          isLoading: true,
+        );
+
+        final response = await authRepository.logout();
+        response.fold((failure){
+          state = state.copyWith(
+            state: AuthConcreteState.failure,
+            message: failure.message,
+            statusCode: failure.statusCode,
+            isLoading: false,
+          );
+        }, (data) async{
+         final isRemoved =  await userRepository.removeUser();
+         if(isRemoved){
+           state = state.copyWith(
+             state: AuthConcreteState.signedOut,
+             isLoading: false,
+           );
+         }else{
+           state = state.copyWith(
+             state: AuthConcreteState.failure,
+             isLoading: false,
+             message: CacheFailureException().message,
+           );
+         }
         });
       }
 

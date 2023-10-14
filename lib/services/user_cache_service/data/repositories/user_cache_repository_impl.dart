@@ -23,4 +23,9 @@ class UserRepositoryImpl implements UserRepository {
   Future<bool> saveUser({required User user}) {
     return dataSource.saveUser(user: user);
   }
+
+  @override
+  Future<bool> removeUser() {
+    return dataSource.removeUser();
+  }
 }

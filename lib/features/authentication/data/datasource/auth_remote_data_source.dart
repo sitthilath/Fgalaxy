@@ -22,6 +22,8 @@ abstract class LoginUserDataSource {
 
   Future<Either<AppException, User>> verifyLoginWithOTP(
       {required UserForm form});
+
+  Future<Either<AppException, String>> logout();
 }
 
 class LoginUserRemoteDataSource implements LoginUserDataSource {
@@ -147,19 +149,31 @@ class LoginUserRemoteDataSource implements LoginUserDataSource {
   @override
   Future<Either<AppException, User>> verifyLoginWithOTP(
       {required UserForm form}) async {
-    try{
-      final response = await networkService.post(UrlConstants.VERIFY_LOGIN_OTP, data: form.verifyToJson());
-      return response.fold((l) => Left(l), (r){
+    try {
+      final response = await networkService.post(UrlConstants.VERIFY_LOGIN_OTP,
+          data: form.verifyToJson());
+      return response.fold((l) => Left(l), (r) {
         final user = User.fromJson(r.data);
-        networkService.updateHeader({'Authorization': TOKEN_TYPE + user.accessToken});
+        networkService
+            .updateHeader({'Authorization': TOKEN_TYPE + user.accessToken});
         return Right(user);
       });
-    }catch(e){
+    } catch (e) {
       return Left(AppException(
           message: 'ເກີດຄວາມຜິດພາດທີ່ບໍ່ຮູ້ຈັກ',
           statusCode: 0,
           identifier:
-          '${e.toString()}\nLoginUserRemoteDataSource.verifyLoginWithOTP'));
+              '${e.toString()}\nLoginUserRemoteDataSource.verifyLoginWithOTP'));
+    }
+  }
+
+  @override
+  Future<Either<AppException, String>> logout() async {
+    try{
+      final response = await networkService.get(UrlConstants.LOGOUT);
+      return response.fold((l) => Left(l), (r) => Right(r.data));
+    }catch(e){
+      return Left(AppException(message: 'ເກີດຂໍ້ຜິດພາດທີ່ບໍ່ຮູ້ຈັກ', statusCode: 0, identifier: '${e.toString()}\nLoginUserRemoteDataSource.logout'));
     }
   }
 }
