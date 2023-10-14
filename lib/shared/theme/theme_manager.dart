@@ -1,6 +1,4 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/painting/gradient.dart';
 import 'package:galaxy_18_lottery_app/shared/theme/theme_service.dart';
 
 class ThemeManager implements ThemeService{

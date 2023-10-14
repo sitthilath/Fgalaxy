@@ -36,9 +36,8 @@ class SplashState extends ConsumerState<SplashScreen> {
     final state = ref.watch(splashStateNotifierProvider);
     ref.read(splashStateNotifierProvider.notifier).context = context;
     ref.read(themeProvider).setColors = [
-      HexColor('#4EB1F1'),
-      HexColor('#2764C5'),
-      HexColor('#1E1588'),
+      HexColor('#499ED4'),
+      HexColor('#27398D'),
     ];
     ref.listen(splashStateNotifierProvider.select((value) => value),
         (previous, next) async {
@@ -59,15 +58,11 @@ class SplashState extends ConsumerState<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 250,
-              height: 78,
-              child: Image.asset(
-                AppConstants.logoGalaxy18,
-                fit: BoxFit.cover,
-                filterQuality: FilterQuality.high,
-                gaplessPlayback: true,
-              ),
+            Image.asset(
+              AppConstants.logoGalaxy18,
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.high,
+              gaplessPlayback: true,
             ),
             heightBox(20),
             state.maybeMap(
@@ -76,14 +71,6 @@ class SplashState extends ConsumerState<SplashScreen> {
           ],
         ),
       )),
-    );
-  }
-
-  _loading() {
-    return LinearProgressIndicator(
-      minHeight: 4,
-      valueColor: AlwaysStoppedAnimation(AppColor.primaryColor),
-      backgroundColor: AppColor.primaryColor.withOpacity(.5),
     );
   }
 

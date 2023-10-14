@@ -29,7 +29,7 @@ class AppConstants {
 
 
 //  ============= for gifs ==========
-  static String logoGalaxy18 = '$gifPath/galaxy18.gif';
+  static String logoGalaxy18 = '$gifPath/logo_galaxy18.gif';
 }
 
 class MenuIcons {
