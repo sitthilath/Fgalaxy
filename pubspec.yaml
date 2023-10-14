@@ -49,6 +49,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/lang/
+    - assets/animations/
   fonts:
     - family: NotoSansLao
       fonts:

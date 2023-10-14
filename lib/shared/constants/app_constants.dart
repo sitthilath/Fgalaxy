@@ -1,5 +1,6 @@
  const String iconPath ="assets/icons";
 const String imagePath = "assets/images";
+const String gifPath = "assets/animations";
 
 class AppConstants {
   static String authBGImagePath = "$imagePath/auth-bg-frame.png";
@@ -25,6 +26,10 @@ class AppConstants {
   static String search = '$iconPath/search_icon.svg';
   static String close = '$iconPath/close_icon.svg';
   static String delete = '$iconPath/delete.svg';
+
+
+//  ============= for gifs ==========
+  static String logoGalaxy18 = '$gifPath/logo_galaxy18.gif';
 }
 
 class MenuIcons {

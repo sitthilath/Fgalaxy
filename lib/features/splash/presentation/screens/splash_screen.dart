@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:galaxy_18_lottery_app/features/splash/presentation/providers/splash_provider.dart';
 import 'package:galaxy_18_lottery_app/features/splash/presentation/providers/state/splash_state.dart';
 import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
-import 'package:galaxy_18_lottery_app/services/loader_service/providers/loader_provider.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
 import 'package:galaxy_18_lottery_app/shared/hex_color.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
@@ -37,16 +36,17 @@ class SplashState extends ConsumerState<SplashScreen> {
     final state = ref.watch(splashStateNotifierProvider);
     ref.read(splashStateNotifierProvider.notifier).context = context;
     ref.read(themeProvider).setColors = [
-      HexColor('#4EB1F1'),
-      HexColor('#2764C5'),
-      HexColor('#1E1588'),
+      HexColor('#499ED4'),
+      HexColor('#27398D'),
     ];
     ref.listen(splashStateNotifierProvider.select((value) => value),
         (previous, next) async {
       if (next is Accepted) {
-        AutoRouter.of(context).pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
+        AutoRouter.of(context)
+            .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
       } else if (next is InvalidToken) {
-        AutoRouter.of(context).pushAndPopUntil(const LoginRoute(), predicate: (_) => false);
+        AutoRouter.of(context)
+            .pushAndPopUntil(const LoginRoute(), predicate: (_) => false);
       }
     });
 
@@ -58,30 +58,23 @@ class SplashState extends ConsumerState<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 200,
-              height: 68,
-              child: Image.asset(AppConstants.appLogo, fit: BoxFit.cover),
+            Image.asset(
+              AppConstants.logoGalaxy18,
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.high,
+              gaplessPlayback: true,
             ),
             heightBox(20),
             state.maybeMap(
-                loading: (_) => _loading(), orElse: () => heightBox(0)),
-            state.maybeMap(noInternet: (_) => _retryConnectInternet(),orElse: () => heightBox(0)),
+                noInternet: (_) => _retryConnectInternet(),
+                orElse: () => heightBox(0)),
           ],
         ),
       )),
     );
   }
 
-  _loading() {
-    return LinearProgressIndicator(
-      minHeight: 4,
-      valueColor: AlwaysStoppedAnimation(AppColor.primaryColor),
-      backgroundColor: AppColor.primaryColor.withOpacity(.5),
-    );
-  }
-
- Widget _retryConnectInternet() {
+  Widget _retryConnectInternet() {
     return InkWell(
       onTap: () {
         ref.read(splashStateNotifierProvider.notifier).initialApp();
@@ -94,7 +87,8 @@ class SplashState extends ConsumerState<SplashScreen> {
           color: AppColor.primaryBlue,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Text('ລອງອີກຄັ້ງ', style: styleWhite(size: 14, weight: FontWeight.w400)),
+        child: Text('ລອງອີກຄັ້ງ',
+            style: styleWhite(size: 14, weight: FontWeight.w400)),
       ),
     );
   }
