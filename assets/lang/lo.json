@@ -51,6 +51,7 @@
   "animal_lottery": "ເລກນາມສັດ",
   "select_all": "ເລືອກທັງໝົດ",
   "buy_lottery_risk": "ຊື້ເລກສ່ຽງ",
+  "history": "ປະຫວັດ",
   "news": "========================== ຂ່າວສານ ===============",
   "news_page_title": "ຂ່າວສານ",
   "news_detail_page_title": "ລາຍລະອຽດ",
@@ -77,5 +78,17 @@
   "logout_content": "ທ່ານຕ້ອງການທີ່ຈະອອກຈາກລະບົບ ຫຼື ບໍ່?",
   "cancel_text": "ຍົກເລີກ",
   "logout_title": "ຢືນຢັນເພື່ອອອກຈາກລະບົບ",
-  "logout_success_msg":"ອອກຈາກລະບົບສຳເລັດ"
+  "logout_success_msg":"ອອກຈາກລະບົບສຳເລັດ",
+  "Buy_lottery_page": "========================> ຊື້ຫວຍ ==============",
+  "modern_digits": "ຫວຍທັນສະໄໝ",
+  "animal_digits": "ຫວຍນາມສັດ",
+  "bet_lottery": "ແທງຫວຍ",
+  "random_digits": "ສຸມເລກ",
+  "animal_digits_button": "ນາມສັດ",
+  "input_amount": "ປ້ອນຈຳນວນເງິນ",
+  "input_digits": "ປ້ອນເລກ",
+  "confirm_to_buy": "ຢືນຢັນການຊື້ຫວຍ",
+  "treatise_title": "ຕຳລາ",
+  "add_front_digits": "ເພີ່ມຫຼັກ",
+  "full_digits": "ເຕັມນາມ"
 }

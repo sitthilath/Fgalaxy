@@ -20,6 +20,9 @@ class AppColor {
   static Color fontGrayColor = HexColor('#636e72');
   static Color primaryRed = HexColor('#e74c3c');
   static Color leadingColor = HexColor('#D1ECFF');
+  static Color transactionColor = HexColor('#47A4EA');
+  static Color randomDigitsButtonColor = HexColor('#4F4F4F');
+  static Color addDigitButtonColor = HexColor('#289800');
 
   MaterialColor generateMaterialColor(Color color) {
     return MaterialColor(color.value, {
