@@ -12,13 +12,17 @@ class LotteriesTreatiseLocal implements LotteriesTreatiseCacheDatasource{
   LotteriesTreatiseLocal(this.storageService);
 
   @override
-  Future<Either<AppException, LotteriesTreatise>> fetchLotteriesTreatise() async {
+  Future<Either<AppException, List<LotteriesTreatise>>> fetchLotteriesTreatise() async {
     final data = await storageService.get(storageLocalKey);
     if(data == null){
       return Left(AppException(message: 'ບໍ່ພົບຕຳລາຫວຍໃນແຄສ', statusCode: 0, identifier: 'LotteriesTreatiseLocal.fetchLotteriesTreatise'));
     }
     final jsonData = jsonDecode(data.toString());
-    return Right(LotteriesTreatise.fromJson(jsonData));
+    final List<LotteriesTreatise> lotteriesTreatiseList = [];
+    for(Map<String, dynamic> json in jsonData){
+      lotteriesTreatiseList.add(LotteriesTreatise.fromJson(json));
+    }
+    return Right(lotteriesTreatiseList);
   }
 
   @override
@@ -34,7 +38,7 @@ class LotteriesTreatiseLocal implements LotteriesTreatiseCacheDatasource{
   @override
   Future<bool> saveLotteriesTreatise({required List<LotteriesTreatise> lotteriesTreatise}) async {
     final lotteriesTreatiseList = lotteriesTreatise.map((e) => e.toJson()).toList();
-    return await storageService.set(storageLocalKey, jsonEncode(lotteriesTreatiseList.toString()));
+    return await storageService.set(storageLocalKey, jsonEncode(lotteriesTreatiseList));
   }
 
   @override
