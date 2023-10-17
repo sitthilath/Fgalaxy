@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
@@ -10,6 +12,9 @@ class BuyLotteryButton extends ConsumerWidget{
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
+      onTap: (){
+        AutoRouter.of(context).push(const BuyLotteriesRoute());
+      },
       child: Container(
         width: 69.97,
         height: 71.33,

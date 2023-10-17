@@ -40,6 +40,9 @@ class _MenusWidgetState extends ConsumerState<MenusWidget> {
             runSpacing: 6.0,
             children: [
               InkWell(
+                onTap: (){
+                  AutoRouter.of(context).push(const BuyLotteriesRoute());
+                },
                 child: _menuItem(
                     icon: HomeMenuIcons.buyLotteryIcon, title: 'buy_lottery'),
               ),

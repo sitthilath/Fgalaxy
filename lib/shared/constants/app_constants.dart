@@ -26,6 +26,11 @@ class AppConstants {
   static String search = '$iconPath/search_icon.svg';
   static String close = '$iconPath/close_icon.svg';
   static String delete = '$iconPath/delete.svg';
+  static String transaction = '$iconPath/transaction.svg';
+  static String history = '$iconPath/history.svg';
+  static String shuffle = '$iconPath/shuffle.svg';
+  static String lotteriesTreatise = '$iconPath/lotteries_treatise.svg';
+  static String add = '$iconPath/add.svg';
 
 
 //  ============= for gifs ==========
