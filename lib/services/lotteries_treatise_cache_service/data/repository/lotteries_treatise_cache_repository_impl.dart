@@ -8,7 +8,7 @@ class LotteriesTreatiseCacheRepositoryImpl implements LotteriesTreatiseCacheRepo
   final LotteriesTreatiseCacheDatasource datasource;
   LotteriesTreatiseCacheRepositoryImpl(this.datasource);
   @override
-  Future<Either<AppException, LotteriesTreatise>> fetchLotteriesTreatise() {
+  Future<Either<AppException, List<LotteriesTreatise>>> fetchLotteriesTreatise() {
     return datasource.fetchLotteriesTreatise();
   }
 
