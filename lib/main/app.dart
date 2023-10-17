@@ -18,9 +18,10 @@ class MyApp extends ConsumerStatefulWidget {
 
 class MyAppState extends ConsumerState<MyApp> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    LocaleActions.newLocaleDelegate = const AppTranslationsDelegate(newLocale: Locale('lo'));
+    LocaleActions.newLocaleDelegate =
+        const AppTranslationsDelegate(newLocale: Locale('lo'));
     _checkLang();
   }
 
@@ -51,6 +52,8 @@ class MyAppState extends ConsumerState<MyApp> {
         primaryColor: AppColor.primaryColor,
         fontFamily: LAO_FONT_FAMILY,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        bottomSheetTheme:
+            const BottomSheetThemeData(backgroundColor: Colors.transparent),
       ),
     );
   }
