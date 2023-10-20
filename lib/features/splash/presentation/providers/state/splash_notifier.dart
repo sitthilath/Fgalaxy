@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:galaxy_18_lottery_app/features/current_draw_tottery/domain/repository/current_draw_lottery_repository.dart';
 import 'package:galaxy_18_lottery_app/features/lotteries_treatise/domain/repository/lottery_treatise_repository.dart';
 import 'package:galaxy_18_lottery_app/features/splash/presentation/providers/state/splash_state.dart';
 import 'package:galaxy_18_lottery_app/infrastructure/notification/firebase_notification.dart';
+import 'package:galaxy_18_lottery_app/services/current_draw_lottery_cache_service/domain/repository/current_draw_lottery_cache_repository.dart';
 import 'package:galaxy_18_lottery_app/services/lotteries_treatise_cache_service/domain/repository/lotteries_treatise_cache_repository.dart';
 import 'package:galaxy_18_lottery_app/services/user_cache_service/domain/repositories/user_cache_repository.dart';
 import 'package:galaxy_18_lottery_app/shared/data/remote/network_service.dart';
@@ -19,6 +21,8 @@ class SplashNotifier extends StateNotifier<SplashAppState> {
   final NetworkService networkService;
   final LotteriesTreatiseRepository lotteriesTreatiseRepository;
   final LotteriesTreatiseCacheRepository lotteriesTreatiseCacheRepository;
+  final CurrentDrawLotteryRepository currentDrawLotteryRepository;
+  final CurrentDrawLotteryCacheRepository currentDrawLotteryCacheRepository;
 
   SplashNotifier({
     required this.firebaseService,
@@ -27,6 +31,8 @@ class SplashNotifier extends StateNotifier<SplashAppState> {
     required this.networkService,
     required this.lotteriesTreatiseRepository,
     required this.lotteriesTreatiseCacheRepository,
+    required this.currentDrawLotteryRepository,
+    required this.currentDrawLotteryCacheRepository,
   }) : super(const SplashAppState.initial());
 
   Future<void> initialApp() async {
@@ -45,6 +51,7 @@ class SplashNotifier extends StateNotifier<SplashAppState> {
       return;
     }
     await firebaseService.initialise();
+    fetchCurrentDrawLottery();
     state = const SplashAppState.accepted();
   }
 
@@ -83,6 +90,13 @@ class SplashNotifier extends StateNotifier<SplashAppState> {
           data.data.map((e) => LotteriesTreatise.fromJson(e)).toList();
       await lotteriesTreatiseCacheRepository.saveLotteriesTreatise(
           lotteriesTreatise: lotteriesTreatiseList);
+    });
+  }
+
+  Future<void> fetchCurrentDrawLottery() async {
+    final response  = await currentDrawLotteryRepository.fetchCurrentDrawLottery();
+    response.fold((l) => null, (data) async {
+      await currentDrawLotteryCacheRepository.saveCurrentDrawLottery(currentDrawLottery: data);
     });
   }
 

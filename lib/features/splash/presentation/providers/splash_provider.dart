@@ -1,12 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/domain/providers/login_provider.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:galaxy_18_lottery_app/features/current_draw_tottery/domain/providers/current_draw_lottery_provider.dart';
+import 'package:galaxy_18_lottery_app/features/current_draw_tottery/domain/repository/current_draw_lottery_repository.dart';
 import 'package:galaxy_18_lottery_app/features/lotteries_treatise/domain/providers/lotteries_treatise_provider.dart';
 import 'package:galaxy_18_lottery_app/features/lotteries_treatise/domain/repository/lottery_treatise_repository.dart';
 import 'package:galaxy_18_lottery_app/features/splash/presentation/providers/state/splash_notifier.dart';
 import 'package:galaxy_18_lottery_app/features/splash/presentation/providers/state/splash_state.dart';
 import 'package:galaxy_18_lottery_app/infrastructure/notification/firebase_notification.dart';
 import 'package:galaxy_18_lottery_app/infrastructure/notification/providers/firebase_notification_provider.dart';
+import 'package:galaxy_18_lottery_app/services/current_draw_lottery_cache_service/domain/providers/current_draw_lottery_cache_provider.dart';
+import 'package:galaxy_18_lottery_app/services/current_draw_lottery_cache_service/domain/repository/current_draw_lottery_cache_repository.dart';
 import 'package:galaxy_18_lottery_app/services/lotteries_treatise_cache_service/domain/providers/lotteries_treatise_cache_provider.dart';
 import 'package:galaxy_18_lottery_app/services/lotteries_treatise_cache_service/domain/repository/lotteries_treatise_cache_repository.dart';
 import 'package:galaxy_18_lottery_app/services/user_cache_service/domain/providers/user_cache_provider.dart';
@@ -26,6 +30,10 @@ final splashStateNotifierProvider =
       ref.watch(lotteriesTreatiseCacheRepositoryProvider);
   final LotteriesTreatiseRepository lotteriesTreatiseRepository =
       ref.watch(lotteriesTreatiseRepositoryProvider);
+  final CurrentDrawLotteryRepository currentDrawLotteryRepository =
+      ref.watch(currentDrawLotteryRepositoryProvider);
+  final CurrentDrawLotteryCacheRepository currentDrawLotteryCacheRepository =
+      ref.watch(currentDrawLotteryCacheRepoProvider);
   return SplashNotifier(
     firebaseService: firebaseNotification,
     userRepository: userRepository,
@@ -33,5 +41,7 @@ final splashStateNotifierProvider =
     networkService: networkService,
     lotteriesTreatiseRepository: lotteriesTreatiseRepository,
     lotteriesTreatiseCacheRepository: lotteriesTreatiseCacheRepository,
+    currentDrawLotteryRepository: currentDrawLotteryRepository,
+    currentDrawLotteryCacheRepository: currentDrawLotteryCacheRepository,
   );
 });

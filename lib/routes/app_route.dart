@@ -26,5 +26,6 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: LoginWithOTP.page),
     AutoRoute(page: BuyLotteriesRoute.page),
     AutoRoute(page: ModernDigitsRoute.page),
+    AutoRoute(page: AnimalDigitsRoute.page),
   ];
 }

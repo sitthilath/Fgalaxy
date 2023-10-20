@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/screens/animal_digits_screen.dart';
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/screens/modern_digits_screen.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/theme/provider/theme_provider.dart';
@@ -57,7 +58,7 @@ class BuyLotteriesScreen extends ConsumerWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       const ModernDigitsScreen(),
-                      Container(),
+                      const AnimalDigitsScreen(),
                       Container(),
                     ],
                   ),

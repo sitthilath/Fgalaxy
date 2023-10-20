@@ -31,6 +31,7 @@ class AppConstants {
   static String shuffle = '$iconPath/shuffle.svg';
   static String lotteriesTreatise = '$iconPath/lotteries_treatise.svg';
   static String add = '$iconPath/add.svg';
+  static String question = '$iconPath/question.svg';
 
 
 //  ============= for gifs ==========

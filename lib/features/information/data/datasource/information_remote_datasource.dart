@@ -32,5 +32,4 @@ class InformationRemoteDatasource implements InformationDatasource{
       return Left(AppException(message: 'ເກີດຂໍ້ຜິດພາດທີ່ບໍ່ຮູ້ຈັກ', statusCode: 1, identifier: '${e.toString()}\nInformationRemoteDatasource.fetchInformation'));
     }
   }
-
 }

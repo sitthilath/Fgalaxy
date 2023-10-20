@@ -13,4 +13,6 @@ class UrlConstants {
   static const String VERIFY_LOGIN_OTP ='/auth/customers/verify-login-otp';
   static const String LOGOUT = '/auth/customers/logout';
   static const String LOTTERIES_TREATISE = '/customer/lotteries-treatise';
+  static const String CURRENT_DRAW_LOTTERY ='/lottery-draw/current-lottery';
+  static const String LAST_LOTTERY_RESULT ='/lottery-draw/latest-lottery-result';
 }

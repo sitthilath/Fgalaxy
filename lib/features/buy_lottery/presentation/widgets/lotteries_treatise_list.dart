@@ -11,7 +11,8 @@ import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/loadings/circle_loading.dart';
 
 class LotteriesTreatiseList extends ConsumerStatefulWidget {
-  const LotteriesTreatiseList({Key? key}) : super(key: key);
+   const LotteriesTreatiseList({Key? key}) : super(key: key);
+
 
   @override
   ConsumerState<LotteriesTreatiseList> createState() =>
