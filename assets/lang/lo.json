@@ -64,8 +64,8 @@
   "lottery_betting": "ແທງຫວຍ",
   "lottery_statistic": "ສະຖິຕິຫວຍ",
   "dream_treatise": "ຕຳລາຝັນ",
-  "chance_date": "ງວດວັນທີ",
-  "close_lottery_chance": "ປິດການຂາຍໃນອີກ",
+  "draw_lottery_date": "ງວດວັນທີ",
+  "close_lottery_draw": "ປິດການຂາຍໃນອີກ",
   "day": "ວັນ",
   "hour": "ຊົ່ວໂມງ",
   "minute": "ນາທີ",
@@ -91,5 +91,6 @@
   "treatise_title": "ຕຳລາ",
   "add_front_digits": "ເພີ່ມຫຼັກ",
   "full_digits": "ເຕັມນາມ",
-  "add": "ເພີ່ມ"
+  "add": "ເພີ່ມ",
+  "draw_lotto_is_closed": "ຍັງບໍ່ທັນເປີດງວດໃໝ່"
 }

@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/providers/lotteries_treatise_provider.dart';
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/buy_lottery_text_field.dart';
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/confirm_button.dart';
+import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/current_draw_lottery_card.dart';
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/lotteries_treatise_list.dart';
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/lottery_menus.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
@@ -46,14 +47,18 @@ class _ModernDigitsScreenState extends ConsumerState<ModernDigitsScreen> {
   final TextEditingController _digitsController = TextEditingController();
   bool isLotteriesTreatiseActive = false;
   bool showOtherPrice = false;
+  bool hasTimerStopped = false;
 
   @override
   Widget build(BuildContext context) {
-   final state = ref.watch(lotteriesTreatiseNotifierProvider);
+    final state = ref.watch(lotteriesTreatiseNotifierProvider);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: ListView(
-        children: [],
+        padding: const EdgeInsets.symmetric(horizontal: 17),
+        children: const [
+          CurrentDrawLotteryCard(),
+        ],
       ),
       bottomSheet: DraggableScrollableSheet(
         initialChildSize: initialExtent,
@@ -234,8 +239,10 @@ class _ModernDigitsScreenState extends ConsumerState<ModernDigitsScreen> {
 
   _searchLotto(String value) {
     if (value.length >= 2) {
-      ref.read(lotteriesTreatiseNotifierProvider.notifier).searchLotteryTreatise(value);
-         _setMaxExtent(true);
+      ref
+          .read(lotteriesTreatiseNotifierProvider.notifier)
+          .searchLotteryTreatise(value);
+      _setMaxExtent(true);
     } else {
       ref.read(lotteriesTreatiseNotifierProvider.notifier).resetState();
       ref
@@ -247,8 +254,7 @@ class _ModernDigitsScreenState extends ConsumerState<ModernDigitsScreen> {
   _setMaxExtent(bool isExtent) {
     setState(() {
       isLotteriesTreatiseActive = isExtent;
-      initialExtent =
-      isLotteriesTreatiseActive ? maxExtent : minExtent;
+      initialExtent = isLotteriesTreatiseActive ? maxExtent : minExtent;
     });
   }
 }
