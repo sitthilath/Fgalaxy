@@ -4,6 +4,7 @@ import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/
 import 'package:galaxy_18_lottery_app/features/current_draw_tottery/presentation/providers/current_draw_lottery_provider.dart';
 import 'package:galaxy_18_lottery_app/features/current_draw_tottery/presentation/providers/state/current_draw_lottery_state.dart';
 import 'package:galaxy_18_lottery_app/features/current_draw_tottery/presentation/widgets/current_draw_lottery_countdown.dart';
+import 'package:galaxy_18_lottery_app/features/last_lottery_result/presentation/widget/last_lottery_result.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/formaters/date_formatter.dart';
@@ -41,7 +42,13 @@ class CurrentDrawLotteryCard extends ConsumerWidget {
       return circlePrimaryLoading();
     } else if (state.state != CurrentDrawLotteryConcreteState.expired &&
         state.state != CurrentDrawLotteryConcreteState.close) {
-      return _body(state, context);
+      return Column(
+        children: [
+          _body(state, context),
+          heightBox(11),
+          const LastLotteryResult(),
+        ],
+      );
     } else {
       return Text(
         Txt.t(context, 'draw_lotto_is_closed'),
