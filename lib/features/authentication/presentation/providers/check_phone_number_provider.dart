@@ -30,3 +30,16 @@ final checkPasswordProvider = Provider<String?>((ref){
   }
   return null;
 });
+
+final checkPasswordWhenUserRegisterProvider = Provider<String?>((ref){
+  final String? password = ref.watch(checkPasswordIsEmptyProvider);
+  if(password != null){
+    if(password.isEmpty){
+      return "password_can_not_be_empty";
+    }else if(!passwordRegex.hasMatch(password)){
+      return "password_must_be_pass_regex";
+    }
+      return null;
+  }
+  return null;
+});
