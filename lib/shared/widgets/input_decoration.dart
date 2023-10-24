@@ -14,7 +14,7 @@ phoneDecoration({required String hint, String? prefix, String? errorText}) {
     hintStyle: styleOption(
         color: AppColor.hintColor, fontWeight: FontWeight.w500, size: 14),
     prefixIcon: SizedBox(
-      width: 90,
+      width: 76,
       height: 50,
       child: Padding(
         padding: const EdgeInsets.only(left: 8.0),
