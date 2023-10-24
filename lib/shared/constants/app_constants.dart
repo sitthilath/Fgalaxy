@@ -32,6 +32,7 @@ class AppConstants {
   static String lotteriesTreatise = '$iconPath/lotteries_treatise.svg';
   static String add = '$iconPath/add.svg';
   static String question = '$iconPath/question.svg';
+  static String closeOutline ='$iconPath/close_outline.svg';
 
 
 //  ============= for gifs ==========

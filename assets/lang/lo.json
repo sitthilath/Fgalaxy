@@ -52,6 +52,7 @@
   "select_all": "ເລືອກທັງໝົດ",
   "buy_lottery_risk": "ຊື້ເລກສ່ຽງ",
   "history": "ປະຫວັດ",
+  "ok": "ຕົກລົງ",
   "news": "========================== ຂ່າວສານ ===============",
   "news_page_title": "ຂ່າວສານ",
   "news_detail_page_title": "ລາຍລະອຽດ",
@@ -83,7 +84,7 @@
   "modern_digits": "ຫວຍທັນສະໄໝ",
   "animal_digits": "ຫວຍນາມສັດ",
   "bet_lottery": "ແທງຫວຍ",
-  "random_digits": "ສຸມເລກ",
+  "random_digits": "ສຸ່ມເລກ",
   "animal_digits_button": "ນາມສັດ",
   "input_amount": "ປ້ອນຈຳນວນເງິນ",
   "input_digits": "ປ້ອນເລກ",
@@ -93,5 +94,15 @@
   "full_digits": "ເຕັມນາມ",
   "add": "ເພີ່ມ",
   "draw_lotto_is_closed": "ຍັງບໍ່ທັນເປີດງວດໃໝ່",
-  "last_lottery_result": "ຜົນຫວຍລ່າສຸດ"
+  "last_lottery_result": "ຜົນຫວຍລ່າສຸດ",
+  "choose_2d_6d": "ເລືອກຫຼັກເລກ ( 2-6 ໂຕ )",
+  "set_digits_for_random": "ກຳນົດເລກ ( ໃສ່ ຫຼື ບໍ່ໃສ່ກໍໄດ້ )",
+  "set_amount_lotto_random": "ຈຳນວນປ່ອງ",
+  "amount__random_items": "ປ່ອງ",
+  "price_random_item": "ຈຳນວນເງິນ",
+  "kip": "ກີບ",
+  "random_modern_lottery_invalid": "ຈຳນວນເລກທີ່ຕ້ອງການສຸ່ມຕ້ອງບໍ່ເກີນ",
+  "numbers": "ເລກ",
+  "the_number": "ສຳລັບເລກ",
+  "length": "ຫຼັກ"
 }

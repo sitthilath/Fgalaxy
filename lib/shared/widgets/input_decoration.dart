@@ -129,6 +129,50 @@ buyLotteryDecoration({required String hint}) {
   );
 }
 
+setDigitDecoration({required String hint}) {
+  return InputDecoration(
+    hintText: hint,
+    hintStyle: styleOption(
+        color: AppColor.whiteColor, fontWeight: FontWeight.w500, size: 18),
+    contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+    border: const OutlineInputBorder(),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColor.whiteColor, width: 1),
+      borderRadius: BorderRadius.circular(10),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColor.whiteColor, width: 1),
+      borderRadius: BorderRadius.circular(10),
+    ),
+  );
+}
+
+setAmountDecoration({required String hint, required String suffix}) {
+  return InputDecoration(
+    hintText: hint,
+    hintStyle: styleOption(
+        color: AppColor.hintColor, fontWeight: FontWeight.w500, size: 18),
+    suffixIcon: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Text(
+        suffix,
+        style: styleBlack(size: 14, weight: FontWeight.w400),
+        textAlign: TextAlign.center,
+      ),
+    ),
+    contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+    border: const OutlineInputBorder(),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColor.blackColor, width: 1),
+      borderRadius: BorderRadius.circular(10),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColor.blackColor, width: 1),
+      borderRadius: BorderRadius.circular(10),
+    ),
+  );
+}
+
 otpDecoration(BuildContext context,
     {required String hint,
     String? errorText,

@@ -8,6 +8,8 @@ import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/current_draw_lottery_card.dart';
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/lotteries_treatise_list.dart';
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/lottery_menus.dart';
+import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/ramdom_lottery.dart';
+import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/widgets/ramdom_popup.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
@@ -122,6 +124,9 @@ class _ModernDigitsScreenState extends ConsumerState<ModernDigitsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     InkWell(
+                      onTap: (){
+                        randomPopup(context, const RandomLottery());
+                      },
                       child: LotteryMenus(
                         title: 'random_digits',
                         icon: AppConstants.shuffle,
