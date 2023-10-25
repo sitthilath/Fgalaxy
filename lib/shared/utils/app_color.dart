@@ -23,6 +23,7 @@ class AppColor {
   static Color transactionColor = HexColor('#47A4EA');
   static Color randomDigitsButtonColor = HexColor('#4F4F4F');
   static Color addDigitButtonColor = HexColor('#289800');
+  static Color primarySubTitle = HexColor('#b2bec3');
 
   MaterialColor generateMaterialColor(Color color) {
     return MaterialColor(color.value, {

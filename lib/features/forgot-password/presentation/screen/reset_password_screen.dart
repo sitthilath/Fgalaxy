@@ -3,9 +3,15 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/provider/forgot_password_notifier_provider.dart';
+import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/provider/reset_password_state_notifier.dart';
+import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/provider/state/forgot_password_state.dart';
+import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/provider/time_remaining.dart';
+import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/provider/validate_provider.dart';
 import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/widgets/otp_field.dart';
 import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/widgets/password_field.dart';
+import 'package:galaxy_18_lottery_app/infrastructure/messages/providers/flutter_toast_message_provider.dart';
+import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
+import 'package:galaxy_18_lottery_app/services/loader_service/providers/loader_provider.dart';
 import 'package:galaxy_18_lottery_app/shared/constants/regex.dart';
 import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
@@ -14,7 +20,6 @@ import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/appbars/shared_appbar.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/label_widget.dart';
-import 'package:galaxy_18_lottery_app/shared/widgets/theme_widget.dart';
 
 @RoutePage()
 class ResetPasswordScreen extends ConsumerStatefulWidget {
@@ -30,12 +35,8 @@ class ResetPasswordScreen extends ConsumerStatefulWidget {
 
 class ResetPasswordState extends ConsumerState<ResetPasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
-  // final TextEditingController _confirmPasswordCtr = TextEditingController();
+  final TextEditingController _confirmPasswordCtr = TextEditingController();
   final TextEditingController _otpCtr = TextEditingController();
-  String? passwordIsEmpty;
-  String? passwordMatch;
-  String? otpIsEmpty;
-  int _secondsRemaining = TIMER_OF_OTP;
   late Timer _timer;
 
   @override
@@ -52,17 +53,21 @@ class ResetPasswordState extends ConsumerState<ResetPasswordScreen> {
 
   void _otpCounter() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_secondsRemaining > 0) {
-        setState(() {
-          _secondsRemaining--;
-        });
+      if (ref.watch(timeRemainingProvider) > 0) {
+        ref.read(timeRemainingProvider.notifier).update((state) => state - 1);
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-   ref.watch(forgotPasswordStateNotifierProvider);
+    ref.watch(resetPasswordStateNotifierProvider);
+    final String? passwordIsEmpty = ref.watch(checkPasswordProvider);
+    final String? cfPasswordIsEmpty = ref.watch(checkCfPasswordProvider);
+    final String? otpIsEmpty = ref.watch(checkOtpProvider);
+    final int timeRemaining = ref.watch(timeRemainingProvider);
+    ref.read(loaderProvider).context = context;
+    _listenState(ref);
     return Scaffold(
       appBar: SharedAppbar(
           title: Txt.t(context, 'change_password_title'),
@@ -79,21 +84,29 @@ class ResetPasswordState extends ConsumerState<ResetPasswordScreen> {
             heightBox(10),
             PasswordField(
               controller: _passwordController,
-              onChange: _checkPassword,
-              errorMsg: passwordIsEmpty,
+              onChange: (value) {
+                ref.read(passwordProvider.notifier).state = value;
+              },
+              errorMsg: passwordIsEmpty != null
+                  ? Txt.t(context, passwordIsEmpty)
+                  : null,
             ),
-            // heightBox(15),
-            // labelText(
-            //   color: AppColor.blackColor,
-            //   text: Txt.t(context, "confirm_password"),
-            //   fontWeight: FontWeight.w400,
-            // ),
-            // heightBox(10),
-            // PasswordField(
-            //   controller: _confirmPasswordCtr,
-            //   onChange: _checkCfPassword,
-            //   errorMsg: passwordMatch,
-            // ),
+            heightBox(15),
+            labelText(
+              color: AppColor.blackColor,
+              text: Txt.t(context, "confirm_password"),
+              fontWeight: FontWeight.w400,
+            ),
+            heightBox(10),
+            PasswordField(
+              controller: _confirmPasswordCtr,
+              onChange: (value) {
+                ref.read(cfPasswordProvider.notifier).state = value;
+              },
+              errorMsg: cfPasswordIsEmpty != null
+                  ? Txt.t(context, cfPasswordIsEmpty)
+                  : null,
+            ),
             heightBox(15),
             labelText(
               color: AppColor.blackColor,
@@ -103,76 +116,40 @@ class ResetPasswordState extends ConsumerState<ResetPasswordScreen> {
             heightBox(10),
             OTPField(
               controller: _otpCtr,
-              onChange: _checkOtp,
-              errorMsg: otpIsEmpty,
-              timer: _secondsRemaining,
-              sendAgain: _sendOtpAgain,
+              onChange: (value) {
+                ref.read(otpProvider.notifier).state = value;
+              },
+              errorMsg: otpIsEmpty != null ? Txt.t(context, otpIsEmpty) : null,
             ),
+            heightBox(10),
+            timeRemaining == 0
+                ? _resendOTP(timeRemaining)
+                : _waitOTP(timeRemaining),
           ],
         ),
       ),
     );
   }
 
-  _checkPassword(String password) {
-    if (password.isEmpty) {
-      setState(() {
-        passwordIsEmpty = Txt.t(context, 'password_can_not_be_empty');
-      });
-    } else if (!passwordRegex.hasMatch(password)) {
-      setState(() {
-        passwordIsEmpty = Txt.t(context, 'password_must_be_pass_regex');
-      });
-    } else {
-      setState(() {
-        passwordIsEmpty = null;
-      });
-    }
-  }
-
-  _checkCfPassword(String cfPassword) {
-    if (cfPassword != _passwordController.text) {
-      setState(() {
-        passwordMatch = Txt.t(context, 'password_not_match');
-      });
-    } else {
-      setState(() {
-        passwordMatch = null;
-      });
-    }
-  }
-
-  _checkOtp(String otp) {
-    if (otp.isEmpty) {
-      setState(() {
-        otpIsEmpty = Txt.t(context, 'otp_can_not_empty');
-      });
-    } else if (otp.length < 6) {
-      setState(() {
-        otpIsEmpty = Txt.t(context, 'otp_should_be_6');
-      });
-    } else {
-      setState(() {
-        otpIsEmpty = null;
-      });
-    }
-  }
-
   _verifyButton() {
     return InkWell(
       onTap: () async {
         focusDisable(context);
-        _checkPassword(_passwordController.text);
-        // _checkCfPassword(_confirmPasswordCtr.text);
+        ref.read(passwordProvider.notifier).state = _passwordController.text;
+        ref.read(cfPasswordProvider.notifier).state = _confirmPasswordCtr.text;
+        ref.read(otpProvider.notifier).state = _otpCtr.text;
         if (_passwordController.text.isNotEmpty &&
             passwordRegex.hasMatch(_passwordController.text) &&
             _otpCtr.text.isNotEmpty &&
             _otpCtr.text.length == 6) {
           _timer.cancel();
           await ref
-              .read(forgotPasswordStateNotifierProvider.notifier)
+              .read(resetPasswordStateNotifierProvider.notifier)
               .resetPassword(
-                  widget.phoneNumber, _otpCtr.text, _passwordController.text);
+                widget.phoneNumber,
+                _otpCtr.text,
+                _passwordController.text,
+              );
         }
       },
       child: Container(
@@ -190,12 +167,90 @@ class ResetPasswordState extends ConsumerState<ResetPasswordScreen> {
     );
   }
 
-  _sendOtpAgain() {
-    if (_secondsRemaining == 0) {
-      ref.read(forgotPasswordStateNotifierProvider.notifier).forgotPassword(widget.phoneNumber);
+  _sendOtpAgain(int timeRemaining) {
+    if (timeRemaining == 0) {
+      ref
+          .read(resetPasswordStateNotifierProvider.notifier)
+          .resendOTP(widget.phoneNumber);
+      ref.read(timeRemainingProvider.notifier).state = TIMER_OF_OTP;
     }
-    setState(() {
-      _secondsRemaining = TIMER_OF_OTP;
-    });
+  }
+
+  _waitOTP(int timeRemaining) {
+    return Flex(
+      direction: Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        heightBox(10),
+        Text(
+          Txt.t(context, 'otp_can_send_again_at'),
+          style: styleOption(
+            color: AppColor.blackColor,
+            size: 14,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        widthBox(3),
+        Text(
+          '$timeRemaining ${Txt.t(context, 'second')}',
+          style: styleOption(
+            color: AppColor.blackColor,
+            size: 14,
+            fontWeight: FontWeight.w400,
+          ),
+        )
+      ],
+    );
+  }
+
+  _resendOTP(int timeRemaining) {
+    return Flex(
+      direction: Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Text(
+          Txt.t(context, 'still_haven_received_the_code'),
+          style: styleOption(
+            color: AppColor.blackColor,
+            size: 14,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        widthBox(3),
+        InkWell(
+            onTap: () {
+              _sendOtpAgain(timeRemaining);
+            },
+            child: Text(
+              Txt.t(context, 'send_again'),
+              style: stylePrimary(
+                size: 14,
+                weight: FontWeight.w400,
+              ),
+            ))
+      ],
+    );
+  }
+
+  void _listenState(WidgetRef ref) {
+    ref.listen(resetPasswordStateNotifierProvider.select((value) => value),
+        (previous, next) {
+         if(next is Loading){
+           ref.read(loaderProvider).showLoader(Txt.t(context, 'waiting_msg'));
+         }else if(next is Success){
+           ref.read(loaderProvider).closeLoader();
+           ref.read(toastMessageProvider).messageSuccess(
+               message: Txt.t(context, 'change_password_success_msg'));
+           AutoRouter.of(context)
+               .pushAndPopUntil(const LoginRoute(), predicate: (_) => false);
+         }else if(next is Failure){
+           ref.read(loaderProvider).closeLoader();
+           ref
+               .read(toastMessageProvider)
+               .messageError(message: next.exception.message.toString());
+         }else{
+           ref.read(loaderProvider).closeLoader();
+         }
+        });
   }
 }

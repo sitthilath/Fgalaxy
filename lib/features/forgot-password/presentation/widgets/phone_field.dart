@@ -15,11 +15,11 @@ class PhoneField extends StatelessWidget {
       key: key,
       controller: controller,
       onChanged: onChange,
-      decoration: phoneDecoration(hint: 'xxxxxxxx', prefix: LA_PREFIX, errorText: errorMsg),
+      decoration: phoneDecoration(hint: '20xxxxxxxx', prefix: LA_PREFIX, errorText: errorMsg),
       style: styleBlack(size: 14, weight: FontWeight.w400),
       keyboardType: TextInputType.number,
       inputFormatters: [
-        LengthLimitingTextInputFormatter(8),
+        LengthLimitingTextInputFormatter(10),
         FilteringTextInputFormatter.digitsOnly,
       ],
     );
