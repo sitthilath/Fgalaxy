@@ -92,7 +92,7 @@ class NavigatorState extends ConsumerState<NavigatorScreen> {
               ],
             ),
           ),
-          widthBox(130),
+          Expanded(child: heightBox(0)),
           Expanded(
             child: Flex(
               direction: Axis.horizontal,
