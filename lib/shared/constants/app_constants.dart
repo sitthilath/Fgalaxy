@@ -33,6 +33,7 @@ class AppConstants {
   static String add = '$iconPath/add.svg';
   static String question = '$iconPath/question.svg';
   static String closeOutline ='$iconPath/close_outline.svg';
+  static String clock ='$iconPath/clock.svg';
 
 
 //  ============= for gifs ==========

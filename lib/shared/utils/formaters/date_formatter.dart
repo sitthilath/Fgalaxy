@@ -9,3 +9,7 @@ dFormat(var val){
   String date = DateFormat("dd-MM-yyyy").format(val);
   return date;
 }
+dFullFormat(var val){
+  String date = DateFormat.yMd().add_Hm().format(val);
+  return date;
+}

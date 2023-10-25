@@ -3,12 +3,15 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:galaxy_18_lottery_app/features/information/presentation/providers/information_notifier_provider.dart';
 import 'package:galaxy_18_lottery_app/features/information/presentation/providers/state/information_state.dart';
 import 'package:galaxy_18_lottery_app/infrastructure/messages/providers/flutter_toast_message_provider.dart';
 import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
+import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
+import 'package:galaxy_18_lottery_app/shared/utils/formaters/date_formatter.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/appbars/simple_appbar.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
@@ -57,10 +60,13 @@ class InformationState extends ConsumerState<InformationScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(informationNotifierProvider);
     ref.read(toastMessageProvider).initialMessage(context);
-    ref.listen(informationNotifierProvider.select((value) => value), (previous, next) {
-      if(next.state == InformationConcreteState.fetchedAll){
-        if(next.message.isNotEmpty){
-          ref.read(toastMessageProvider).messageInfo(message: Txt.t(context, next.message));
+    ref.listen(informationNotifierProvider.select((value) => value),
+        (previous, next) {
+      if (next.state == InformationConcreteState.fetchedAll) {
+        if (next.message.isNotEmpty) {
+          ref
+              .read(toastMessageProvider)
+              .messageInfo(message: Txt.t(context, next.message));
         }
       }
     });
@@ -78,9 +84,13 @@ class InformationState extends ConsumerState<InformationScreen> {
                         backgroundColor: AppColor.primaryColor,
                         displacement: 80,
                         strokeWidth: 2.2,
-                        onRefresh: (){
-                          ref.read(informationNotifierProvider.notifier).resetState();
-                         return ref.read(informationNotifierProvider.notifier).fetchAllInformation();
+                        onRefresh: () {
+                          ref
+                              .read(informationNotifierProvider.notifier)
+                              .resetState();
+                          return ref
+                              .read(informationNotifierProvider.notifier)
+                              .fetchAllInformation();
                         },
                         child: ListView.builder(
                           controller: _controller,
@@ -90,8 +100,10 @@ class InformationState extends ConsumerState<InformationScreen> {
                           itemBuilder: (BuildContext context, int index) {
                             final information = state.informationList[index];
                             return InkWell(
-                              onTap: (){
-                                AutoRouter.of(context).push(InformationDetailRoute(information: information));
+                              onTap: () {
+                                AutoRouter.of(context).push(
+                                    InformationDetailRoute(
+                                        information: information));
                               },
                               child: Container(
                                 margin: const EdgeInsets.only(bottom: 15.0),
@@ -104,13 +116,15 @@ class InformationState extends ConsumerState<InformationScreen> {
                                       color: AppColor.whiteColor,
                                     ),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
                                           width: double.infinity,
                                           height: 200,
                                           child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(10),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                             child: AspectRatio(
                                               aspectRatio: 16 / 9,
                                               child: cacheImageNetwork(
@@ -121,11 +135,13 @@ class InformationState extends ConsumerState<InformationScreen> {
                                         ),
                                         heightBox(6),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 6),
+                                          padding:
+                                              const EdgeInsets.only(left: 6),
                                           child: Text(
                                             information.name,
                                             style: styleBlack(
-                                                size: 16, weight: FontWeight.w700),
+                                                size: 18,
+                                                weight: FontWeight.w600),
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 2,
                                           ),
@@ -143,6 +159,32 @@ class InformationState extends ConsumerState<InformationScreen> {
                                         //     maxLines: 2,
                                         //   ),
                                         // ),
+                                        heightBox(3),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 6),
+                                          child: Flex(
+                                            direction: Axis.horizontal,
+                                            children: [
+                                              SvgPicture.asset(
+                                                AppConstants.clock,
+                                                width: 18,
+                                                height: 18,
+                                                color: AppColor.primarySubTitle,
+                                              ),
+                                              widthBox(4),
+                                              Text(
+                                                '${dFullFormat(DateTime.now())}',
+                                                style: styleOption(
+                                                  color:
+                                                      AppColor.primarySubTitle,
+                                                  size: 14,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -164,7 +206,8 @@ class InformationState extends ConsumerState<InformationScreen> {
                               height: 30,
                               child: CircularProgressIndicator(
                                 strokeWidth: 4,
-                                valueColor: AlwaysStoppedAnimation<Color>(AppColor.primaryColor),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppColor.primaryColor),
                               ),
                             ),
                           ),
