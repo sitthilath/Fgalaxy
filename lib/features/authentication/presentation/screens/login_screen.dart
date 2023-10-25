@@ -41,167 +41,170 @@ class LoginState extends ConsumerState<LoginScreen> {
     ref.read(toastMessageProvider).initialMessage(context);
     _listenAuthState(ref);
     double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: ThemeApp(
-        child: Stack(
+        child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: screenHeight * 0.3,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppConstants.authBGImagePath),
-                    fit: BoxFit.cover),
-              ),
-              child: Image.asset(
-                AppConstants.appLogo,
-                fit: BoxFit.contain,
+            Expanded(
+              child: Stack(
+                fit: StackFit.loose,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(AppConstants.authBGImagePath),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Image.asset(
+                      AppConstants.appLogo,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    left: 0,
+                    bottom: -50,
+                    child: Container(
+                      width: screenWidth*0.7,
+                      height: screenHeight*0.2,
+                      alignment: Alignment.bottomCenter,
+                      child: SvgPicture.asset(
+                        AppConstants.boxGroupPath,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: screenHeight * 0.2,
-              child: SizedBox(
-                width: double.infinity,
-                height: 150,
-                child: SvgPicture.asset(
-                  AppConstants.boxGroupPath,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              top: screenHeight * 0.3,
+            Expanded(
+              flex: 3,
               child: Container(
                 width: double.infinity,
                 padding:
-                    const EdgeInsets.symmetric(vertical: 0, horizontal: 35),
+                const EdgeInsets.symmetric(vertical: 0, horizontal: 35),
                 decoration: BoxDecoration(
                     color: AppColor.whiteColor,
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15),
                     )),
-                child: IntrinsicHeight(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.only(top: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.only(bottom: 6),
-                          decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                              color: AppColor.borderColor,
-                            )),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(bottom: 6),
+                        decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                color: AppColor.borderColor,
+                              )),
+                        ),
+                        child: Text(
+                          Txt.t(context, "login_button_text"),
+                          style: stylePrimary(
+                            size: 18,
+                            weight: FontWeight.w600,
                           ),
+                        ),
+                      ),
+                      heightBox(10),
+                      labelText(
+                          color: AppColor.blackColor,
+                          text: Txt.t(context, "phone_number"),
+                          size: 14,
+                          fontWeight: FontWeight.w500),
+                      heightBox(10),
+                      phoneField(
+                        controller: phoneController,
+                        onValidate: (value) {
+                          ref
+                              .read(checkPhoneNumberIsEmptyProvider.notifier)
+                              .state = value;
+                        },
+                        errorMsg: phoneIsEmpty != null
+                            ? Txt.t(context, phoneIsEmpty)
+                            : null,
+                      ),
+                      heightBox(10),
+                      labelText(
+                          color: AppColor.blackColor,
+                          text: Txt.t(context, "password_text"),
+                          size: 14,
+                          fontWeight: FontWeight.w500),
+                      heightBox(10),
+                      passwordField(
+                        controller: passwordController,
+                        onValidate: (value) {
+                          ref
+                              .read(checkPasswordIsEmptyProvider.notifier)
+                              .state = value;
+                        },
+                        errorMsg: passwordIsEmpty != null
+                            ? Txt.t(context, passwordIsEmpty)
+                            : null,
+                      ),
+                      heightBox(8.0),
+                      InkWell(
+                        onTap: () => AutoRouter.of(context)
+                            .push(const ForgotPasswordRoute()),
+                        child: Container(
+                          alignment: Alignment.centerRight,
                           child: Text(
-                            Txt.t(context, "login_button_text"),
+                            Txt.t(context, "forgot_password_text"),
                             style: stylePrimary(
-                              size: 18,
-                              weight: FontWeight.w600,
-                            ),
+                                size: 14, weight: FontWeight.w400),
+                            textAlign: TextAlign.right,
                           ),
                         ),
-                        heightBox(10),
-                        labelText(
+                      ),
+                      heightBox(10),
+                      loginButton(onTab: _onLoginUser),
+                      Center(
+                        child: labelText(
                             color: AppColor.blackColor,
-                            text: Txt.t(context, "phone_number"),
-                            size: 14,
+                            text: Txt.t(context, "or"),
+                            size: 16,
                             fontWeight: FontWeight.w500),
-                        heightBox(10),
-                        phoneField(
-                          controller: phoneController,
-                          onValidate: (value) {
-                            ref
-                                .read(checkPhoneNumberIsEmptyProvider.notifier)
-                                .state = value;
-                          },
-                          errorMsg: phoneIsEmpty != null
-                              ? Txt.t(context, phoneIsEmpty)
-                              : null,
-                        ),
-                        heightBox(10),
-                        labelText(
-                            color: AppColor.blackColor,
-                            text: Txt.t(context, "password_text"),
-                            size: 14,
-                            fontWeight: FontWeight.w500),
-                        heightBox(10),
-                        passwordField(
-                          controller: passwordController,
-                          onValidate: (value) {
-                            ref
-                                .read(checkPasswordIsEmptyProvider.notifier)
-                                .state = value;
-                          },
-                          errorMsg: passwordIsEmpty != null
-                              ? Txt.t(context, passwordIsEmpty)
-                              : null,
-                        ),
-                        heightBox(8.0),
-                        InkWell(
-                          onTap: () => AutoRouter.of(context)
-                              .push(const ForgotPasswordRoute()),
-                          child: Container(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              Txt.t(context, "forgot_password_text"),
-                              style: stylePrimary(
-                                  size: 14, weight: FontWeight.w400),
-                              textAlign: TextAlign.right,
+                      ),
+                      loginWithOTP(_loginWithOTP,
+                          fontColor: AppColor.primaryColor),
+                      heightBox(10),
+                      loginWithBCELOne(),
+                      heightBox(10),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Flex(
+                          direction: Axis.horizontal,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              Txt.t(context, 'not_have_account'),
+                              style: styleBlack(
+                                  size: 14, weight: FontWeight.w600),
                             ),
-                          ),
-                        ),
-                        heightBox(10),
-                        loginButton(onTab: _onLoginUser),
-                        Center(
-                          child: labelText(
-                              color: AppColor.blackColor,
-                              text: Txt.t(context, "or"),
-                              size: 16,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        loginWithOTP(_loginWithOTP,
-                            fontColor: AppColor.primaryColor),
-                        heightBox(10),
-                        loginWithBCELOne(),
-                        heightBox(10),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Flex(
-                            direction: Axis.horizontal,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                Txt.t(context, 'not_have_account'),
-                                style: styleBlack(
-                                    size: 14, weight: FontWeight.w600),
+                            widthBox(8),
+                            InkWell(
+                              onTap: () {
+                                context.router.push(const RegisterRoute());
+                              },
+                              child: Text(
+                                Txt.t(context, "register"),
+                                style: stylePrimary(
+                                    size: 14, weight: FontWeight.w700),
                               ),
-                              widthBox(8),
-                              InkWell(
-                                onTap: () {
-                                  context.router.push(const RegisterRoute());
-                                },
-                                child: Text(
-                                  Txt.t(context, "register"),
-                                  style: stylePrimary(
-                                      size: 14, weight: FontWeight.w700),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

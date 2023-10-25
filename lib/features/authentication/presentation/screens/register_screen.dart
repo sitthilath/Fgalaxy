@@ -42,46 +42,51 @@ class RegisterState extends ConsumerState<RegisterScreen> {
     ref.read(toastMessageProvider).initialMessage(context);
     _listenAuthState(ref);
     double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: ThemeApp(
-        child: Stack(
+        child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: screenHeight * 0.3,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppConstants.authBGImagePath),
-                    fit: BoxFit.cover),
-              ),
-              child: Image.asset(
-                AppConstants.appLogo,
-                fit: BoxFit.contain,
+            Expanded(
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: screenHeight * 0.3,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(AppConstants.authBGImagePath),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Image.asset(
+                      AppConstants.appLogo,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    left: 0,
+                    bottom: -50,
+                    child: Container(
+                      width: screenWidth*0.7,
+                      height: screenHeight*0.2,
+                      alignment: Alignment.bottomCenter,
+                      child: SvgPicture.asset(
+                        AppConstants.boxGroupPath,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: screenHeight * 0.2,
-              child: SizedBox(
-                width: double.infinity,
-                height: 150,
-                child: SvgPicture.asset(
-                  AppConstants.boxGroupPath,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              top: screenHeight * 0.3,
+            Expanded(
+              flex: 3,
               child: Container(
                 width: double.infinity,
                 padding:
-                    const EdgeInsets.symmetric(vertical: 0, horizontal: 35),
+                const EdgeInsets.symmetric(vertical: 0, horizontal: 35),
                 decoration: BoxDecoration(
                     color: AppColor.whiteColor,
                     borderRadius: const BorderRadius.only(
@@ -101,8 +106,8 @@ class RegisterState extends ConsumerState<RegisterScreen> {
                           decoration: BoxDecoration(
                             border: Border(
                                 bottom: BorderSide(
-                              color: AppColor.borderColor,
-                            )),
+                                  color: AppColor.borderColor,
+                                )),
                           ),
                           child: Text(
                             Txt.t(context, "register"),
