@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:galaxy_18_lottery_app/features/banners/presentation/widget/banners_widget.dart';
+import 'package:galaxy_18_lottery_app/features/banners/presentation/screen/banner_screen.dart';
 import 'package:galaxy_18_lottery_app/features/home/presentation/widgets/customer_profile.dart';
 import 'package:galaxy_18_lottery_app/features/home/presentation/widgets/home_appbar.dart';
 import 'package:galaxy_18_lottery_app/features/home/presentation/widgets/menus_widget.dart';
@@ -31,7 +31,7 @@ class HomeScreen extends ConsumerWidget {
               heightBox(15),
               const MenusWidget(),
               heightBox(15),
-              const BannersWidget(),
+              const BannerView(),
             ],
           ),
         ),
