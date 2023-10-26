@@ -10,14 +10,10 @@ class OTPField extends StatelessWidget {
     required this.controller,
     this.errorMsg,
     required this.onChange,
-    required this.timer,
-    required this.sendAgain,
   }) : super(key: key);
   final TextEditingController controller;
   final String? errorMsg;
   final Function(String value) onChange;
-  final int timer;
-  final Function() sendAgain;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +24,7 @@ class OTPField extends StatelessWidget {
       onChanged: onChange,
       decoration: otpDecoration(context,
           hint: Txt.t(context, 'input_otp_code'),
-          errorText: errorMsg,
-          timer: timer,
-          onPressed: sendAgain),
+          errorText: errorMsg,),
       inputFormatters: [
         LengthLimitingTextInputFormatter(6),
         FilteringTextInputFormatter.digitsOnly,

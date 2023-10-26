@@ -109,7 +109,7 @@ class _LotteriesTreatiseListState extends ConsumerState<LotteriesTreatiseList> {
                       children: [
                         Flex(
                           direction: Axis.horizontal,
-                          children: item.digits
+                          children: item.digits.reversed
                               .map(
                                 (digit) => InkWell(
                                   child: Container(

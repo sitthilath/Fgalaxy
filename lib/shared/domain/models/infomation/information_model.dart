@@ -6,6 +6,8 @@ class Information extends Equatable{
  final String imageUrl;
  final String newsLink;
  final String content;
+ final DateTime createdAt;
+ final DateTime updatedAt;
 
   const Information({
     required this.id,
@@ -13,6 +15,8 @@ class Information extends Equatable{
     required this.imageUrl,
     required this.newsLink,
     required this.content,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Information.fromJson(Map<String, dynamic> json) => Information(
@@ -21,6 +25,8 @@ class Information extends Equatable{
     imageUrl: json["image_url"],
     newsLink: json["news_link"],
     content: json["content"],
+    createdAt: DateTime.parse(json['created_at']),
+    updatedAt: DateTime.parse(json['updated_at']),
   );
 
   Map<String, dynamic> toJson() => {
@@ -29,9 +35,11 @@ class Information extends Equatable{
     "image_url": imageUrl,
     "news_link": newsLink,
     "content": content,
+    "created_at": createdAt,
+    "updated_at": updatedAt,
   };
 
   @override
   // TODO: implement props
-  List<Object?> get props => [id, name, imageUrl, newsLink, content];
+  List<Object?> get props => [id, name, imageUrl, newsLink, content, createdAt, updatedAt];
 }

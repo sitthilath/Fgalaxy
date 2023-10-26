@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/auth_providers.dart';
+import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/validate_provider.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/state/auth_state.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/login_button.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/password_field.dart';
@@ -32,82 +33,60 @@ class RegisterState extends ConsumerState<RegisterScreen> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  String? phoneIsEmpty;
-  String? passwordIsEmpty;
-
   @override
   Widget build(BuildContext context) {
+    final String? phoneIsEmpty = ref.watch(checkPhoneNumberProvider);
+    final String? passwordIsEmpty =
+        ref.watch(checkPasswordWhenUserRegisterProvider);
     ref.watch(authStateNotifierProvider);
     ref.read(toastMessageProvider).initialMessage(context);
-    ref.listen(authStateNotifierProvider.select((value) => value),
-        (previous, next) async {
-      if (next.state == AuthConcreteState.singingUp) {
-        _showLoader(context, Txt.t(context, "waiting_msg"));
-      } else if (next.state == AuthConcreteState.signedUp) {
-        _closeLoader(context);
-        AutoRouter.of(context).push(
-          OTPRoute(phoneNumber: phoneController.text),
-        );
-      } else if (next.state == AuthConcreteState.failure) {
-        if (next.statusCode == 409) {
-          ref.read(toastMessageProvider).messageInfo(
-              message:
-                  "${Txt.t(context, "phone_number")} $LA_PREFIX${phoneController.text} ${Txt.t(context, "has_in_system_plz_login")}");
-        } else if (next.statusCode == 422) {
-          ref
-              .read(authStateNotifierProvider.notifier)
-              .sendOTP(phoneController.text);
-          AutoRouter.of(context).push(
-            OTPRoute(phoneNumber: phoneController.text),
-          );
-        } else {
-          ref.read(toastMessageProvider).messageError(
-                message: next.message.toString(),
-              );
-        }
-        _closeLoader(context);
-      }
-    });
+    _listenAuthState(ref);
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: ThemeApp(
-        child: Stack(
+        child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: 280,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppConstants.authBGImagePath),
-                    fit: BoxFit.cover),
-              ),
-              child: Image.asset(
-                AppConstants.appLogo,
-                fit: BoxFit.contain,
+            Expanded(
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: screenHeight * 0.3,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(AppConstants.authBGImagePath),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Image.asset(
+                      AppConstants.appLogo,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    left: 0,
+                    bottom: -50,
+                    child: Container(
+                      width: screenWidth*0.7,
+                      height: screenHeight*0.2,
+                      alignment: Alignment.bottomCenter,
+                      child: SvgPicture.asset(
+                        AppConstants.boxGroupPath,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 180,
-              child: SizedBox(
-                width: double.infinity,
-                height: 150,
-                child: SvgPicture.asset(
-                  AppConstants.boxGroupPath,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              top: 280,
+            Expanded(
+              flex: 3,
               child: Container(
                 width: double.infinity,
                 padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 35),
+                const EdgeInsets.symmetric(vertical: 0, horizontal: 35),
                 decoration: BoxDecoration(
                     color: AppColor.whiteColor,
                     borderRadius: const BorderRadius.only(
@@ -115,88 +94,104 @@ class RegisterState extends ConsumerState<RegisterScreen> {
                       topRight: Radius.circular(15),
                     )),
                 child: IntrinsicHeight(
-                  child: ListView(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.only(bottom: 15),
-                        decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                            color: AppColor.borderColor,
-                          )),
-                        ),
-                        child: Text(
-                          Txt.t(context, "register"),
-                          style: stylePrimary(
-                            size: 18,
-                            weight: FontWeight.w600,
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.only(bottom: 10),
+                          decoration: BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                  color: AppColor.borderColor,
+                                )),
+                          ),
+                          child: Text(
+                            Txt.t(context, "register"),
+                            style: stylePrimary(
+                              size: 18,
+                              weight: FontWeight.w600,
+                            ),
                           ),
                         ),
-                      ),
-                      heightBox(15),
-                      labelText(
-                          color: AppColor.blackColor,
-                          text: Txt.t(context, "phone_number"),
-                          size: 14,
-                          fontWeight: FontWeight.w500),
-                      heightBox(10),
-                      phoneField(
-                        controller: phoneController,
-                        onValidate: _checkPhoneNumber,
-                        errorMsg: phoneIsEmpty,
-                      ),
-                      heightBox(15),
-                      labelText(
-                          color: AppColor.blackColor,
-                          text: Txt.t(context, "password_text"),
-                          size: 14,
-                          fontWeight: FontWeight.w500),
-                      heightBox(10),
-                      passwordField(
-                        controller: passwordController,
-                        onValidate: _checkPassword,
-                        errorMsg: passwordIsEmpty,
-                      ),
-                      heightBox(15),
-                      registerButton(
-                        onTab: () => _validateField(ref),
-                      ),
-                      Center(
-                        child: labelText(
+                        heightBox(10),
+                        labelText(
                             color: AppColor.blackColor,
-                            text: Txt.t(context, "or"),
-                            size: 16,
+                            text: Txt.t(context, "phone_number"),
+                            size: 14,
                             fontWeight: FontWeight.w500),
-                      ),
-                      heightBox(15),
-                      registerWithBCELOne(),
-                      heightBox(20),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Flex(
-                          direction: Axis.horizontal,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              Txt.t(context, "is_have_account"),
-                              style:
-                                  styleBlack(size: 14, weight: FontWeight.w600),
-                            ),
-                            widthBox(8),
-                            InkWell(
-                              onTap: () {
-                                context.router.back();
-                              },
-                              child: Text(Txt.t(context, "login_button_text"),
-                                  style: stylePrimary(
-                                      size: 14, weight: FontWeight.w700)),
-                            ),
-                          ],
+                        heightBox(10),
+                        phoneField(
+                          controller: phoneController,
+                          onValidate: (value) {
+                            ref
+                                .read(checkPhoneNumberIsEmptyProvider.notifier)
+                                .state = value;
+                          },
+                          errorMsg: phoneIsEmpty != null
+                              ? Txt.t(context, phoneIsEmpty)
+                              : null,
                         ),
-                      ),
-                    ],
+                        heightBox(10),
+                        labelText(
+                            color: AppColor.blackColor,
+                            text: Txt.t(context, "password_text"),
+                            size: 14,
+                            fontWeight: FontWeight.w500),
+                        heightBox(10),
+                        passwordField(
+                          controller: passwordController,
+                          onValidate: (value) {
+                            ref
+                                .read(checkPasswordIsEmptyProvider.notifier)
+                                .state = value;
+                          },
+                          errorMsg: passwordIsEmpty != null
+                              ? Txt.t(context, passwordIsEmpty)
+                              : null,
+                        ),
+                        heightBox(10),
+                        registerButton(
+                          onTab: () => _validateField(ref),
+                        ),
+                        Center(
+                          child: labelText(
+                              color: AppColor.blackColor,
+                              text: Txt.t(context, "or"),
+                              size: 16,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        heightBox(10),
+                        registerWithBCELOne(),
+                        heightBox(10),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Flex(
+                            direction: Axis.horizontal,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                Txt.t(context, "is_have_account"),
+                                style: styleBlack(
+                                    size: 14, weight: FontWeight.w600),
+                              ),
+                              widthBox(8),
+                              InkWell(
+                                onTap: () {
+                                  context.router.back();
+                                },
+                                child: Text(Txt.t(context, "login_button_text"),
+                                    style: stylePrimary(
+                                        size: 14, weight: FontWeight.w700)),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -221,10 +216,12 @@ class RegisterState extends ConsumerState<RegisterScreen> {
 
   _validateField(WidgetRef ref) async {
     focusDisable(context);
-    _checkPhoneNumber(phoneController.text);
-    _checkPassword(passwordController.text);
+    ref.read(checkPhoneNumberIsEmptyProvider.notifier).state =
+        phoneController.text;
+    ref.read(checkPasswordIsEmptyProvider.notifier).state =
+        passwordController.text;
     if (phoneController.text.isNotEmpty &&
-        phoneController.text.length == 8 &&
+        phoneController.text.length == 10 &&
         passwordController.text.isNotEmpty &&
         passwordRegex.hasMatch(passwordController.text)) {
       ref
@@ -233,35 +230,34 @@ class RegisterState extends ConsumerState<RegisterScreen> {
     }
   }
 
-  void _checkPhoneNumber(String phone) {
-    if (phone.isEmpty) {
-      setState(() {
-        phoneIsEmpty = Txt.t(context, "phone_can_not_empty");
-      });
-    } else if (phone.length < 8) {
-      setState(() {
-        phoneIsEmpty = Txt.t(context, "phone_should_be_must_equal_8");
-      });
-    } else {
-      setState(() {
-        phoneIsEmpty = null;
-      });
-    }
-  }
-
-  void _checkPassword(String password) {
-    if (password.isEmpty) {
-      setState(() {
-        passwordIsEmpty = Txt.t(context, "password_can_not_be_empty");
-      });
-    } else if (!passwordRegex.hasMatch(password)) {
-      setState(() {
-        passwordIsEmpty = Txt.t(context, "password_must_be_pass_regex");
-      });
-    } else {
-      setState(() {
-        passwordIsEmpty = null;
-      });
-    }
+  void _listenAuthState(WidgetRef ref) {
+    ref.listen(authStateNotifierProvider.select((value) => value),
+        (previous, next) async {
+      if (next.state == AuthConcreteState.singingUp) {
+        _showLoader(context, Txt.t(context, "waiting_msg"));
+      } else if (next.state == AuthConcreteState.signedUp) {
+        _closeLoader(context);
+        AutoRouter.of(context).push(
+          OTPRoute(phoneNumber: phoneController.text),
+        );
+      } else if (next.state == AuthConcreteState.failure) {
+        if (next.statusCode == 409) {
+          ref.read(toastMessageProvider).messageInfo(
+              message:
+                  "${Txt.t(context, "phone_number")} $LA_PREFIX${phoneController.text} ${Txt.t(context, "has_in_system_plz_login")}");
+        } else if (next.statusCode == 422) {
+          ref
+              .read(otpStateNotifierProvider.notifier).sendOTP(phoneController.text);
+          AutoRouter.of(context).push(
+            OTPRoute(phoneNumber: phoneController.text),
+          );
+        } else {
+          ref.read(toastMessageProvider).messageError(
+                message: next.message.toString(),
+              );
+        }
+        _closeLoader(context);
+      }
+    });
   }
 }

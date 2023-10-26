@@ -20,7 +20,7 @@ class _UserReferralState extends ConsumerState<UserReferral> {
   @override
   void initState() {
     super.initState();
-    isCopied = true;
+    isCopied = false;
   }
 
   @override
@@ -75,7 +75,7 @@ class _UserReferralState extends ConsumerState<UserReferral> {
                           InkWell(
                             onTap: () {
                               setState(() {
-                                isCopied = true;
+                                isCopied = !isCopied;
                               });
                               Future.delayed(const Duration(seconds: 1),
                                   () async {

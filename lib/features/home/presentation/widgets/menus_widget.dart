@@ -73,14 +73,14 @@ class _MenusWidgetState extends ConsumerState<MenusWidget> {
   }
 
   Widget _menuItem({required String icon, required String title}) {
-    return SizedBox(
-      width: 80,
-      height: 80,
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 40,
-            height: 40,
+            width: 33.84,
+            height: 28,
             child: SvgPicture.asset(icon, fit: BoxFit.contain),
           ),
           heightBox(10),

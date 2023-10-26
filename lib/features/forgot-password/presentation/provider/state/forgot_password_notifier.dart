@@ -21,12 +21,4 @@ class ForgotPasswordStateNotifier extends StateNotifier<ForgotPasswordState> {
       return const ForgotPasswordState.hasPhone();
     });
   }
-
-  Future<void> resetPassword(String phoneNumber, String code, String password) async {
-    state = const ForgotPasswordState.loading();
-    final response = await forgotPasswordRepository.resetPassword(phoneNumber: LA_PREFIX+phoneNumber, code: code, newPassword: password);
-    state = await response.fold((failure) {
-      return ForgotPasswordState.failure(failure);
-    }, (r) => const ForgotPasswordState.success());
-  }
 }
