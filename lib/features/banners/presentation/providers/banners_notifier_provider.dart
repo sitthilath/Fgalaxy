@@ -6,5 +6,5 @@ import 'package:galaxy_18_lottery_app/features/banners/presentation/providers/st
 
 final bannersNotifierProvider = StateNotifierProvider<BannerNotifier, BannerState>((ref){
   final BannersRepository repository = ref.watch(bannersRepositoryProvider);
-  return BannerNotifier(repository: repository);
+  return BannerNotifier(repository: repository)..fetchAllBanners();
 });
