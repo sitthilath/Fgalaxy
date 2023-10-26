@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/auth_providers.dart';
-import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/check_phone_number_provider.dart';
+import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/validate_provider.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/state/auth_state.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/login_button.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/password_field.dart';

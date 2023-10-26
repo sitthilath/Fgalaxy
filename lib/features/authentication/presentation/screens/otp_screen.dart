@@ -1,21 +1,20 @@
 import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/auth_providers.dart';
+import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/otp_remaining_provider.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/state/auth_state.dart';
 import 'package:galaxy_18_lottery_app/infrastructure/messages/providers/flutter_toast_message_provider.dart';
 import 'package:galaxy_18_lottery_app/routes/app_route.gr.dart';
-import 'package:galaxy_18_lottery_app/shared/constants/app_constants.dart';
+import 'package:galaxy_18_lottery_app/services/loader_service/providers/loader_provider.dart';
 import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/style/text_style.dart';
-import 'package:galaxy_18_lottery_app/shared/utils/app_color.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/localization_text.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/appbars/shared_appbar.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
-import 'package:galaxy_18_lottery_app/shared/widgets/loadings/loading.dart';
+import 'package:galaxy_18_lottery_app/shared/widgets/input_decoration.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/theme_widget.dart';
 
 @RoutePage()
@@ -30,335 +29,157 @@ class OTPScreen extends ConsumerStatefulWidget {
 }
 
 class OTPScreenState extends ConsumerState<OTPScreen> {
-  List<int> otpCodes = [];
-  int _secondsRemaining = TIMER_OF_OTP;
-  late Timer _timer;
-
+   Timer? _timer;
+   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
-    _startCountdown();
   }
 
   void _startCountdown() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_secondsRemaining > 0) {
-        setState(() {
-          _secondsRemaining--;
-        });
+      if (ref.watch(otpRemainingProvider) > 0) {
+        ref.read(otpRemainingProvider.notifier).update((state) => state - 1);
       }
     });
   }
 
   @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(authStateNotifierProvider);
+    final int otpRemaining = ref.watch(otpRemainingProvider);
+    ref.watch(otpStateNotifierProvider);
     ref.read(toastMessageProvider).initialMessage(context);
+    ref.read(loaderProvider).context = context;
     _listenState();
     return ThemeApp(
       child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: SharedAppbar(title: Txt.t(context, "confirm_otp")),
-          body: Column(
+        key: _scaffoldKey,
+        backgroundColor: Colors.transparent,
+        appBar: SharedAppbar(title: Txt.t(context, "confirm_otp")),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 50),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Flex(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      direction: Axis.vertical,
-                      children: [
-                        Text(Txt.t(context, "your_phone_send_to"),
-                            style:
-                                styleWhite(size: 14, weight: FontWeight.w400)),
-                        Text(LA_PREFIX + widget.phoneNumber,
-                            style:
-                                styleWhite(size: 14, weight: FontWeight.w400)),
-                        heightBox(36),
-                        Flex(
-                          direction: Axis.horizontal,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _pinItems(_checkIndex(0)),
-                            widthBox(12),
-                            _pinItems(_checkIndex(1)),
-                            widthBox(12),
-                            _pinItems(_checkIndex(2)),
-                            widthBox(12),
-                            _pinItems(_checkIndex(3)),
-                            widthBox(12),
-                            _pinItems(_checkIndex(4)),
-                            widthBox(12),
-                            _pinItems(_checkIndex(5)),
-                          ],
-                        ),
-                        heightBox(36),
-                        _sendOtpAgain(),
-                      ],
-                    ),
-                  )),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  color: AppColor.whiteColor,
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Column(
-                    children: [
-                      Flex(
-                        direction: Axis.horizontal,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _digit(
-                              number: 1,
-                              subText: '',
-                              onTap: () => _addNumber(1)),
-                          _digit(
-                              number: 2,
-                              subText: 'a b c',
-                              onTap: () => _addNumber(2)),
-                          _digit(
-                              number: 3,
-                              subText: 'd e f',
-                              onTap: () => _addNumber(3)),
-                        ],
-                      ),
-                      heightBox(15),
-                      Flex(
-                        direction: Axis.horizontal,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _digit(
-                              number: 4,
-                              subText: 'g h i',
-                              onTap: () => _addNumber(4)),
-                          _digit(
-                              number: 5,
-                              subText: 'j l k',
-                              onTap: () => _addNumber(5)),
-                          _digit(
-                              number: 6,
-                              subText: 'm n o',
-                              onTap: () => _addNumber(6)),
-                        ],
-                      ),
-                      heightBox(15),
-                      Flex(
-                        direction: Axis.horizontal,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _digit(
-                              number: 7,
-                              subText: 'p q r s',
-                              onTap: () => _addNumber(7)),
-                          _digit(
-                              number: 8,
-                              subText: 't u v',
-                              onTap: () => _addNumber(8)),
-                          _digit(
-                              number: 9,
-                              subText: 'w x y z',
-                              onTap: () => _addNumber(9)),
-                        ],
-                      ),
-                      heightBox(15),
-                      Flex(
-                        direction: Axis.horizontal,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _digit(number: '*', subText: '', onTap: () {}),
-                          _digit(
-                              number: 0,
-                              subText: '+',
-                              onTap: () => _addNumber(0)),
-                          InkWell(
-                            onTap: () {
-                              if (otpCodes.isNotEmpty) {
-                                otpCodes.removeLast();
-                              }
-                            },
-                            child: SizedBox(
-                              width: 40,
-                              height: 40,
-                              child: SvgPicture.asset(AppConstants.delete,
-                                  color: AppColor.primaryColor),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+              Text(Txt.t(context, "your_phone_send_to"),
+                  style: styleWhite(size: 14, weight: FontWeight.w400)),
+              heightBox(6),
+              Text(LA_PREFIX + widget.phoneNumber,
+                  style: styleWhite(size: 14, weight: FontWeight.w400)),
+              heightBox(20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: TextField(
+                  autofocus: true,
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  decoration: simpleDecoration(hint: 'xxxxxx'),
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(6),
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
+                  onTapOutside: (event) {
+                    focusDisable(context);
+                  },
+                  onChanged: _onSubmitOtp,
+                  onSubmitted: _onSubmitOtp,
                 ),
               ),
+              heightBox(20),
+              otpRemaining == 0
+                  ? _sendOtpAgain(otpRemaining)
+                  : Text(
+                      "${Txt.t(context, "otp_can_send_again_at")} ${ref.watch(otpRemainingProvider)} ${Txt.t(context, "second")}",
+                      style: styleWhite(size: 14, weight: FontWeight.w400)),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 
-  Widget _sendOtpAgain() {
+  Widget _sendOtpAgain(int otpRemaining) {
     return Flex(
-      direction: Axis.horizontal,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: _secondsRemaining == 0
-          ? [
-              Text(Txt.t(context, "still_haven_received_the_code"),
-                  style: styleWhite(size: 14, weight: FontWeight.w300)),
-              widthBox(10),
-              InkWell(
-                onTap: () {
-                  if (_secondsRemaining == 0) {
-                    ref
-                        .read(authStateNotifierProvider.notifier)
-                        .sendOTP(widget.phoneNumber);
-                    setState(() {
-                      _secondsRemaining = 30;
-                    });
-                    // _startCountdown();
-                  }
-                },
-                child: Text(Txt.t(context, "send_again"),
-                    style: styleWhite(size: 14, weight: FontWeight.w600)),
-              ),
-            ]
-          : [
-              Text(
-                  "${Txt.t(context, "otp_can_send_again_at")} $_secondsRemaining ${Txt.t(context, "second")}",
-                  style: styleWhite(size: 14, weight: FontWeight.w400)),
-            ],
-    );
+        direction: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(Txt.t(context, "still_haven_received_the_code"),
+              style: styleWhite(size: 14, weight: FontWeight.w300)),
+          widthBox(10),
+          InkWell(
+            onTap: () {
+              ref
+                  .read(otpStateNotifierProvider.notifier)
+                  .sendOTP(widget.phoneNumber);
+              ref.read(otpRemainingProvider.notifier).state = TIMER_OF_OTP;
+            },
+            child: Text(Txt.t(context, "send_again"),
+                style: styleWhite(size: 14, weight: FontWeight.w600)),
+          ),
+        ]);
   }
 
-  Container _pinItems(bool isFill) {
-    return Container(
-      width: 25,
-      height: 25,
-      decoration: BoxDecoration(
-          color: isFill ? AppColor.whiteColor : Colors.transparent,
-          borderRadius: BorderRadius.circular(25),
-          border: Border.all(
-            color: AppColor.whiteColor,
-          )),
-    );
+  Future<void> _showLoader(String title) async {
+     ref.read(loaderProvider).showLoader(title);
   }
 
-  _digit(
-      {required dynamic number,
-      required String subText,
-      required Function() onTap}) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-          width: 50,
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              Text(
-                "$number",
-                style: TextStyle(
-                    fontSize: 34,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    fontFamily: 'roboto',
-                    inherit: false,
-                    color: AppColor.blackColor),
-              ),
-              Text(
-                subText.toUpperCase(),
-                style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    color: AppColor.blackColor),
-              ),
-            ],
-          )),
-    );
-  }
-
-  bool _checkIndex(int index) {
-    bool hasIndex = false;
-    if (otpCodes.isNotEmpty) {
-      if (otpCodes.length > index) {
-        hasIndex = otpCodes.elementAt(index) != -1;
-      } else {
-        hasIndex = false;
-      }
-    }
-    return hasIndex;
-  }
-
-  void _addNumber(int i) {
-    if (otpCodes.length <= 5) {
-      setState(() {
-        otpCodes.add(i);
-      });
-    }
-    if (otpCodes.length == 6) {
-      final code = otpCodes.join('');
-      if (widget.isLogin) {
-        ref
-            .read(authStateNotifierProvider.notifier)
-            .verifyUserWithOTP(widget.phoneNumber, code);
-      } else {
-        ref
-            .read(authStateNotifierProvider.notifier)
-            .verifyUser(code, widget.phoneNumber);
-      }
-    }
-  }
-
-  Future<void> _showLoader(BuildContext context, String title) {
-    return LoadingDialog.showAuthLoadingDialog(context, title: title);
-  }
-
-  Future<void> _closeLoader(BuildContext context) async {
-    final navigator = Navigator.of(context);
-    if (navigator.canPop()) {
-      return navigator.pop();
-    }
-    return Future.value(null);
+  Future<void> _closeLoader() async {
+     ref.read(loaderProvider).closeLoader();
   }
 
   void _listenState() {
-    ref.listen(authStateNotifierProvider.select((value) => value),
-            (previous, next) async {
-          if (next.state == AuthConcreteState.verifying) {
-            _showLoader(context, Txt.t(context, "verify_msg"));
-          } else if (next.state == AuthConcreteState.verified) {
-            _closeLoader(context);
-            ref
-                .read(toastMessageProvider)
-                .messageSuccess(message: Txt.t(context, "register_success"));
-            AutoRouter.of(context)
-                .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
-            otpCodes.clear();
-          } else if (next.state == AuthConcreteState.verifyingWithOtp) {
-            await _showLoader(context, Txt.t(context, "verify_msg"));
-          } else if (next.state == AuthConcreteState.verifiedWithOtp) {
-            _closeLoader(context);
-            ref
-                .read(toastMessageProvider)
-                .messageSuccess(message: Txt.t(context, "register_success"));
-            AutoRouter.of(context)
-                .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
-          } else if (next.state == AuthConcreteState.failure) {
-            await _closeLoader(context);
-            ref
-                .read(toastMessageProvider)
-                .messageError(message: next.message.toString());
-            otpCodes.clear();
-          }
-        });
+    ref.listen(otpStateNotifierProvider.select((value) => value),
+        (previous, next) async {
+      switch(next.state){
+        case AuthConcreteState.sendingOtp:
+          _showLoader(Txt.t(context, "verify_msg"));
+          break;
+        case AuthConcreteState.sentOtp:
+          _closeLoader();
+          _startCountdown();
+          break;
+        case AuthConcreteState.verifying:
+          _showLoader(Txt.t(context, "verify_msg"));
+          break;
+        case AuthConcreteState.verified:
+          _closeLoader();
+          ref.read(toastMessageProvider).messageSuccess(message: Txt.t(context, "register_success"));
+          AutoRouter.of(context).pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
+          break;
+        case AuthConcreteState.verifyingWithOtp:
+           _showLoader(Txt.t(context, "verify_msg"));
+          break;
+        case AuthConcreteState.verifiedWithOtp:
+          _closeLoader();
+          ref.read(toastMessageProvider).messageSuccess(message: Txt.t(context, "register_success"));
+          AutoRouter.of(context).pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
+          break;
+        case AuthConcreteState.failure:
+           _closeLoader();
+          ref.read(toastMessageProvider).messageError(message: next.message.toString());
+          ref.read(otpRemainingProvider.notifier).state = 0;
+           _timer?.cancel();
+          break;
+        default:
+          _closeLoader();
+      }
+    });
+  }
+
+  void _onSubmitOtp(String otp) {
+    if (otp.isNotEmpty && otp.length == 6) {
+      if (widget.isLogin) {
+        ref.read(otpStateNotifierProvider.notifier).verifyUserWithOTP(widget.phoneNumber, otp);
+        return;
+      }
+      ref.read(otpStateNotifierProvider.notifier).verifyUser(otp, widget.phoneNumber);
+    }
   }
 }

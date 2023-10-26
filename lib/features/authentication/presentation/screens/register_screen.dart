@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/auth_providers.dart';
-import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/check_phone_number_provider.dart';
+import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/validate_provider.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/providers/state/auth_state.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/login_button.dart';
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/widgets/password_field.dart';
@@ -247,8 +247,7 @@ class RegisterState extends ConsumerState<RegisterScreen> {
                   "${Txt.t(context, "phone_number")} $LA_PREFIX${phoneController.text} ${Txt.t(context, "has_in_system_plz_login")}");
         } else if (next.statusCode == 422) {
           ref
-              .read(authStateNotifierProvider.notifier)
-              .sendOTP(phoneController.text);
+              .read(otpStateNotifierProvider.notifier).sendOTP(phoneController.text);
           AutoRouter.of(context).push(
             OTPRoute(phoneNumber: phoneController.text),
           );
