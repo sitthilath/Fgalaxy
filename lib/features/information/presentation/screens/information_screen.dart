@@ -174,7 +174,7 @@ class InformationState extends ConsumerState<InformationScreen> {
                                               ),
                                               widthBox(4),
                                               Text(
-                                                '${dFullFormat(DateTime.now())}',
+                                                '${dFullFormat(information.createdAt)}',
                                                 style: styleOption(
                                                   color:
                                                       AppColor.primarySubTitle,

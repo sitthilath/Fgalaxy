@@ -71,7 +71,7 @@ class InformationDetailScreen extends StatelessWidget {
                     ),
                     widthBox(4),
                     Text(
-                      '${dFullFormat(DateTime.now())}',
+                      '${dFullFormat(information.createdAt)}',
                       style: styleOption(
                         color:
                         AppColor.primarySubTitle,
