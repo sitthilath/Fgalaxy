@@ -42,12 +42,12 @@ class SplashState extends ConsumerState<SplashScreen> {
     ref.listen(splashStateNotifierProvider.select((value) => value),
         (previous, next) async {
       if (next is Accepted) {
-        Future.delayed(const Duration(seconds: 5), ()async {
+        Future.delayed(const Duration(seconds: 4), ()async {
           AutoRouter.of(context)
               .pushAndPopUntil(NavigatorRoute(), predicate: (_) => false);
         });
       } else if (next is InvalidToken) {
-        Future.delayed(const Duration(seconds: 5), ()async {
+        Future.delayed(const Duration(seconds: 4), ()async {
           AutoRouter.of(context)
               .pushAndPopUntil(const LoginRoute(), predicate: (_) => false);
         });
