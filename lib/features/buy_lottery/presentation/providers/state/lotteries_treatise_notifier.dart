@@ -49,6 +49,7 @@ class LotteriesTreatiseNotifier extends StateNotifier<LotteriesTreatiseState> {
         hasLotteriesTreatise: true,
         lotteriesTreatiseList: lotteriesTreatiseList,
         message: '',
+        filterLotteriesTreatise: lotteriesTreatiseList
       );
     });
   }
@@ -102,7 +103,11 @@ class LotteriesTreatiseNotifier extends StateNotifier<LotteriesTreatiseState> {
         lotteriesTreatiseList: data,
         hasLotteriesTreatise: true,
         message: '',
+          filterLotteriesTreatise: data
       );
     });
   }
+
+
+
 }

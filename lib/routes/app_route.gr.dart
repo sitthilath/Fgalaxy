@@ -8,138 +8,152 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i19;
-import 'package:flutter/material.dart' as _i20;
+import 'package:auto_route/auto_route.dart' as _i22;
+import 'package:flutter/material.dart' as _i23;
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/screens/login_screen.dart'
-    as _i9;
-import 'package:galaxy_18_lottery_app/features/authentication/presentation/screens/login_with_otp_screen.dart'
     as _i10;
+import 'package:galaxy_18_lottery_app/features/authentication/presentation/screens/login_with_otp_screen.dart'
+    as _i11;
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/screens/otp_screen.dart'
-    as _i14;
+    as _i15;
 import 'package:galaxy_18_lottery_app/features/authentication/presentation/screens/register_screen.dart'
-    as _i16;
+    as _i19;
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/screens/animal_digits_screen.dart'
     as _i1;
 import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/screens/buy_lotteries_screen.dart'
-    as _i2;
-import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/screens/modern_digits_screen.dart'
-    as _i12;
-import 'package:galaxy_18_lottery_app/features/dream_treatise/presentation/screens/dream_treatise_detail_screen.dart'
     as _i3;
-import 'package:galaxy_18_lottery_app/features/dream_treatise/presentation/screens/dream_treatise_screen.dart'
-    as _i4;
-import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/screen/forgot_password_screen.dart'
-    as _i5;
-import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/screen/reset_password_screen.dart'
-    as _i17;
-import 'package:galaxy_18_lottery_app/features/home/presentation/screen/home_screen.dart'
-    as _i6;
-import 'package:galaxy_18_lottery_app/features/information/presentation/screens/information_detail_screen.dart'
-    as _i7;
-import 'package:galaxy_18_lottery_app/features/information/presentation/screens/information_screen.dart'
-    as _i8;
-import 'package:galaxy_18_lottery_app/features/lottery-results/presentation/screen/lottery_result_screen.dart'
-    as _i11;
-import 'package:galaxy_18_lottery_app/features/navigator/presentation/screen/navigator_screen.dart'
+import 'package:galaxy_18_lottery_app/features/buy_lottery/presentation/screens/modern_digits_screen.dart'
     as _i13;
+import 'package:galaxy_18_lottery_app/features/buy_lottery/tab_bet_lottery/bet_lottery/presentation/screen/bet_lottery_screen.dart'
+    as _i2;
+import 'package:galaxy_18_lottery_app/features/dream_treatise/presentation/screens/dream_treatise_detail_screen.dart'
+    as _i4;
+import 'package:galaxy_18_lottery_app/features/dream_treatise/presentation/screens/dream_treatise_screen.dart'
+    as _i5;
+import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/screen/forgot_password_screen.dart'
+    as _i6;
+import 'package:galaxy_18_lottery_app/features/forgot-password/presentation/screen/reset_password_screen.dart'
+    as _i20;
+import 'package:galaxy_18_lottery_app/features/home/presentation/screen/home_screen.dart'
+    as _i7;
+import 'package:galaxy_18_lottery_app/features/information/presentation/screens/information_detail_screen.dart'
+    as _i8;
+import 'package:galaxy_18_lottery_app/features/information/presentation/screens/information_screen.dart'
+    as _i9;
+import 'package:galaxy_18_lottery_app/features/lottery-results/presentation/screen/lottery_result_screen.dart'
+    as _i12;
+import 'package:galaxy_18_lottery_app/features/navigator/presentation/screen/navigator_screen.dart'
+    as _i14;
+import 'package:galaxy_18_lottery_app/features/pay_lottery/presentation/screen/pay_lottery_screen.dart'
+    as _i16;
+import 'package:galaxy_18_lottery_app/features/payment_history/presentation/screen/payment_history_screen.dart'
+    as _i17;
 import 'package:galaxy_18_lottery_app/features/profile/presentation/screen/profile_screen.dart'
-    as _i15;
-import 'package:galaxy_18_lottery_app/features/splash/presentation/screens/splash_screen.dart'
     as _i18;
-import 'package:galaxy_18_lottery_app/shared/domain/models/infomation/information_model.dart'
+import 'package:galaxy_18_lottery_app/features/splash/presentation/screens/splash_screen.dart'
     as _i21;
+import 'package:galaxy_18_lottery_app/shared/domain/models/infomation/information_model.dart'
+    as _i24;
 
-abstract class $AppRouter extends _i19.RootStackRouter {
+abstract class $AppRouter extends _i22.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i19.PageFactory> pagesMap = {
+  final Map<String, _i22.PageFactory> pagesMap = {
     AnimalDigitsRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.AnimalDigitsScreen(),
       );
     },
-    BuyLotteriesRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+    BetLotteryRoute.name: (routeData) {
+      final args = routeData.argsAs<BetLotteryRouteArgs>(
+          orElse: () => const BetLotteryRouteArgs());
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.BuyLotteriesScreen(),
+        child: _i2.BetLotteryScreen(key: args.key),
+      );
+    },
+    BuyLotteriesRoute.name: (routeData) {
+      return _i22.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i3.BuyLotteriesScreen(),
       );
     },
     DreamTreatiseDetailRoute.name: (routeData) {
       final args = routeData.argsAs<DreamTreatiseDetailRouteArgs>();
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i3.DreamTreatiseDetailScreen(
+        child: _i4.DreamTreatiseDetailScreen(
           args.id,
           key: args.key,
         ),
       );
     },
     DreamTreatiseRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.DreamTreatiseScreen(),
+        child: const _i5.DreamTreatiseScreen(),
       );
     },
     ForgotPasswordRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.ForgotPasswordScreen(),
+        child: const _i6.ForgotPasswordScreen(),
       );
     },
     HomeRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.HomeScreen(),
+        child: const _i7.HomeScreen(),
       );
     },
     InformationDetailRoute.name: (routeData) {
       final args = routeData.argsAs<InformationDetailRouteArgs>();
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i7.InformationDetailScreen(
+        child: _i8.InformationDetailScreen(
           key: args.key,
           information: args.information,
         ),
       );
     },
     InformationRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.InformationScreen(),
+        child: const _i9.InformationScreen(),
       );
     },
     LoginRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i9.LoginScreen(),
+        child: const _i10.LoginScreen(),
       );
     },
     LoginWithOTP.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.LoginWithOTP(),
+        child: const _i11.LoginWithOTP(),
       );
     },
     LotteryResultRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.LotteryResultScreen(),
+        child: const _i12.LotteryResultScreen(),
       );
     },
     ModernDigitsRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.ModernDigitsScreen(),
+        child: const _i13.ModernDigitsScreen(),
       );
     },
     NavigatorRoute.name: (routeData) {
       final args = routeData.argsAs<NavigatorRouteArgs>(
           orElse: () => const NavigatorRouteArgs());
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i13.NavigatorScreen(
+        child: _i14.NavigatorScreen(
           key: args.key,
           pageIndex: args.pageIndex,
         ),
@@ -147,41 +161,53 @@ abstract class $AppRouter extends _i19.RootStackRouter {
     },
     OTPRoute.name: (routeData) {
       final args = routeData.argsAs<OTPRouteArgs>();
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i14.OTPScreen(
+        child: _i15.OTPScreen(
           key: args.key,
           phoneNumber: args.phoneNumber,
           isLogin: args.isLogin,
         ),
       );
     },
-    ProfileRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+    PayLotteryRoute.name: (routeData) {
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.ProfileScreen(),
+        child: const _i16.PayLotteryScreen(),
+      );
+    },
+    PaymentHistoryRoute.name: (routeData) {
+      return _i22.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i17.PaymentHistoryScreen(),
+      );
+    },
+    ProfileRoute.name: (routeData) {
+      return _i22.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i18.ProfileScreen(),
       );
     },
     RegisterRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.RegisterScreen(),
+        child: const _i19.RegisterScreen(),
       );
     },
     ResetPasswordRoute.name: (routeData) {
       final args = routeData.argsAs<ResetPasswordRouteArgs>();
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i17.ResetPasswordScreen(
+        child: _i20.ResetPasswordScreen(
           args.phoneNumber,
           key: args.key,
         ),
       );
     },
     SplashRoute.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i18.SplashScreen(),
+        child: const _i21.SplashScreen(),
       );
     },
   };
@@ -189,8 +215,8 @@ abstract class $AppRouter extends _i19.RootStackRouter {
 
 /// generated route for
 /// [_i1.AnimalDigitsScreen]
-class AnimalDigitsRoute extends _i19.PageRouteInfo<void> {
-  const AnimalDigitsRoute({List<_i19.PageRouteInfo>? children})
+class AnimalDigitsRoute extends _i22.PageRouteInfo<void> {
+  const AnimalDigitsRoute({List<_i22.PageRouteInfo>? children})
       : super(
           AnimalDigitsRoute.name,
           initialChildren: children,
@@ -198,13 +224,42 @@ class AnimalDigitsRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'AnimalDigitsRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.BuyLotteriesScreen]
-class BuyLotteriesRoute extends _i19.PageRouteInfo<void> {
-  const BuyLotteriesRoute({List<_i19.PageRouteInfo>? children})
+/// [_i2.BetLotteryScreen]
+class BetLotteryRoute extends _i22.PageRouteInfo<BetLotteryRouteArgs> {
+  BetLotteryRoute({
+    _i23.Key? key,
+    List<_i22.PageRouteInfo>? children,
+  }) : super(
+          BetLotteryRoute.name,
+          args: BetLotteryRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'BetLotteryRoute';
+
+  static const _i22.PageInfo<BetLotteryRouteArgs> page =
+      _i22.PageInfo<BetLotteryRouteArgs>(name);
+}
+
+class BetLotteryRouteArgs {
+  const BetLotteryRouteArgs({this.key});
+
+  final _i23.Key? key;
+
+  @override
+  String toString() {
+    return 'BetLotteryRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i3.BuyLotteriesScreen]
+class BuyLotteriesRoute extends _i22.PageRouteInfo<void> {
+  const BuyLotteriesRoute({List<_i22.PageRouteInfo>? children})
       : super(
           BuyLotteriesRoute.name,
           initialChildren: children,
@@ -212,17 +267,17 @@ class BuyLotteriesRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'BuyLotteriesRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i3.DreamTreatiseDetailScreen]
+/// [_i4.DreamTreatiseDetailScreen]
 class DreamTreatiseDetailRoute
-    extends _i19.PageRouteInfo<DreamTreatiseDetailRouteArgs> {
+    extends _i22.PageRouteInfo<DreamTreatiseDetailRouteArgs> {
   DreamTreatiseDetailRoute({
     required int id,
-    _i20.Key? key,
-    List<_i19.PageRouteInfo>? children,
+    _i23.Key? key,
+    List<_i22.PageRouteInfo>? children,
   }) : super(
           DreamTreatiseDetailRoute.name,
           args: DreamTreatiseDetailRouteArgs(
@@ -234,8 +289,8 @@ class DreamTreatiseDetailRoute
 
   static const String name = 'DreamTreatiseDetailRoute';
 
-  static const _i19.PageInfo<DreamTreatiseDetailRouteArgs> page =
-      _i19.PageInfo<DreamTreatiseDetailRouteArgs>(name);
+  static const _i22.PageInfo<DreamTreatiseDetailRouteArgs> page =
+      _i22.PageInfo<DreamTreatiseDetailRouteArgs>(name);
 }
 
 class DreamTreatiseDetailRouteArgs {
@@ -246,7 +301,7 @@ class DreamTreatiseDetailRouteArgs {
 
   final int id;
 
-  final _i20.Key? key;
+  final _i23.Key? key;
 
   @override
   String toString() {
@@ -255,9 +310,9 @@ class DreamTreatiseDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i4.DreamTreatiseScreen]
-class DreamTreatiseRoute extends _i19.PageRouteInfo<void> {
-  const DreamTreatiseRoute({List<_i19.PageRouteInfo>? children})
+/// [_i5.DreamTreatiseScreen]
+class DreamTreatiseRoute extends _i22.PageRouteInfo<void> {
+  const DreamTreatiseRoute({List<_i22.PageRouteInfo>? children})
       : super(
           DreamTreatiseRoute.name,
           initialChildren: children,
@@ -265,13 +320,13 @@ class DreamTreatiseRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'DreamTreatiseRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i5.ForgotPasswordScreen]
-class ForgotPasswordRoute extends _i19.PageRouteInfo<void> {
-  const ForgotPasswordRoute({List<_i19.PageRouteInfo>? children})
+/// [_i6.ForgotPasswordScreen]
+class ForgotPasswordRoute extends _i22.PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<_i22.PageRouteInfo>? children})
       : super(
           ForgotPasswordRoute.name,
           initialChildren: children,
@@ -279,13 +334,13 @@ class ForgotPasswordRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'ForgotPasswordRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i6.HomeScreen]
-class HomeRoute extends _i19.PageRouteInfo<void> {
-  const HomeRoute({List<_i19.PageRouteInfo>? children})
+/// [_i7.HomeScreen]
+class HomeRoute extends _i22.PageRouteInfo<void> {
+  const HomeRoute({List<_i22.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -293,17 +348,17 @@ class HomeRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i7.InformationDetailScreen]
+/// [_i8.InformationDetailScreen]
 class InformationDetailRoute
-    extends _i19.PageRouteInfo<InformationDetailRouteArgs> {
+    extends _i22.PageRouteInfo<InformationDetailRouteArgs> {
   InformationDetailRoute({
-    _i20.Key? key,
-    required _i21.Information information,
-    List<_i19.PageRouteInfo>? children,
+    _i23.Key? key,
+    required _i24.Information information,
+    List<_i22.PageRouteInfo>? children,
   }) : super(
           InformationDetailRoute.name,
           args: InformationDetailRouteArgs(
@@ -315,8 +370,8 @@ class InformationDetailRoute
 
   static const String name = 'InformationDetailRoute';
 
-  static const _i19.PageInfo<InformationDetailRouteArgs> page =
-      _i19.PageInfo<InformationDetailRouteArgs>(name);
+  static const _i22.PageInfo<InformationDetailRouteArgs> page =
+      _i22.PageInfo<InformationDetailRouteArgs>(name);
 }
 
 class InformationDetailRouteArgs {
@@ -325,9 +380,9 @@ class InformationDetailRouteArgs {
     required this.information,
   });
 
-  final _i20.Key? key;
+  final _i23.Key? key;
 
-  final _i21.Information information;
+  final _i24.Information information;
 
   @override
   String toString() {
@@ -336,9 +391,9 @@ class InformationDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i8.InformationScreen]
-class InformationRoute extends _i19.PageRouteInfo<void> {
-  const InformationRoute({List<_i19.PageRouteInfo>? children})
+/// [_i9.InformationScreen]
+class InformationRoute extends _i22.PageRouteInfo<void> {
+  const InformationRoute({List<_i22.PageRouteInfo>? children})
       : super(
           InformationRoute.name,
           initialChildren: children,
@@ -346,13 +401,13 @@ class InformationRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'InformationRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i9.LoginScreen]
-class LoginRoute extends _i19.PageRouteInfo<void> {
-  const LoginRoute({List<_i19.PageRouteInfo>? children})
+/// [_i10.LoginScreen]
+class LoginRoute extends _i22.PageRouteInfo<void> {
+  const LoginRoute({List<_i22.PageRouteInfo>? children})
       : super(
           LoginRoute.name,
           initialChildren: children,
@@ -360,13 +415,13 @@ class LoginRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i10.LoginWithOTP]
-class LoginWithOTP extends _i19.PageRouteInfo<void> {
-  const LoginWithOTP({List<_i19.PageRouteInfo>? children})
+/// [_i11.LoginWithOTP]
+class LoginWithOTP extends _i22.PageRouteInfo<void> {
+  const LoginWithOTP({List<_i22.PageRouteInfo>? children})
       : super(
           LoginWithOTP.name,
           initialChildren: children,
@@ -374,13 +429,13 @@ class LoginWithOTP extends _i19.PageRouteInfo<void> {
 
   static const String name = 'LoginWithOTP';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i11.LotteryResultScreen]
-class LotteryResultRoute extends _i19.PageRouteInfo<void> {
-  const LotteryResultRoute({List<_i19.PageRouteInfo>? children})
+/// [_i12.LotteryResultScreen]
+class LotteryResultRoute extends _i22.PageRouteInfo<void> {
+  const LotteryResultRoute({List<_i22.PageRouteInfo>? children})
       : super(
           LotteryResultRoute.name,
           initialChildren: children,
@@ -388,13 +443,13 @@ class LotteryResultRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'LotteryResultRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i12.ModernDigitsScreen]
-class ModernDigitsRoute extends _i19.PageRouteInfo<void> {
-  const ModernDigitsRoute({List<_i19.PageRouteInfo>? children})
+/// [_i13.ModernDigitsScreen]
+class ModernDigitsRoute extends _i22.PageRouteInfo<void> {
+  const ModernDigitsRoute({List<_i22.PageRouteInfo>? children})
       : super(
           ModernDigitsRoute.name,
           initialChildren: children,
@@ -402,16 +457,16 @@ class ModernDigitsRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'ModernDigitsRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i13.NavigatorScreen]
-class NavigatorRoute extends _i19.PageRouteInfo<NavigatorRouteArgs> {
+/// [_i14.NavigatorScreen]
+class NavigatorRoute extends _i22.PageRouteInfo<NavigatorRouteArgs> {
   NavigatorRoute({
-    _i20.Key? key,
+    _i23.Key? key,
     int pageIndex = 0,
-    List<_i19.PageRouteInfo>? children,
+    List<_i22.PageRouteInfo>? children,
   }) : super(
           NavigatorRoute.name,
           args: NavigatorRouteArgs(
@@ -423,8 +478,8 @@ class NavigatorRoute extends _i19.PageRouteInfo<NavigatorRouteArgs> {
 
   static const String name = 'NavigatorRoute';
 
-  static const _i19.PageInfo<NavigatorRouteArgs> page =
-      _i19.PageInfo<NavigatorRouteArgs>(name);
+  static const _i22.PageInfo<NavigatorRouteArgs> page =
+      _i22.PageInfo<NavigatorRouteArgs>(name);
 }
 
 class NavigatorRouteArgs {
@@ -433,7 +488,7 @@ class NavigatorRouteArgs {
     this.pageIndex = 0,
   });
 
-  final _i20.Key? key;
+  final _i23.Key? key;
 
   final int pageIndex;
 
@@ -444,13 +499,13 @@ class NavigatorRouteArgs {
 }
 
 /// generated route for
-/// [_i14.OTPScreen]
-class OTPRoute extends _i19.PageRouteInfo<OTPRouteArgs> {
+/// [_i15.OTPScreen]
+class OTPRoute extends _i22.PageRouteInfo<OTPRouteArgs> {
   OTPRoute({
-    _i20.Key? key,
+    _i23.Key? key,
     required String phoneNumber,
     bool isLogin = false,
-    List<_i19.PageRouteInfo>? children,
+    List<_i22.PageRouteInfo>? children,
   }) : super(
           OTPRoute.name,
           args: OTPRouteArgs(
@@ -463,8 +518,8 @@ class OTPRoute extends _i19.PageRouteInfo<OTPRouteArgs> {
 
   static const String name = 'OTPRoute';
 
-  static const _i19.PageInfo<OTPRouteArgs> page =
-      _i19.PageInfo<OTPRouteArgs>(name);
+  static const _i22.PageInfo<OTPRouteArgs> page =
+      _i22.PageInfo<OTPRouteArgs>(name);
 }
 
 class OTPRouteArgs {
@@ -474,7 +529,7 @@ class OTPRouteArgs {
     this.isLogin = false,
   });
 
-  final _i20.Key? key;
+  final _i23.Key? key;
 
   final String phoneNumber;
 
@@ -487,9 +542,37 @@ class OTPRouteArgs {
 }
 
 /// generated route for
-/// [_i15.ProfileScreen]
-class ProfileRoute extends _i19.PageRouteInfo<void> {
-  const ProfileRoute({List<_i19.PageRouteInfo>? children})
+/// [_i16.PayLotteryScreen]
+class PayLotteryRoute extends _i22.PageRouteInfo<void> {
+  const PayLotteryRoute({List<_i22.PageRouteInfo>? children})
+      : super(
+          PayLotteryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PayLotteryRoute';
+
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i17.PaymentHistoryScreen]
+class PaymentHistoryRoute extends _i22.PageRouteInfo<void> {
+  const PaymentHistoryRoute({List<_i22.PageRouteInfo>? children})
+      : super(
+          PaymentHistoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PaymentHistoryRoute';
+
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i18.ProfileScreen]
+class ProfileRoute extends _i22.PageRouteInfo<void> {
+  const ProfileRoute({List<_i22.PageRouteInfo>? children})
       : super(
           ProfileRoute.name,
           initialChildren: children,
@@ -497,13 +580,13 @@ class ProfileRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'ProfileRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i16.RegisterScreen]
-class RegisterRoute extends _i19.PageRouteInfo<void> {
-  const RegisterRoute({List<_i19.PageRouteInfo>? children})
+/// [_i19.RegisterScreen]
+class RegisterRoute extends _i22.PageRouteInfo<void> {
+  const RegisterRoute({List<_i22.PageRouteInfo>? children})
       : super(
           RegisterRoute.name,
           initialChildren: children,
@@ -511,16 +594,16 @@ class RegisterRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'RegisterRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i17.ResetPasswordScreen]
-class ResetPasswordRoute extends _i19.PageRouteInfo<ResetPasswordRouteArgs> {
+/// [_i20.ResetPasswordScreen]
+class ResetPasswordRoute extends _i22.PageRouteInfo<ResetPasswordRouteArgs> {
   ResetPasswordRoute({
     required String phoneNumber,
-    _i20.Key? key,
-    List<_i19.PageRouteInfo>? children,
+    _i23.Key? key,
+    List<_i22.PageRouteInfo>? children,
   }) : super(
           ResetPasswordRoute.name,
           args: ResetPasswordRouteArgs(
@@ -532,8 +615,8 @@ class ResetPasswordRoute extends _i19.PageRouteInfo<ResetPasswordRouteArgs> {
 
   static const String name = 'ResetPasswordRoute';
 
-  static const _i19.PageInfo<ResetPasswordRouteArgs> page =
-      _i19.PageInfo<ResetPasswordRouteArgs>(name);
+  static const _i22.PageInfo<ResetPasswordRouteArgs> page =
+      _i22.PageInfo<ResetPasswordRouteArgs>(name);
 }
 
 class ResetPasswordRouteArgs {
@@ -544,7 +627,7 @@ class ResetPasswordRouteArgs {
 
   final String phoneNumber;
 
-  final _i20.Key? key;
+  final _i23.Key? key;
 
   @override
   String toString() {
@@ -553,9 +636,9 @@ class ResetPasswordRouteArgs {
 }
 
 /// generated route for
-/// [_i18.SplashScreen]
-class SplashRoute extends _i19.PageRouteInfo<void> {
-  const SplashRoute({List<_i19.PageRouteInfo>? children})
+/// [_i21.SplashScreen]
+class SplashRoute extends _i22.PageRouteInfo<void> {
+  const SplashRoute({List<_i22.PageRouteInfo>? children})
       : super(
           SplashRoute.name,
           initialChildren: children,
@@ -563,5 +646,5 @@ class SplashRoute extends _i19.PageRouteInfo<void> {
 
   static const String name = 'SplashRoute';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }

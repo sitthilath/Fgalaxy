@@ -7,6 +7,7 @@ import 'package:galaxy_18_lottery_app/shared/globals.dart';
 import 'package:galaxy_18_lottery_app/shared/utils/url_constants.dart';
 
 abstract class LoginUserDataSource {
+
   Future<Either<AppException, User>> loginUser({required UserForm userForm});
 
   Future<Either<AppException, String>> registerUser(

@@ -11,6 +11,10 @@ class AppConstants {
   static String avatar = "$imagePath/avatar.png";
   static String emptyBox = "$imagePath/empty-box.png";
   static String error = "$imagePath/error.png";
+  static String galaxyBlueLogo = "$imagePath/galaxy_blue_logo.png";
+  static String laoLotteryLogo = "$imagePath/lao_lottery_logo.png";
+  static String lotteryPanel = "$imagePath/lottery_panel.png";
+  static String bcelOneLogo = "$imagePath/bcelone_logo.png";
 
 
   ////======== for icons =========
@@ -34,7 +38,7 @@ class AppConstants {
   static String question = '$iconPath/question.svg';
   static String closeOutline ='$iconPath/close_outline.svg';
   static String clock ='$iconPath/clock.svg';
-
+  static String circleCheck ='$iconPath/check_circle.png';
 
 //  ============= for gifs ==========
   static String logoGalaxy18 = '$gifPath/logo_galaxy18_splash.gif';

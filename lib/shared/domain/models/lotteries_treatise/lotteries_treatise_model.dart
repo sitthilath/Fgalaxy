@@ -17,6 +17,8 @@ class LotteriesTreatise extends Equatable {
     required this.digits,
   });
 
+
+
   factory LotteriesTreatise.fromJson(Map<String, dynamic> json) =>
       LotteriesTreatise(
         id: json["id"],
@@ -26,6 +28,8 @@ class LotteriesTreatise extends Equatable {
         updatedAt: DateTime.parse(json["updated_at"]),
         digits: List<Digit>.from(json["digits"].map((x) => Digit.fromJson(x))),
       );
+
+
 
   Map<String, dynamic> toJson() => {
         "id": id,

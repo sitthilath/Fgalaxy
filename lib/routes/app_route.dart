@@ -9,7 +9,7 @@ class AppRouter extends $AppRouter {
       const RouteType.material();
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: SplashRoute.page, initial: true),
+    AutoRoute(page: SplashRoute.page,initial: true),
     AutoRoute(page: LoginRoute.page),
     AutoRoute(page: RegisterRoute.page),
     AutoRoute(page: OTPRoute.page),
@@ -27,5 +27,7 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: BuyLotteriesRoute.page),
     AutoRoute(page: ModernDigitsRoute.page),
     AutoRoute(page: AnimalDigitsRoute.page),
+    AutoRoute(page: PayLotteryRoute.page),
+    AutoRoute(page: PaymentHistoryRoute.page)
   ];
 }

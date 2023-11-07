@@ -11,11 +11,15 @@ import 'package:galaxy_18_lottery_app/shared/widgets/appbars/buy_lottery_appbar.
 import 'package:galaxy_18_lottery_app/shared/widgets/help_widget.dart';
 import 'package:galaxy_18_lottery_app/shared/widgets/theme_widget.dart';
 
+import '../../../order_lottery/presentation/providers/order_lottery_state_provider.dart';
+import '../../tab_bet_lottery/bet_lottery/presentation/screen/bet_lottery_screen.dart';
+
 @RoutePage()
 class BuyLotteriesScreen extends ConsumerWidget {
   static const String routeName = '/buyLotteriesScreen';
 
   const BuyLotteriesScreen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,6 +42,9 @@ class BuyLotteriesScreen extends ConsumerWidget {
                   color: AppColor.whiteColor,
                 ),
                 child: TabBar(
+                  onTap: (index){
+                    ref.read(orderLotteryNotifierProvider.notifier).setTabState(index);
+                  },
                   tabs: [
                     Tab(text: Txt.t(context, 'modern_digits')),
                     Tab(text: Txt.t(context, 'animal_digits')),
@@ -59,7 +66,7 @@ class BuyLotteriesScreen extends ConsumerWidget {
                     children: [
                       const ModernDigitsScreen(),
                       const AnimalDigitsScreen(),
-                      Container(),
+                      BetLotteryScreen(),
                     ],
                   ),
                 ),

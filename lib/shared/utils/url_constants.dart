@@ -15,4 +15,5 @@ class UrlConstants {
   static const String LOTTERIES_TREATISE = '/customer/lotteries-treatise';
   static const String CURRENT_DRAW_LOTTERY ='/lottery-draw/current-lottery';
   static const String LAST_LOTTERY_RESULT ='/lottery-draw/latest-lottery-result';
+  static const String PAY_LOTTERY_PATH ='/pay-lottery';
 }

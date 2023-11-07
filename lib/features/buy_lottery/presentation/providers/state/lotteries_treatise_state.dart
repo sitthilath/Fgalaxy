@@ -14,8 +14,10 @@ class LotteriesTreatiseState extends Equatable {
   final bool isLoading;
   final String message;
   final LotteriesTreatiseConcreteState state;
+  final List<LotteriesTreatise> filterLotteriesTreatise;
 
   const LotteriesTreatiseState({
+    this.filterLotteriesTreatise = const [],
     this.state = LotteriesTreatiseConcreteState.initial,
     this.hasLotteriesTreatise = false,
     this.lotteriesTreatiseList = const [],
@@ -24,6 +26,7 @@ class LotteriesTreatiseState extends Equatable {
   });
 
   const LotteriesTreatiseState.initial({
+    this.filterLotteriesTreatise = const [],
     this.lotteriesTreatiseList = const [],
     this.hasLotteriesTreatise = false,
     this.isLoading = false,
@@ -32,6 +35,7 @@ class LotteriesTreatiseState extends Equatable {
   });
 
   LotteriesTreatiseState copyWith({
+    List<LotteriesTreatise>? filterLotteriesTreatise,
     List<LotteriesTreatise>? lotteriesTreatiseList,
     bool? hasLotteriesTreatise,
     bool? isLoading,
@@ -39,6 +43,7 @@ class LotteriesTreatiseState extends Equatable {
     LotteriesTreatiseConcreteState? state,
   }) {
     return LotteriesTreatiseState(
+      filterLotteriesTreatise: filterLotteriesTreatise?? this.filterLotteriesTreatise,
       lotteriesTreatiseList:
           lotteriesTreatiseList ?? this.lotteriesTreatiseList,
       hasLotteriesTreatise: hasLotteriesTreatise ?? this.hasLotteriesTreatise,
